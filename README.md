@@ -1,48 +1,48 @@
-# Mixmi Profile - Web3 Profile Application
+# MixMi Profile - Production
 
-## Overview
+This repository contains the production-ready implementation of the MixMi Profile application, refactored for performance, maintainability, and scalability.
 
-This application is a web3-enabled profile page that allows users to create and manage their digital presence with various sections including personal information, spotlight items, media embeds, shop items, and decorative stickers. The application leverages the Leather wallet for authentication and uses localStorage for data persistence.
+## Project Overview
 
-## ⚠️ IMPORTANT: Current Working Implementation
+MixMi Profile provides a user profile system with support for personal information, social links, and cryptocurrency wallet addresses. It's designed to integrate with other MixMi applications while maintaining a clean, responsive user interface.
 
-**The `/integrated` route is the ONLY working implementation.** All other routes and similarly named components outside this path should be considered legacy code that will be removed during cleanup.
+## Features
 
-This application contains significant amounts of duplicate code and similarly named components from earlier development iterations. Use the structure outlined below to understand the current working implementation.
+- **Profile Management**
+  - View and edit personal information
+  - Customize profile visibility settings
+  - Upload and manage profile content
+  
+- **Wallet Integration**
+  - Connect STX and BTC wallet addresses
+  - Control wallet address visibility
+  - Secure display of cryptocurrency information
+  
+- **Social Integration**
+  - Link to various social platforms
+  - Customize social links display
 
-## Key Features
+## Key Components
 
-- **Leather Wallet Authentication**: Authenticate with Stacks blockchain wallet
-- **Read-only vs. Editing States**: Toggle between viewing and editing mode
-- **Section Editors**: Dedicated modals for editing different profile sections
-- **Persistent Storage**: Save data to localStorage, synced with wallet address
-- **Responsive Design**: Mobile-friendly interface
-- **Sticker Customization**: Add decorative stickers to profile
+### Profile Viewing System
+- **Public View**: Displays only information marked as publicly visible
+- **Private View**: Shows full profile to authorized users
+- **Sticker Display**: Renders the user's selected profile sticker
+- **Section Visibility**: Respects user preferences for section display
+- **Responsive Layout**: Adapts to various screen sizes
 
-## Application Structure
-
-### Routes
-
-- **/integrated**: The main entry point for the app, providing the full functionality with authentication and editing capabilities
-
-### Components Structure
-
-- **IntegratedProfile**: The root component that handles authentication, data loading/saving, and state management
-- **ProfileView**: The main profile display component with read-only and editing modes
-- **Section Components**:
-  - **PersonalInfoSection**: Display and edit name, title, bio, and wallet info
-  - **SpotlightSection**: Display and manage spotlight items
-  - **MediaSection**: Display and manage embedded media content
-  - **ShopSection**: Display and manage shop items
-  - **StickerSection**: Display and customize stickers
-
-### Editor Modals
-
-- **PersonalInfoEditorModal**: Edit profile details
-- **SpotlightEditorModal**: Add, remove, and reorder spotlight items
-- **MediaEditorModal**: Add and manage media embeds
-- **ShopEditorModal**: Create and manage shop items
-- **StickerEditorModal**: Choose and position stickers
+### Profile Editing System
+- **Modal Interface**: Clean, focused editing experience
+- **Form Sections**:
+  - Personal Information: Edit name, title, bio with character limits
+  - Wallet Addresses: Manage STX/BTC addresses with privacy controls
+  - Social Links: Add/remove platform links with custom URLs
+- **UX Features**:
+  - Input validation with error messaging
+  - Character counters for text fields
+  - Scrollable container for lengthy forms
+  - Sticky save/cancel buttons for accessibility
+  - Visual hierarchy through consistent styling
 
 ## Authentication Flow
 
@@ -52,45 +52,43 @@ This application contains significant amounts of duplicate code and similarly na
 4. Edit mode becomes available, allowing profile customization
 5. Profile data is associated with the wallet address
 
-## Storage Implementation
+## Technology Stack
 
-Data is stored in localStorage using separate keys for different data types, defined in the `STORAGE_KEYS` object in the `IntegratedProfile` component:
+- **Frontend Framework**: 
+  - Next.js 14.2.16
+  - React 18.x
+  - TypeScript 5.8.2
+- **UI/UX**: Tailwind CSS 3.4.1 with custom theming
+- **Components**: Custom component library based on shadcn/ui and Radix UI
+- **Authentication**: Leather wallet integration (Stacks blockchain)
+- **State Management**: React Context API
+- **Data Persistence**: Local storage (Supabase integration planned)
 
-```javascript
-const STORAGE_KEYS = {
-  PROFILE: 'mixmi_profile_data',
-  SPOTLIGHT: 'mixmi_spotlight_items',
-  SHOP: 'mixmi_shop_items',
-  MEDIA: 'mixmi_media_items',
-  STICKER: 'mixmi_sticker_data'
-};
-```
+## Architecture
 
-Each data type has its own dedicated save function:
-- `saveProfileData()` - Saves basic profile information using `STORAGE_KEYS.PROFILE`
-- `saveSpotlightItems()` - Saves spotlight items using `STORAGE_KEYS.SPOTLIGHT`
-- `saveMediaItems()` - Saves media embeds using `STORAGE_KEYS.MEDIA`
-- `saveShopItems()` - Saves shop items using `STORAGE_KEYS.SHOP`
-- `saveStickerData()` - Saves sticker configuration using `STORAGE_KEYS.STICKER`
+The application follows a modular architecture:
+- `/app`: Next.js app router components and pages
+- `/components`: Reusable UI components
+- `/lib`: Utility functions and helpers
+- `/public`: Static assets and images
 
-This separation allows for targeted updates to specific sections without rewriting all profile data, improving performance and reducing the chance of data loss during saves.
+## Development
 
-## Example Content - "Fluffy Toy Collective"
+1. Clone this repository
+2. Install dependencies: `npm install`
+3. Set up environment variables (copy `.env.example` to `.env.local`)
+4. Run the development server: `npm run dev`
+5. Access the application at `http://localhost:3000`
 
-The application includes example content themed around the fictional "Fluffy Toy Collective" to demonstrate platform capabilities. This includes placeholder images, descriptions, and media embeds that show how each section can be used.
+## Deployment
 
-## Technologies Used
+1. Build the application: `npm run build`
+2. Preview the production build: `npm run start`
+3. Deploy to your hosting platform of choice
 
-- **Next.js**: Framework for the React application
-- **Stacks Connect**: For Leather wallet integration
-- **TailwindCSS**: For styling components
-- **React Beautiful DND**: For drag-and-drop functionality
-- **Lucide & React Icons**: For icon components
-- **Shadcn/UI**: Component library for UI elements
+## Roadmap
 
-## Development and Testing
-
-In development mode:
-- Authentication can be toggled using the console command `window.toggleAuth()`
-- Current authentication state can be checked with `window.checkAuth()`
-- The app includes example content for testing and preview purposes 
+- Integration with Supabase for data persistence
+- Custom sticker uploads
+- Internationalization support
+- Enhanced wallet verification
