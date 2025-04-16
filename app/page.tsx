@@ -5,7 +5,7 @@ import ProfileHeader from "@/components/profile/ProfileHeader";
 import SectionManager from "@/components/profile/SectionManager";
 import SpotlightSection from "@/components/sections/SpotlightSection";
 import MediaSection from "@/components/sections/MediaSection";
-import StickerDisplay from "@/components/sections/StickerDisplay";
+import ProfileSticker from "@/components/profile/ProfileSticker";
 import ShopSection from "@/components/sections/ShopSection";
 import { useAuth } from "@/contexts/AuthContext";
 import { useProfile } from "@/contexts/ProfileContext";
@@ -34,9 +34,7 @@ export default function Home() {
         <ShopSection />
       )}
       
-      {profile.sectionVisibility.sticker && (
-        <StickerDisplay />
-      )}
+      <ProfileSticker editable={isAuthenticated} />
       
       {!isAuthenticated && 
        !profile.sectionVisibility.spotlight && 

@@ -63,4 +63,47 @@ export const STORAGE_KEYS = {
   AUTH: "auth"
 };
 
-export type StorageKeysType = typeof STORAGE_KEYS[keyof typeof STORAGE_KEYS]; 
+export type StorageKeysType = typeof STORAGE_KEYS[keyof typeof STORAGE_KEYS];
+
+export type StickerId = 
+  | 'daisy-purple' 
+  | 'daisy-pink' 
+  | 'daisy-yellow' 
+  | 'daisy-white'
+  | 'daisy-blue'
+  | 'moto-wheel-2'
+  | 'gear-shiny'
+  | 'lemon-slice'
+  | 'lime-slice'
+  | 'orange-slice'
+  | 'pineapple-slice'
+  | 'strawberry-slice';
+
+export interface Sticker {
+  id: StickerId;
+  imageUrl: string;
+  alt: string;
+}
+
+export interface Profile {
+  id: string;
+  name: string;
+  title: string;
+  bio: string;
+  image: string;
+  socialLinks: SocialLink[];
+  sectionVisibility: {
+    spotlight: boolean;
+    media: boolean;
+    shop: boolean;
+    sticker: boolean;
+  };
+  walletAddress?: string;
+  showWalletAddress: boolean;
+  btcAddress?: string;
+  showBtcAddress: boolean;
+  sticker: {
+    id: StickerId | null;
+    visible: boolean;
+  };
+} 
