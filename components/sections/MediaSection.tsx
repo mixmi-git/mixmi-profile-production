@@ -66,7 +66,7 @@ export default function MediaSection() {
         )}
       </div>
       
-      <div className="space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {mediaItems.map((item) => (
           <MediaCard 
             key={item.id} 
@@ -78,7 +78,7 @@ export default function MediaSection() {
         
         {isAuthenticated && (
           <div 
-            className="rounded-md border-2 border-dashed border-slate-700 flex items-center justify-center cursor-pointer hover:border-slate-600 transition-colors p-8"
+            className="rounded-md border-2 border-dashed border-slate-700 flex items-center justify-center cursor-pointer hover:border-slate-600 transition-colors h-full min-h-[200px]"
             onClick={handleAdd}
           >
             <div className="text-center">
@@ -105,7 +105,7 @@ export default function MediaSection() {
         )}
         
         {mediaItems.length === 0 && !isAuthenticated && (
-          <div className="text-center py-8">
+          <div className="col-span-full text-center py-8">
             <p className="text-gray-400">No media items to display</p>
           </div>
         )}

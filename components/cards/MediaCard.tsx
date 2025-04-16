@@ -16,41 +16,50 @@ const getMediaEmbed = (item: MediaItem) => {
   switch(item.type.toLowerCase()) {
     case 'youtube':
       return (
-        <iframe
-          width="100%"
-          height="200"
-          src={item.embedUrl}
-          title={item.title || "YouTube Video"}
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
+        <div className="aspect-video w-full">
+          <iframe
+            width="100%"
+            height="100%"
+            src={item.embedUrl}
+            title={item.title || "YouTube Video"}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="w-full h-full"
+          ></iframe>
+        </div>
       );
     case 'spotify':
       return (
-        <iframe
-          src={item.embedUrl}
-          width="100%"
-          height="80"
-          frameBorder="0"
-          allow="encrypted-media"
-          title={item.title || "Spotify Track"}
-        ></iframe>
+        <div className="w-full">
+          <iframe
+            src={item.embedUrl}
+            width="100%"
+            height="80"
+            frameBorder="0"
+            allow="encrypted-media"
+            title={item.title || "Spotify Track"}
+            className="w-full"
+          ></iframe>
+        </div>
       );
     case 'soundcloud':
       return (
-        <iframe
-          width="100%"
-          height="166"
-          scrolling="no"
-          frameBorder="no"
-          src={item.embedUrl}
-          title={item.title || "SoundCloud Track"}
-        ></iframe>
+        <div className="w-full">
+          <iframe
+            width="100%"
+            height="166"
+            scrolling="no"
+            frameBorder="no"
+            src={item.embedUrl}
+            title={item.title || "SoundCloud Track"}
+            className="w-full"
+          ></iframe>
+        </div>
       );
     default:
       return (
-        <div className="bg-slate-800 p-4 flex items-center justify-center h-40">
+        <div className="bg-slate-800 p-4 flex items-center justify-center h-40 w-full">
           <p>Unsupported media type</p>
         </div>
       );
@@ -59,8 +68,8 @@ const getMediaEmbed = (item: MediaItem) => {
 
 export default function MediaCard({ item, onEdit, onDelete }: MediaCardProps) {
   return (
-    <div className="relative w-full rounded-md overflow-hidden bg-slate-800 border border-slate-700 group">
-      <div className="media-content">
+    <div className="relative w-full rounded-md overflow-hidden bg-slate-800 border border-slate-700 group h-full">
+      <div className="media-content w-full">
         {getMediaEmbed(item)}
       </div>
       
