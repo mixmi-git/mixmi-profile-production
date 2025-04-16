@@ -84,6 +84,61 @@ export default function ProfileInfo() {
             <path d="M5 9.5c4-1 8-1 12 0"></path>
           </svg>
         );
+      case 'tiktok':
+        return (
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="20" 
+            height="20" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+          >
+            <path d="M9 12a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"></path>
+            <path d="M15 8h.01"></path>
+            <path d="M21 12c-3 0-6-1-8-2.5V17a5 5 0 0 1-9.9 1H14V7c1 0 3 1 6 1z"></path>
+          </svg>
+        );
+      case 'github':
+        return (
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="20" 
+            height="20" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+          >
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+          </svg>
+        );
+      case 'soundcloud':
+        return (
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="20" 
+            height="20" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+          >
+            <path d="M2 12h1v4h-1z"></path>
+            <path d="M6 8v8h-1V8z"></path>
+            <path d="M10 6v10H9V6z"></path>
+            <path d="M14 6v10h-1V6z"></path>
+            <path d="M18 8v8h-1V8z"></path>
+            <path d="M22 8v8h-1V8z"></path>
+          </svg>
+        );
       default:
         return (
           <svg 
@@ -123,7 +178,7 @@ export default function ProfileInfo() {
       </div>
       
       {/* Social links */}
-      <div className="flex space-x-4">
+      <div className="flex space-x-6">
         {profile.socialLinks && profile.socialLinks.length > 0 ? (
           profile.socialLinks.map((link, index) => (
             <a 
@@ -131,7 +186,8 @@ export default function ProfileInfo() {
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-cyan-400 transition-colors"
+              className="text-cyan-400 hover:text-cyan-300 transition-colors"
+              title={link.platform}
             >
               {getSocialIcon(link.platform)}
               <span className="sr-only">{link.platform}</span>
@@ -161,66 +217,64 @@ export default function ProfileInfo() {
         ) : null}
       </div>
       
-      {/* Wallet addresses - TEMP: Always show if available, regardless of profile settings */}
-      {(walletAddress || btcAddress) && (
-        <div className="space-y-2 mt-2">
-          {walletAddress && (
-            <div className="bg-slate-900 p-2 rounded-md flex items-center justify-between">
-              <div>
-                <span className="text-xs text-gray-500">STX:</span>
-                <span className="ml-2 text-sm">{`${walletAddress.slice(0, 8)}...${walletAddress.slice(-8)}`}</span>
-              </div>
-              <button 
-                className="text-cyan-400 hover:text-cyan-300"
-                onClick={() => copyToClipboard(walletAddress)}
-              >
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  width="16" 
-                  height="16" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                >
-                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                </svg>
-              </button>
+      {/* Wallet addresses - Show based on profile settings */}
+      <div className="space-y-2 mt-2">
+        {walletAddress && profile.showWalletAddress && (
+          <div className="bg-slate-900 p-2 rounded-md flex items-center justify-between">
+            <div>
+              <span className="text-xs text-gray-500">STX:</span>
+              <span className="ml-2 text-sm">{`${walletAddress.slice(0, 8)}...${walletAddress.slice(-8)}`}</span>
             </div>
-          )}
-          
-          {btcAddress && (
-            <div className="bg-slate-900 p-2 rounded-md flex items-center justify-between">
-              <div>
-                <span className="text-xs text-gray-500">BTC:</span>
-                <span className="ml-2 text-sm">{`${btcAddress.slice(0, 8)}...${btcAddress.slice(-8)}`}</span>
-              </div>
-              <button 
-                className="text-cyan-400 hover:text-cyan-300"
-                onClick={() => copyToClipboard(btcAddress)}
+            <button 
+              className="text-cyan-400 hover:text-cyan-300"
+              onClick={() => copyToClipboard(walletAddress)}
+            >
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="16" 
+                height="16" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
               >
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  width="16" 
-                  height="16" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                >
-                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                </svg>
-              </button>
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+            </button>
+          </div>
+        )}
+        
+        {btcAddress && profile.showBtcAddress && (
+          <div className="bg-slate-900 p-2 rounded-md flex items-center justify-between">
+            <div>
+              <span className="text-xs text-gray-500">BTC:</span>
+              <span className="ml-2 text-sm">{`${btcAddress.slice(0, 8)}...${btcAddress.slice(-8)}`}</span>
             </div>
-          )}
-        </div>
-      )}
+            <button 
+              className="text-cyan-400 hover:text-cyan-300"
+              onClick={() => copyToClipboard(btcAddress)}
+            >
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="16" 
+                height="16" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 } 
