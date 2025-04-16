@@ -62,6 +62,15 @@ export default function MediaItemModal({
   const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const url = e.target.value;
     setFormData((prev) => ({ ...prev, rawUrl: url }));
+    
+    // Clear previous embed data to ensure it gets regenerated
+    setFormData((prev) => ({ 
+      ...prev, 
+      rawUrl: url,
+      embedUrl: "", // Clear the embed URL to force regeneration
+      type: "youtube" // Reset type to default
+    }));
+    
     setError(null);
     setPreview(null);
   };
@@ -79,6 +88,7 @@ export default function MediaItemModal({
       return;
     }
     
+    // Always update the media type and embed URL based on the raw URL
     setFormData((prev) => ({
       ...prev,
       type: mediaInfo.type,
@@ -99,11 +109,18 @@ export default function MediaItemModal({
       return;
     }
     
+    // Always regenerate the embed URL before saving
     if (!formData.embedUrl) {
       generatePreview();
-      if (!formData.embedUrl) {
-        return;
-      }
+      
+      // Need to delay the save to allow the state to update
+      setTimeout(() => {
+        if (formData.embedUrl) {
+          onSave(formData);
+          onClose();
+        }
+      }, 100);
+      return;
     }
     
     onSave(formData);
@@ -162,7 +179,7 @@ export default function MediaItemModal({
             </button>
           </div>
           <p className="mt-1 text-xs text-gray-500">
-            Supports YouTube, Spotify, SoundCloud, and more
+            Supports YouTube, Spotify, SoundCloud, Mixcloud, Apple Music, and more
           </p>
         </div>
 
@@ -170,7 +187,7 @@ export default function MediaItemModal({
         {preview && (
           <div className="border border-slate-700 rounded-md overflow-hidden">
             <div className="p-2 bg-slate-800">
-              <h3 className="text-sm font-medium">Preview</h3>
+              <h3 className="text-sm font-medium">Preview ({formData.type})</h3>
             </div>
             <div className="p-4 bg-slate-900">
               {preview}

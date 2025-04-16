@@ -57,6 +57,35 @@ const getMediaEmbed = (item: MediaItem) => {
           ></iframe>
         </div>
       );
+    case 'mixcloud':
+      return (
+        <div className="w-full">
+          <iframe
+            width="100%"
+            height="180"
+            src={item.embedUrl}
+            frameBorder="0"
+            allow="autoplay"
+            title={item.title || "Mixcloud Track"}
+            className="w-full"
+          ></iframe>
+        </div>
+      );
+    case 'apple-music':
+      return (
+        <div className="w-full">
+          <iframe
+            src={item.embedUrl}
+            width="100%"
+            height="175"
+            frameBorder="0"
+            allow="autoplay *; encrypted-media *;"
+            sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
+            title={item.title || "Apple Music Track"}
+            className="w-full"
+          ></iframe>
+        </div>
+      );
     default:
       return (
         <div className="bg-slate-800 p-4 flex items-center justify-center h-40 w-full">
