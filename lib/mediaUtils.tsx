@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Media types we support
-export type MediaType = 'youtube' | 'spotify' | 'soundcloud' | 'apple-music' | 'other';
+export type MediaType = 'youtube' | 'spotify' | 'soundcloud' | 'apple-music' | 'mixcloud' | 'other';
 
 interface MediaInfo {
   type: MediaType;
@@ -76,6 +76,24 @@ export function parseMediaUrl(url: string): MediaInfo | null {
       }
     }
     
+    // Mixcloud
+    if (url.includes('mixcloud.com')) {
+      try {
+        // Format: https://www.mixcloud.com/username/showname/
+        // Convert to: https://www.mixcloud.com/widget/iframe/?feed=/username/showname/
+        const urlObj = new URL(url);
+        const path = urlObj.pathname; // This will be like /username/showname/
+        
+        return {
+          type: 'mixcloud',
+          embedUrl: `https://www.mixcloud.com/widget/iframe/?feed=${path}&hide_cover=1`,
+          title: 'Mixcloud'
+        };
+      } catch (e) {
+        console.error('Error parsing Mixcloud URL:', e);
+      }
+    }
+    
     // Default to original URL if no specific embedding is recognized
     return {
       type: 'other',
@@ -134,6 +152,17 @@ export function getMediaPreview(mediaType: MediaType, embedUrl: string): JSX.Ele
           allow="autoplay *; encrypted-media *;"
           sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
           title="Apple Music"
+        />
+      );
+    case 'mixcloud':
+      return (
+        <iframe
+          width="100%"
+          height="180"
+          src={embedUrl}
+          frameBorder="0"
+          allow="autoplay"
+          title="Mixcloud"
         />
       );
     default:
