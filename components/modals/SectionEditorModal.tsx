@@ -44,6 +44,7 @@ const isValidImageUrl = (url: string): boolean => {
 
 function DraggableItem<T extends Item>({ item, index, moveItem, onEdit, onDelete, imageField = "image" }: DraggableItemProps<T>) {
   const ref = React.useRef<HTMLDivElement>(null);
+  const dragHandleRef = React.useRef<HTMLDivElement>(null);
   
   const [{ isDragging }, drag] = useDrag({
     type: ItemType,
@@ -105,7 +106,16 @@ function DraggableItem<T extends Item>({ item, index, moveItem, onEdit, onDelete
     },
   });
 
-  drag(drop(ref));
+  // Apply drag to both the item and the drag handle
+  drag(ref);
+  drop(ref);
+  
+  // Apply drag to the handle as well
+  useEffect(() => {
+    if (dragHandleRef.current) {
+      drag(dragHandleRef.current);
+    }
+  }, [drag, dragHandleRef]);
 
   // Check if the image field contains a valid image URL
   const hasValidImage = isValidImageUrl(item[imageField]);
@@ -115,7 +125,11 @@ function DraggableItem<T extends Item>({ item, index, moveItem, onEdit, onDelete
       ref={ref}
       className={`flex items-center gap-4 p-3 rounded-md mb-2 ${isDragging ? 'opacity-50 bg-slate-700' : 'bg-slate-800'} cursor-move border border-slate-700`}
     >
-      <div className="text-slate-500 flex items-center">
+      <div 
+        ref={dragHandleRef}
+        className="text-slate-500 flex items-center cursor-grab active:cursor-grabbing" 
+        aria-label="Drag to reorder"
+      >
         <svg 
           xmlns="http://www.w3.org/2000/svg" 
           width="20" 
