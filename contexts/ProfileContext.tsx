@@ -51,6 +51,9 @@ interface ProfileContextType {
   mediaItems: MediaItem[];
   shopItems: ShopItem[];
   updateProfile: (updates: Partial<ProfileData>) => void;
+  addSpotlightItem: (item: SpotlightItem) => void;
+  updateSpotlightItem: (id: string, item: SpotlightItem) => void;
+  removeSpotlightItem: (id: string) => void;
   isSaving: boolean;
 }
 
@@ -122,13 +125,39 @@ export const ProfileProvider: React.FC<{children: React.ReactNode}> = ({ childre
     }));
   };
   
+  // Add a new spotlight item
+  const addSpotlightItem = (item: SpotlightItem) => {
+    const newItems = [...spotlightItems, item];
+    setSpotlightItems(newItems);
+    StorageService.setItem(STORAGE_KEYS.SPOTLIGHT, newItems);
+  };
+  
+  // Update an existing spotlight item
+  const updateSpotlightItem = (id: string, updatedItem: SpotlightItem) => {
+    const newItems = spotlightItems.map(item => 
+      item.id === id ? updatedItem : item
+    );
+    setSpotlightItems(newItems);
+    StorageService.setItem(STORAGE_KEYS.SPOTLIGHT, newItems);
+  };
+  
+  // Remove a spotlight item
+  const removeSpotlightItem = (id: string) => {
+    const newItems = spotlightItems.filter(item => item.id !== id);
+    setSpotlightItems(newItems);
+    StorageService.setItem(STORAGE_KEYS.SPOTLIGHT, newItems);
+  };
+  
   return (
     <ProfileContext.Provider value={{ 
       profile, 
       spotlightItems, 
       mediaItems, 
       shopItems,
-      updateProfile, 
+      updateProfile,
+      addSpotlightItem,
+      updateSpotlightItem,
+      removeSpotlightItem,
       isSaving 
     }}>
       {children}
