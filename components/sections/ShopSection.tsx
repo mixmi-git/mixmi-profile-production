@@ -9,7 +9,7 @@ import SectionEditorModal from '../modals/SectionEditorModal';
 import { ShopItem } from '@/types';
 
 export default function ShopSection() {
-  const { shopItems, addShopItem, updateShopItem, removeShopItem } = useProfile();
+  const { shopItems, addShopItem, updateShopItem, removeShopItem, updateAllShopItems } = useProfile();
   const { isAuthenticated } = useAuth();
   
   const [isItemModalOpen, setIsItemModalOpen] = useState(false);
@@ -35,15 +35,8 @@ export default function ShopSection() {
   };
   
   const handleUpdateItems = (items: ShopItem[]) => {
-    // Remove all current items
-    shopItems.forEach(item => {
-      removeShopItem(item.id);
-    });
-    
-    // Add them back in the new order
-    items.forEach(item => {
-      addShopItem(item);
-    });
+    // Use the new bulk update method
+    updateAllShopItems(items);
   };
   
   return (

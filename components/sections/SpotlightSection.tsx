@@ -9,7 +9,7 @@ import SectionEditorModal from '../modals/SectionEditorModal';
 import { SpotlightItem } from '@/types';
 
 export default function SpotlightSection() {
-  const { spotlightItems, addSpotlightItem, updateSpotlightItem, removeSpotlightItem } = useProfile();
+  const { spotlightItems, addSpotlightItem, updateSpotlightItem, removeSpotlightItem, updateAllSpotlightItems } = useProfile();
   const { isAuthenticated } = useAuth();
   
   const [isItemModalOpen, setIsItemModalOpen] = useState(false);
@@ -35,15 +35,8 @@ export default function SpotlightSection() {
   };
   
   const handleUpdateItems = (items: SpotlightItem[]) => {
-    // Remove all current items
-    spotlightItems.forEach(item => {
-      removeSpotlightItem(item.id);
-    });
-    
-    // Add them back in the new order
-    items.forEach(item => {
-      addSpotlightItem(item);
-    });
+    // Use the new bulk update method
+    updateAllSpotlightItems(items);
   };
   
   return (

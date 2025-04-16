@@ -9,7 +9,7 @@ import SectionEditorModal from '../modals/SectionEditorModal';
 import { MediaItem } from '@/types';
 
 export default function MediaSection() {
-  const { mediaItems, addMediaItem, updateMediaItem, removeMediaItem } = useProfile();
+  const { mediaItems, addMediaItem, updateMediaItem, removeMediaItem, updateAllMediaItems } = useProfile();
   const { isAuthenticated } = useAuth();
   
   const [isItemModalOpen, setIsItemModalOpen] = useState(false);
@@ -35,15 +35,8 @@ export default function MediaSection() {
   };
   
   const handleUpdateItems = (items: MediaItem[]) => {
-    // Remove all current items
-    mediaItems.forEach(item => {
-      removeMediaItem(item.id);
-    });
-    
-    // Add them back in the new order
-    items.forEach(item => {
-      addMediaItem(item);
-    });
+    // Use the new bulk update method
+    updateAllMediaItems(items);
   };
   
   return (

@@ -54,12 +54,15 @@ export interface ProfileContextType {
   addSpotlightItem: (item: SpotlightItem) => void;
   updateSpotlightItem: (id: string, item: SpotlightItem) => void;
   removeSpotlightItem: (id: string) => void;
+  updateAllSpotlightItems: (items: SpotlightItem[]) => void;
   addMediaItem: (item: MediaItem) => void;
   updateMediaItem: (id: string, item: MediaItem) => void;
   removeMediaItem: (id: string) => void;
+  updateAllMediaItems: (items: MediaItem[]) => void;
   addShopItem: (item: ShopItem) => void;
   updateShopItem: (id: string, item: ShopItem) => void;
   removeShopItem: (id: string) => void;
+  updateAllShopItems: (items: ShopItem[]) => void;
   isSaving: boolean;
 }
 
@@ -154,6 +157,12 @@ export const ProfileProvider: React.FC<{children: React.ReactNode}> = ({ childre
     StorageService.setItem(STORAGE_KEYS.SPOTLIGHT, newItems);
   };
   
+  // Update all spotlight items at once (for reordering)
+  const updateAllSpotlightItems = (items: SpotlightItem[]) => {
+    setSpotlightItems(items);
+    StorageService.setItem(STORAGE_KEYS.SPOTLIGHT, items);
+  };
+  
   // Add a new media item
   const addMediaItem = (item: MediaItem) => {
     const newItems = [...mediaItems, item];
@@ -175,6 +184,12 @@ export const ProfileProvider: React.FC<{children: React.ReactNode}> = ({ childre
     const newItems = mediaItems.filter(item => item.id !== id);
     setMediaItems(newItems);
     StorageService.setItem(STORAGE_KEYS.MEDIA, newItems);
+  };
+  
+  // Update all media items at once (for reordering)
+  const updateAllMediaItems = (items: MediaItem[]) => {
+    setMediaItems(items);
+    StorageService.setItem(STORAGE_KEYS.MEDIA, items);
   };
   
   // Add a new shop item
@@ -200,6 +215,12 @@ export const ProfileProvider: React.FC<{children: React.ReactNode}> = ({ childre
     StorageService.setItem(STORAGE_KEYS.SHOP, newItems);
   };
   
+  // Update all shop items at once (for reordering)
+  const updateAllShopItems = (items: ShopItem[]) => {
+    setShopItems(items);
+    StorageService.setItem(STORAGE_KEYS.SHOP, items);
+  };
+  
   return (
     <ProfileContext.Provider value={{ 
       profile, 
@@ -210,12 +231,15 @@ export const ProfileProvider: React.FC<{children: React.ReactNode}> = ({ childre
       addSpotlightItem,
       updateSpotlightItem,
       removeSpotlightItem,
+      updateAllSpotlightItems,
       addMediaItem,
       updateMediaItem,
       removeMediaItem,
+      updateAllMediaItems,
       addShopItem,
       updateShopItem,
       removeShopItem,
+      updateAllShopItems,
       isSaving 
     }}>
       {children}
