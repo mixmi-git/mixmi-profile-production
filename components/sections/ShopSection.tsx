@@ -1,13 +1,36 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useProfile } from '@/contexts/ProfileContext';
 import { useAuth } from '@/contexts/AuthContext';
 import ShopCard from '../cards/ShopCard';
+import ShopItemModal from '../modals/ShopItemModal';
+import { ShopItem } from '@/types';
 
 export default function ShopSection() {
-  const { shopItems } = useProfile();
+  const { shopItems, addShopItem, updateShopItem, removeShopItem } = useProfile();
   const { isAuthenticated } = useAuth();
+  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingItem, setEditingItem] = useState<ShopItem | undefined>(undefined);
+  
+  const handleEdit = (item: ShopItem) => {
+    setEditingItem(item);
+    setIsModalOpen(true);
+  };
+  
+  const handleAdd = () => {
+    setEditingItem(undefined);
+    setIsModalOpen(true);
+  };
+  
+  const handleSave = (item: ShopItem) => {
+    if (editingItem) {
+      updateShopItem(item.id, item);
+    } else {
+      addShopItem(item);
+    }
+  };
   
   return (
     <section className="mb-16">
@@ -20,7 +43,10 @@ export default function ShopSection() {
         </div>
         
         {isAuthenticated && (
-          <button className="bg-slate-800 hover:bg-slate-700 text-cyan-400 px-3 py-1 rounded-md flex items-center space-x-2 transition-colors text-sm">
+          <button 
+            onClick={handleAdd}
+            className="bg-slate-800 hover:bg-slate-700 text-cyan-400 px-3 py-1 rounded-md flex items-center space-x-2 transition-colors text-sm"
+          >
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
               width="14" 
@@ -45,14 +71,15 @@ export default function ShopSection() {
           <ShopCard 
             key={item.id} 
             item={item} 
-            onEdit={isAuthenticated ? () => console.log('Edit shop item', item.id) : undefined}
+            onEdit={isAuthenticated ? () => handleEdit(item) : undefined}
+            onDelete={isAuthenticated ? () => removeShopItem(item.id) : undefined}
           />
         ))}
         
         {isAuthenticated && shopItems.length < 6 && (
           <div 
             className="aspect-square rounded-md border-2 border-dashed border-slate-700 flex items-center justify-center cursor-pointer hover:border-slate-600 transition-colors"
-            onClick={() => console.log('Add new shop item')}
+            onClick={handleAdd}
           >
             <div className="text-center">
               <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center mx-auto mb-2">
@@ -83,6 +110,13 @@ export default function ShopSection() {
           </div>
         )}
       </div>
+      
+      <ShopItemModal 
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        item={editingItem}
+        onSave={handleSave}
+      />
     </section>
   );
 } 

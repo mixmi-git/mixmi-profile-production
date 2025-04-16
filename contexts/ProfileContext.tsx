@@ -45,7 +45,7 @@ const defaultProfile: ProfileData = {
   showBtcAddress: true
 };
 
-interface ProfileContextType {
+export interface ProfileContextType {
   profile: ProfileData;
   spotlightItems: SpotlightItem[];
   mediaItems: MediaItem[];
@@ -57,6 +57,9 @@ interface ProfileContextType {
   addMediaItem: (item: MediaItem) => void;
   updateMediaItem: (id: string, item: MediaItem) => void;
   removeMediaItem: (id: string) => void;
+  addShopItem: (item: ShopItem) => void;
+  updateShopItem: (id: string, item: ShopItem) => void;
+  removeShopItem: (id: string) => void;
   isSaving: boolean;
 }
 
@@ -174,6 +177,29 @@ export const ProfileProvider: React.FC<{children: React.ReactNode}> = ({ childre
     StorageService.setItem(STORAGE_KEYS.MEDIA, newItems);
   };
   
+  // Add a new shop item
+  const addShopItem = (item: ShopItem) => {
+    const newItems = [...shopItems, item];
+    setShopItems(newItems);
+    StorageService.setItem(STORAGE_KEYS.SHOP, newItems);
+  };
+  
+  // Update an existing shop item
+  const updateShopItem = (id: string, updatedItem: ShopItem) => {
+    const newItems = shopItems.map(item => 
+      item.id === id ? updatedItem : item
+    );
+    setShopItems(newItems);
+    StorageService.setItem(STORAGE_KEYS.SHOP, newItems);
+  };
+  
+  // Remove a shop item
+  const removeShopItem = (id: string) => {
+    const newItems = shopItems.filter(item => item.id !== id);
+    setShopItems(newItems);
+    StorageService.setItem(STORAGE_KEYS.SHOP, newItems);
+  };
+  
   return (
     <ProfileContext.Provider value={{ 
       profile, 
@@ -187,6 +213,9 @@ export const ProfileProvider: React.FC<{children: React.ReactNode}> = ({ childre
       addMediaItem,
       updateMediaItem,
       removeMediaItem,
+      addShopItem,
+      updateShopItem,
+      removeShopItem,
       isSaving 
     }}>
       {children}
