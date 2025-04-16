@@ -40,7 +40,7 @@ interface EditProfileModalProps {
 
 // Limited to only the platforms we want
 const PLATFORM_OPTIONS = [
-  { value: "twitter", label: "Twitter / X" },
+  { value: "twitter", label: "X" },
   { value: "instagram", label: "Instagram" },
   { value: "github", label: "GitHub" },
   { value: "youtube", label: "YouTube" },
