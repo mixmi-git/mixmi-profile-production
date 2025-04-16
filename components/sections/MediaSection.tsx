@@ -76,7 +76,7 @@ export default function MediaSection() {
           />
         ))}
         
-        {isAuthenticated && (
+        {isAuthenticated && mediaItems.length < 3 && (
           <div 
             className="rounded-md border-2 border-dashed border-slate-700 flex items-center justify-center cursor-pointer hover:border-slate-600 transition-colors h-full min-h-[200px]"
             onClick={handleAdd}

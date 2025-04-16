@@ -76,7 +76,7 @@ export default function SpotlightSection() {
           />
         ))}
         
-        {isAuthenticated && spotlightItems.length < 6 && (
+        {isAuthenticated && spotlightItems.length < 3 && (
           <div 
             className="aspect-square rounded-md border-2 border-dashed border-slate-700 flex items-center justify-center cursor-pointer hover:border-slate-600 transition-colors"
             onClick={handleAdd}
