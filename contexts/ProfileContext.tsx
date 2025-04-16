@@ -1,16 +1,17 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { ProfileData, STORAGE_KEYS } from "@/types";
+import { ProfileData, SpotlightItem, MediaItem, STORAGE_KEYS } from "@/types";
 import { StorageService } from "@/lib/storage";
 import { useDebounce } from "@/hooks/useDebounce";
+import { v4 as uuidv4 } from "uuid";
 
 // Default profile data
 const defaultProfile: ProfileData = {
-  id: "",
-  name: "",
-  title: "",
-  bio: "",
+  id: uuidv4(),
+  name: "Add Your Name",
+  title: "Add Your Title",
+  bio: "Tell us about yourself...",
   image: "",
   socialLinks: [],
   sectionVisibility: {
@@ -25,6 +26,8 @@ const defaultProfile: ProfileData = {
 
 interface ProfileContextType {
   profile: ProfileData;
+  spotlightItems: SpotlightItem[];
+  mediaItems: MediaItem[];
   updateProfile: (updates: Partial<ProfileData>) => void;
   isSaving: boolean;
 }
@@ -33,15 +36,23 @@ export const ProfileContext = createContext<ProfileContextType | undefined>(unde
 
 export const ProfileProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
   const [profile, setProfile] = useState<ProfileData>(defaultProfile);
+  const [spotlightItems, setSpotlightItems] = useState<SpotlightItem[]>([]);
+  const [mediaItems, setMediaItems] = useState<MediaItem[]>([]);
   const [isSaving, setIsSaving] = useState(false);
   
   // Use the debounce hook to prevent too many saves
   const debouncedProfile = useDebounce(profile, 1000);
   
-  // Load profile from storage on initial render
+  // Load data from storage on initial render
   useEffect(() => {
     const storedProfile = StorageService.getItem<ProfileData>(STORAGE_KEYS.PROFILE, defaultProfile);
     setProfile(storedProfile);
+    
+    const storedSpotlightItems = StorageService.getItem<SpotlightItem[]>(STORAGE_KEYS.SPOTLIGHT, []);
+    setSpotlightItems(storedSpotlightItems);
+    
+    const storedMediaItems = StorageService.getItem<MediaItem[]>(STORAGE_KEYS.MEDIA, []);
+    setMediaItems(storedMediaItems);
   }, []);
   
   // Save profile when it changes (debounced)
@@ -71,7 +82,13 @@ export const ProfileProvider: React.FC<{children: React.ReactNode}> = ({ childre
   };
   
   return (
-    <ProfileContext.Provider value={{ profile, updateProfile, isSaving }}>
+    <ProfileContext.Provider value={{ 
+      profile, 
+      spotlightItems, 
+      mediaItems, 
+      updateProfile, 
+      isSaving 
+    }}>
       {children}
     </ProfileContext.Provider>
   );

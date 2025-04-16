@@ -3,19 +3,19 @@
 import React from 'react';
 import { useProfile } from '@/contexts/ProfileContext';
 import { useAuth } from '@/contexts/AuthContext';
-import SpotlightCard from '../cards/SpotlightCard';
+import MediaCard from '../cards/MediaCard';
 
-export default function SpotlightSection() {
-  const { spotlightItems } = useProfile();
+export default function MediaSection() {
+  const { mediaItems } = useProfile();
   const { isAuthenticated } = useAuth();
   
   return (
     <section className="mb-16">
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h2 className="text-3xl font-bold uppercase tracking-wider text-white">Spotlight</h2>
+          <h2 className="text-3xl font-bold uppercase tracking-wider text-white">Media</h2>
           {isAuthenticated && (
-            <p className="text-gray-400 text-sm mt-1">Share your work and favorite projects</p>
+            <p className="text-gray-400 text-sm mt-1">Share your videos, music, and podcasts</p>
           )}
         </div>
         
@@ -40,19 +40,19 @@ export default function SpotlightSection() {
         )}
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {spotlightItems.map((item) => (
-          <SpotlightCard 
+      <div className="space-y-6">
+        {mediaItems.map((item) => (
+          <MediaCard 
             key={item.id} 
             item={item} 
-            onEdit={isAuthenticated ? () => console.log('Edit item', item.id) : undefined}
+            onEdit={isAuthenticated ? () => console.log('Edit media', item.id) : undefined}
           />
         ))}
         
-        {isAuthenticated && spotlightItems.length < 6 && (
+        {isAuthenticated && (
           <div 
-            className="aspect-square rounded-md border-2 border-dashed border-slate-700 flex items-center justify-center cursor-pointer hover:border-slate-600 transition-colors"
-            onClick={() => console.log('Add new spotlight item')}
+            className="rounded-md border-2 border-dashed border-slate-700 flex items-center justify-center cursor-pointer hover:border-slate-600 transition-colors p-8"
+            onClick={() => console.log('Add new media item')}
           >
             <div className="text-center">
               <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center mx-auto mb-2">
@@ -72,14 +72,14 @@ export default function SpotlightSection() {
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                 </svg>
               </div>
-              <p className="text-gray-400">Add Item</p>
+              <p className="text-gray-400">Add Media</p>
             </div>
           </div>
         )}
         
-        {spotlightItems.length === 0 && !isAuthenticated && (
-          <div className="col-span-full text-center py-8">
-            <p className="text-gray-400">No spotlight items to display</p>
+        {mediaItems.length === 0 && !isAuthenticated && (
+          <div className="text-center py-8">
+            <p className="text-gray-400">No media items to display</p>
           </div>
         )}
       </div>
