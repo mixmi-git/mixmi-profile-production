@@ -10,9 +10,9 @@ export default function StickerDisplay() {
   const { profile, updateProfile } = useProfile();
   const { isAuthenticated } = useAuth();
   
-  const sticker = profile.sticker.id ? getStickerById(profile.sticker.id) : undefined;
+  const sticker = profile.sticker?.id ? getStickerById(profile.sticker.id) : undefined;
   
-  if (!profile.sticker.id && !isAuthenticated) {
+  if (!profile.sticker?.id && !isAuthenticated) {
     return null;
   }
   
@@ -57,8 +57,8 @@ export default function StickerDisplay() {
               // For now, just select the default sticker
               updateProfile({
                 sticker: {
-                  ...profile.sticker,
-                  id: DEFAULT_STICKER.id
+                  id: DEFAULT_STICKER.id,
+                  visible: true
                 }
               });
             }}

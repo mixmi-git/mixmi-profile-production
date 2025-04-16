@@ -50,7 +50,22 @@ export const ProfileProvider: React.FC<{children: React.ReactNode}> = ({ childre
   // Load data from storage on initial render
   useEffect(() => {
     const storedProfile = StorageService.getItem<ProfileData>(STORAGE_KEYS.PROFILE, defaultProfile);
-    setProfile(storedProfile);
+    
+    // Ensure all fields from defaultProfile are present in the loaded profile
+    setProfile({
+      ...defaultProfile,
+      ...storedProfile,
+      // Make sure nested objects are properly merged
+      sectionVisibility: {
+        ...defaultProfile.sectionVisibility,
+        ...(storedProfile.sectionVisibility || {})
+      },
+      // Ensure sticker object exists
+      sticker: {
+        ...defaultProfile.sticker,
+        ...(storedProfile.sticker || {})
+      }
+    });
     
     const storedSpotlightItems = StorageService.getItem<SpotlightItem[]>(STORAGE_KEYS.SPOTLIGHT, []);
     setSpotlightItems(storedSpotlightItems);
