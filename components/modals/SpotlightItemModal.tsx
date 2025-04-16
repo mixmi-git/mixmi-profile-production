@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Modal from "../ui/Modal";
+import ImageUploader from "../shared/ImageUploader";
 import { SpotlightItem } from "@/types";
 import { v4 as uuidv4 } from "uuid";
 
@@ -52,8 +53,24 @@ export default function SpotlightItemModal({
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleImageChange = (imageData: string) => {
+    setFormData((prev) => ({ ...prev, image: imageData }));
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate required fields
+    if (!formData.title.trim()) {
+      alert("Title is required");
+      return;
+    }
+    
+    if (!formData.image) {
+      alert("Image is required");
+      return;
+    }
+    
     onSave(formData);
     onClose();
   };
@@ -103,21 +120,13 @@ export default function SpotlightItemModal({
         </div>
 
         <div>
-          <label
-            htmlFor="image"
-            className="block text-sm font-medium text-gray-300 mb-1"
-          >
-            Image URL*
+          <label className="block text-sm font-medium text-gray-300 mb-1">
+            Image*
           </label>
-          <input
-            type="text"
-            id="image"
-            name="image"
-            value={formData.image}
-            onChange={handleChange}
-            placeholder="https://example.com/image.jpg"
-            className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
-            required
+          <ImageUploader
+            initialImage={formData.image}
+            onImageChange={handleImageChange}
+            aspectRatio="square"
           />
         </div>
 
