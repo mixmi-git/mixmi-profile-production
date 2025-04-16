@@ -50,12 +50,22 @@ const PLATFORM_OPTIONS = [
 
 const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen, onClose }) => {
   const { profile, updateProfile } = useProfile();
-  const [formData, setFormData] = useState<ProfileData>({...profile});
+  const [formData, setFormData] = useState<ProfileData>({
+    ...profile,
+    // We're managing wallet visibility in a separate modal now
+    showWalletAddress: profile.showWalletAddress,
+    showBtcAddress: profile.showBtcAddress
+  });
 
   useEffect(() => {
     // Reset form data when modal opens
     if (isOpen) {
-      setFormData({...profile});
+      setFormData({
+        ...profile,
+        // We're managing wallet visibility in a separate modal now
+        showWalletAddress: profile.showWalletAddress,
+        showBtcAddress: profile.showBtcAddress
+      });
     }
   }, [isOpen, profile]);
 
@@ -93,7 +103,13 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen, onClose }) 
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    updateProfile(formData);
+    // Preserve existing wallet visibility settings
+    const updatedProfile = {
+      ...formData,
+      showWalletAddress: profile.showWalletAddress,
+      showBtcAddress: profile.showBtcAddress
+    };
+    updateProfile(updatedProfile);
     onClose();
   };
 
@@ -213,39 +229,6 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen, onClose }) 
               </button>
             </div>
           ))}
-        </div>
-
-        {/* Wallet Address Visibility */}
-        <div className="space-y-2">
-          <p className="text-sm font-medium text-slate-300">Wallet Address Settings</p>
-          
-          <div className="flex items-center">
-            <input
-              type="checkbox"
-              id="showWalletAddress"
-              name="showWalletAddress"
-              checked={formData.showWalletAddress}
-              onChange={handleCheckboxChange}
-              className="h-4 w-4 bg-slate-800 border-slate-700 rounded text-cyan-600 focus:ring-cyan-500"
-            />
-            <label htmlFor="showWalletAddress" className="ml-2 block text-sm text-slate-300">
-              Show STX wallet address
-            </label>
-          </div>
-          
-          <div className="flex items-center">
-            <input
-              type="checkbox"
-              id="showBtcAddress"
-              name="showBtcAddress"
-              checked={formData.showBtcAddress}
-              onChange={handleCheckboxChange}
-              className="h-4 w-4 bg-slate-800 border-slate-700 rounded text-cyan-600 focus:ring-cyan-500"
-            />
-            <label htmlFor="showBtcAddress" className="ml-2 block text-sm text-slate-300">
-              Show BTC wallet address
-            </label>
-          </div>
         </div>
 
         <div className="flex justify-end space-x-3 pt-4">

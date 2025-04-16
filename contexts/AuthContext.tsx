@@ -54,7 +54,8 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }
           setAuth({
             ...storedAuth,
             walletAddress: 'SP2J6ZY48GV1EZ5V2V5RB9MP66SW86PYKKNRV9EJ7',
-            btcAddress: '1AKHyiMrE5RRNjWCVhzqgCLYVV4AZMXsP'
+            btcAddress: '1AKHyiMrE5RRNjWCVhzqgCLYVV4AZMXsP',
+            isAuthenticated: true // Ensure isAuthenticated is true when we have addresses
           });
         } else {
           setAuth(storedAuth);
@@ -89,11 +90,25 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }
             const userData = userSession.loadUserData();
             console.log("User is signed in, data:", userData);
             
-            setAuth({
-              isAuthenticated: true,
-              walletAddress: userData.profile.stxAddress?.mainnet || null,
-              btcAddress: userData.profile.btcAddress?.p2wpkh?.mainnet || null
-            });
+            // Extract addresses with fallbacks
+            const stxAddress = userData.profile?.stxAddress?.mainnet || null;
+            const btcAddress = userData.profile?.btcAddress?.p2wpkh?.mainnet || null;
+            
+            if (stxAddress) {
+              setAuth({
+                isAuthenticated: true,
+                walletAddress: stxAddress,
+                btcAddress: btcAddress
+              });
+              
+              // Log for debugging
+              console.log("Wallet addresses set:", {
+                stx: stxAddress,
+                btc: btcAddress
+              });
+            } else {
+              console.error("No STX address found in user data");
+            }
           } else {
             console.log("User session finished but not signed in");
           }
