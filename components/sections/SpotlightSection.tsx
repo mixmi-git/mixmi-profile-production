@@ -5,23 +5,25 @@ import { useProfile } from '@/contexts/ProfileContext';
 import { useAuth } from '@/contexts/AuthContext';
 import SpotlightCard from '../cards/SpotlightCard';
 import SpotlightItemModal from '../modals/SpotlightItemModal';
+import SectionEditorModal from '../modals/SectionEditorModal';
 import { SpotlightItem } from '@/types';
 
 export default function SpotlightSection() {
   const { spotlightItems, addSpotlightItem, updateSpotlightItem, removeSpotlightItem } = useProfile();
   const { isAuthenticated } = useAuth();
   
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isItemModalOpen, setIsItemModalOpen] = useState(false);
+  const [isSectionModalOpen, setIsSectionModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<SpotlightItem | undefined>(undefined);
   
   const handleEdit = (item: SpotlightItem) => {
     setEditingItem(item);
-    setIsModalOpen(true);
+    setIsItemModalOpen(true);
   };
   
   const handleAdd = () => {
     setEditingItem(undefined);
-    setIsModalOpen(true);
+    setIsItemModalOpen(true);
   };
   
   const handleSave = (item: SpotlightItem) => {
@@ -30,6 +32,18 @@ export default function SpotlightSection() {
     } else {
       addSpotlightItem(item);
     }
+  };
+  
+  const handleUpdateItems = (items: SpotlightItem[]) => {
+    // Remove all current items
+    spotlightItems.forEach(item => {
+      removeSpotlightItem(item.id);
+    });
+    
+    // Add them back in the new order
+    items.forEach(item => {
+      addSpotlightItem(item);
+    });
   };
   
   return (
@@ -44,7 +58,7 @@ export default function SpotlightSection() {
         
         {isAuthenticated && (
           <button 
-            onClick={handleAdd}
+            onClick={() => setIsSectionModalOpen(true)}
             className="bg-slate-800 hover:bg-slate-700 text-cyan-400 px-3 py-1 rounded-md flex items-center space-x-2 transition-colors text-sm"
           >
             <svg 
@@ -111,11 +125,25 @@ export default function SpotlightSection() {
         )}
       </div>
       
+      {/* Individual item edit modal */}
       <SpotlightItemModal 
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        isOpen={isItemModalOpen}
+        onClose={() => setIsItemModalOpen(false)}
         item={editingItem}
         onSave={handleSave}
+      />
+      
+      {/* Section editor modal with reordering */}
+      <SectionEditorModal<SpotlightItem>
+        isOpen={isSectionModalOpen}
+        onClose={() => setIsSectionModalOpen(false)}
+        title="Spotlight"
+        items={spotlightItems}
+        onUpdateItems={handleUpdateItems}
+        onAddItem={handleAdd}
+        onEditItem={handleEdit}
+        onDeleteItem={removeSpotlightItem}
+        imageField="image"
       />
     </section>
   );

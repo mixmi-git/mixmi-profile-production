@@ -5,23 +5,25 @@ import { useProfile } from '@/contexts/ProfileContext';
 import { useAuth } from '@/contexts/AuthContext';
 import MediaCard from '../cards/MediaCard';
 import MediaItemModal from '../modals/MediaItemModal';
+import SectionEditorModal from '../modals/SectionEditorModal';
 import { MediaItem } from '@/types';
 
 export default function MediaSection() {
   const { mediaItems, addMediaItem, updateMediaItem, removeMediaItem } = useProfile();
   const { isAuthenticated } = useAuth();
   
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isItemModalOpen, setIsItemModalOpen] = useState(false);
+  const [isSectionModalOpen, setIsSectionModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<MediaItem | undefined>(undefined);
   
   const handleEdit = (item: MediaItem) => {
     setEditingItem(item);
-    setIsModalOpen(true);
+    setIsItemModalOpen(true);
   };
   
   const handleAdd = () => {
     setEditingItem(undefined);
-    setIsModalOpen(true);
+    setIsItemModalOpen(true);
   };
   
   const handleSave = (item: MediaItem) => {
@@ -30,6 +32,18 @@ export default function MediaSection() {
     } else {
       addMediaItem(item);
     }
+  };
+  
+  const handleUpdateItems = (items: MediaItem[]) => {
+    // Remove all current items
+    mediaItems.forEach(item => {
+      removeMediaItem(item.id);
+    });
+    
+    // Add them back in the new order
+    items.forEach(item => {
+      addMediaItem(item);
+    });
   };
   
   return (
@@ -44,7 +58,7 @@ export default function MediaSection() {
         
         {isAuthenticated && (
           <button 
-            onClick={handleAdd}
+            onClick={() => setIsSectionModalOpen(true)}
             className="bg-slate-800 hover:bg-slate-700 text-cyan-400 px-3 py-1 rounded-md flex items-center space-x-2 transition-colors text-sm"
           >
             <svg 
@@ -111,11 +125,25 @@ export default function MediaSection() {
         )}
       </div>
       
+      {/* Individual item edit modal */}
       <MediaItemModal 
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        isOpen={isItemModalOpen}
+        onClose={() => setIsItemModalOpen(false)}
         item={editingItem}
         onSave={handleSave}
+      />
+      
+      {/* Section editor modal with reordering */}
+      <SectionEditorModal<MediaItem>
+        isOpen={isSectionModalOpen}
+        onClose={() => setIsSectionModalOpen(false)}
+        title="Media"
+        items={mediaItems}
+        onUpdateItems={handleUpdateItems}
+        onAddItem={handleAdd}
+        onEditItem={handleEdit}
+        onDeleteItem={removeMediaItem}
+        imageField="image"
       />
     </section>
   );

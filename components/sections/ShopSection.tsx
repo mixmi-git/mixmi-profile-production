@@ -5,23 +5,25 @@ import { useProfile } from '@/contexts/ProfileContext';
 import { useAuth } from '@/contexts/AuthContext';
 import ShopCard from '../cards/ShopCard';
 import ShopItemModal from '../modals/ShopItemModal';
+import SectionEditorModal from '../modals/SectionEditorModal';
 import { ShopItem } from '@/types';
 
 export default function ShopSection() {
   const { shopItems, addShopItem, updateShopItem, removeShopItem } = useProfile();
   const { isAuthenticated } = useAuth();
   
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isItemModalOpen, setIsItemModalOpen] = useState(false);
+  const [isSectionModalOpen, setIsSectionModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<ShopItem | undefined>(undefined);
   
   const handleEdit = (item: ShopItem) => {
     setEditingItem(item);
-    setIsModalOpen(true);
+    setIsItemModalOpen(true);
   };
   
   const handleAdd = () => {
     setEditingItem(undefined);
-    setIsModalOpen(true);
+    setIsItemModalOpen(true);
   };
   
   const handleSave = (item: ShopItem) => {
@@ -30,6 +32,18 @@ export default function ShopSection() {
     } else {
       addShopItem(item);
     }
+  };
+  
+  const handleUpdateItems = (items: ShopItem[]) => {
+    // Remove all current items
+    shopItems.forEach(item => {
+      removeShopItem(item.id);
+    });
+    
+    // Add them back in the new order
+    items.forEach(item => {
+      addShopItem(item);
+    });
   };
   
   return (
@@ -44,7 +58,7 @@ export default function ShopSection() {
         
         {isAuthenticated && (
           <button 
-            onClick={handleAdd}
+            onClick={() => setIsSectionModalOpen(true)}
             className="bg-slate-800 hover:bg-slate-700 text-cyan-400 px-3 py-1 rounded-md flex items-center space-x-2 transition-colors text-sm"
           >
             <svg 
@@ -111,11 +125,25 @@ export default function ShopSection() {
         )}
       </div>
       
+      {/* Individual item edit modal */}
       <ShopItemModal 
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        isOpen={isItemModalOpen}
+        onClose={() => setIsItemModalOpen(false)}
         item={editingItem}
         onSave={handleSave}
+      />
+      
+      {/* Section editor modal with reordering */}
+      <SectionEditorModal<ShopItem>
+        isOpen={isSectionModalOpen}
+        onClose={() => setIsSectionModalOpen(false)}
+        title="Shop"
+        items={shopItems}
+        onUpdateItems={handleUpdateItems}
+        onAddItem={handleAdd}
+        onEditItem={handleEdit}
+        onDeleteItem={removeShopItem}
+        imageField="image"
       />
     </section>
   );
