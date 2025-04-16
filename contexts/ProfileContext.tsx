@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { ProfileData, SpotlightItem, MediaItem, STORAGE_KEYS } from "@/types";
+import { ProfileData, SpotlightItem, MediaItem, ShopItem, STORAGE_KEYS } from "@/types";
 import { StorageService } from "@/lib/storage";
 import { useDebounce } from "@/hooks/useDebounce";
 import { v4 as uuidv4 } from "uuid";
@@ -20,18 +20,19 @@ const defaultProfile: ProfileData = {
     shop: true,
     sticker: true
   },
-  showWalletAddress: false,
-  showBtcAddress: false,
   sticker: {
-    id: "", // Empty string means no sticker selected
+    id: "daisy-blue", // Set to the default sticker ID
     visible: true
-  }
+  },
+  showWalletAddress: false,
+  showBtcAddress: false
 };
 
 interface ProfileContextType {
   profile: ProfileData;
   spotlightItems: SpotlightItem[];
   mediaItems: MediaItem[];
+  shopItems: ShopItem[];
   updateProfile: (updates: Partial<ProfileData>) => void;
   isSaving: boolean;
 }
@@ -42,6 +43,7 @@ export const ProfileProvider: React.FC<{children: React.ReactNode}> = ({ childre
   const [profile, setProfile] = useState<ProfileData>(defaultProfile);
   const [spotlightItems, setSpotlightItems] = useState<SpotlightItem[]>([]);
   const [mediaItems, setMediaItems] = useState<MediaItem[]>([]);
+  const [shopItems, setShopItems] = useState<ShopItem[]>([]);
   const [isSaving, setIsSaving] = useState(false);
   
   // Use the debounce hook to prevent too many saves
@@ -72,6 +74,9 @@ export const ProfileProvider: React.FC<{children: React.ReactNode}> = ({ childre
     
     const storedMediaItems = StorageService.getItem<MediaItem[]>(STORAGE_KEYS.MEDIA, []);
     setMediaItems(storedMediaItems);
+    
+    const storedShopItems = StorageService.getItem<ShopItem[]>(STORAGE_KEYS.SHOP, []);
+    setShopItems(storedShopItems);
   }, []);
   
   // Save profile when it changes (debounced)
@@ -105,6 +110,7 @@ export const ProfileProvider: React.FC<{children: React.ReactNode}> = ({ childre
       profile, 
       spotlightItems, 
       mediaItems, 
+      shopItems,
       updateProfile, 
       isSaving 
     }}>

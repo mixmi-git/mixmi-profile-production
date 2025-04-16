@@ -6,6 +6,7 @@ import SectionManager from "@/components/profile/SectionManager";
 import SpotlightSection from "@/components/sections/SpotlightSection";
 import MediaSection from "@/components/sections/MediaSection";
 import StickerDisplay from "@/components/sections/StickerDisplay";
+import ShopSection from "@/components/sections/ShopSection";
 import { useAuth } from "@/contexts/AuthContext";
 import { useProfile } from "@/contexts/ProfileContext";
 
@@ -27,6 +28,10 @@ export default function Home() {
       
       {profile.sectionVisibility.media && (
         <MediaSection />
+      )}
+      
+      {profile.sectionVisibility.shop && (
+        <ShopSection />
       )}
       
       {profile.sectionVisibility.sticker && (
