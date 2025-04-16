@@ -220,76 +220,78 @@ export default function ProfileInfo() {
         ) : null}
       </div>
       
-      {/* Wallet addresses - Show based on profile settings */}
-      <div className="space-y-2 mt-2">
-        <div className="flex items-center justify-between mb-1">
-          <h3 className="text-sm font-medium text-slate-300">Wallet Addresses</h3>
-          {isAuthenticated && (
-            <button
-              onClick={() => setIsWalletModalOpen(true)}
-              className="text-xs text-cyan-400 hover:text-cyan-300"
-            >
-              Edit Settings
-            </button>
+      {/* Wallet addresses - Only show section when there are addresses to display */}
+      {((profile.showWalletAddress && walletAddress) || (profile.showBtcAddress && btcAddress)) && (
+        <div className="space-y-2 mt-2">
+          <div className="flex items-center justify-between mb-1">
+            <h3 className="text-sm font-medium text-slate-300">Wallet Addresses</h3>
+            {isAuthenticated && (
+              <button
+                onClick={() => setIsWalletModalOpen(true)}
+                className="text-xs text-cyan-400 hover:text-cyan-300"
+              >
+                Edit Settings
+              </button>
+            )}
+          </div>
+
+          {profile.showWalletAddress && walletAddress && (
+            <div className="bg-slate-900 p-2 rounded-md flex items-center justify-between">
+              <div>
+                <span className="text-xs text-gray-500">STX:</span>
+                <span className="ml-2 text-sm">{`${walletAddress.slice(0, 8)}...${walletAddress.slice(-8)}`}</span>
+              </div>
+              <button 
+                className="text-cyan-400 hover:text-cyan-300"
+                onClick={() => copyToClipboard(walletAddress)}
+              >
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="16" 
+                  height="16" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                >
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+              </button>
+            </div>
+          )}
+          
+          {profile.showBtcAddress && btcAddress && (
+            <div className="bg-slate-900 p-2 rounded-md flex items-center justify-between">
+              <div>
+                <span className="text-xs text-gray-500">BTC:</span>
+                <span className="ml-2 text-sm">{`${btcAddress.slice(0, 8)}...${btcAddress.slice(-8)}`}</span>
+              </div>
+              <button 
+                className="text-cyan-400 hover:text-cyan-300"
+                onClick={() => copyToClipboard(btcAddress)}
+              >
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="16" 
+                  height="16" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                >
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+              </button>
+            </div>
           )}
         </div>
-
-        {profile.showWalletAddress && walletAddress && (
-          <div className="bg-slate-900 p-2 rounded-md flex items-center justify-between">
-            <div>
-              <span className="text-xs text-gray-500">STX:</span>
-              <span className="ml-2 text-sm">{`${walletAddress.slice(0, 8)}...${walletAddress.slice(-8)}`}</span>
-            </div>
-            <button 
-              className="text-cyan-400 hover:text-cyan-300"
-              onClick={() => copyToClipboard(walletAddress)}
-            >
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                width="16" 
-                height="16" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
-              >
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-              </svg>
-            </button>
-          </div>
-        )}
-        
-        {profile.showBtcAddress && btcAddress && (
-          <div className="bg-slate-900 p-2 rounded-md flex items-center justify-between">
-            <div>
-              <span className="text-xs text-gray-500">BTC:</span>
-              <span className="ml-2 text-sm">{`${btcAddress.slice(0, 8)}...${btcAddress.slice(-8)}`}</span>
-            </div>
-            <button 
-              className="text-cyan-400 hover:text-cyan-300"
-              onClick={() => copyToClipboard(btcAddress)}
-            >
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                width="16" 
-                height="16" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
-              >
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-              </svg>
-            </button>
-          </div>
-        )}
-      </div>
+      )}
 
       {/* Add the wallet settings modal */}
       <WalletSettingsModal 

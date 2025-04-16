@@ -15,6 +15,26 @@ export default function WalletSettingsModal({ isOpen, onClose }: WalletSettingsM
   const [showStx, setShowStx] = useState(profile.showWalletAddress);
   const [showBtc, setShowBtc] = useState(profile.showBtcAddress);
 
+  // Debug logging
+  useEffect(() => {
+    if (isOpen) {
+      console.log("WalletSettingsModal opened with:", {
+        profileSettings: {
+          showWalletAddress: profile.showWalletAddress,
+          showBtcAddress: profile.showBtcAddress
+        },
+        availableAddresses: {
+          stx: walletAddress,
+          btc: btcAddress
+        },
+        formState: {
+          showStx,
+          showBtc
+        }
+      });
+    }
+  }, [isOpen, profile, walletAddress, btcAddress, showStx, showBtc]);
+
   // Reset state when modal opens
   useEffect(() => {
     if (isOpen) {
@@ -24,6 +44,11 @@ export default function WalletSettingsModal({ isOpen, onClose }: WalletSettingsM
   }, [isOpen, profile]);
 
   const handleSave = () => {
+    console.log("Saving wallet settings:", {
+      showStx,
+      showBtc
+    });
+    
     updateProfile({
       showWalletAddress: showStx,
       showBtcAddress: showBtc

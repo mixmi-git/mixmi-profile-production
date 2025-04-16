@@ -49,14 +49,21 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }
         // Load from our own storage as fallback
         const storedAuth = StorageService.getItem(STORAGE_KEYS.AUTH, defaultAuthState);
         
-        // FOR TESTING: Add mock wallet addresses if they don't exist
-        if (!storedAuth.walletAddress && process.env.NODE_ENV === 'development') {
-          setAuth({
-            ...storedAuth,
+        // For development/testing: Use mock data
+        if (process.env.NODE_ENV === 'development') {
+          console.log("Using mock wallet data for development");
+          
+          // When in development, always set these test addresses for easier testing
+          const mockAddresses = {
+            isAuthenticated: true,
             walletAddress: 'SP2J6ZY48GV1EZ5V2V5RB9MP66SW86PYKKNRV9EJ7',
-            btcAddress: '1AKHyiMrE5RRNjWCVhzqgCLYVV4AZMXsP',
-            isAuthenticated: true // Ensure isAuthenticated is true when we have addresses
-          });
+            btcAddress: '1AKHyiMrE5RRNjWCVhzqgCLYVV4AZMXsP'
+          };
+          
+          setAuth(mockAddresses);
+          
+          // Also store in local storage for persistence between refreshes
+          StorageService.setItem(STORAGE_KEYS.AUTH, mockAddresses);
         } else {
           setAuth(storedAuth);
         }
@@ -137,13 +144,25 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }
       userSession.signUserOut();
     }
     
-    setAuth({
-      isAuthenticated: false,
-      walletAddress: null,
-      btcAddress: null
-    });
-    
-    StorageService.removeItem(STORAGE_KEYS.AUTH);
+    // In development mode, don't fully disconnect - use mock data for easier testing
+    if (process.env.NODE_ENV === 'development') {
+      console.log("Development mode: Using mock data instead of fully disconnecting");
+      const mockAddresses = {
+        isAuthenticated: false, // Set to false to simulate logged out state
+        walletAddress: 'SP2J6ZY48GV1EZ5V2V5RB9MP66SW86PYKKNRV9EJ7',
+        btcAddress: '1AKHyiMrE5RRNjWCVhzqgCLYVV4AZMXsP'
+      };
+      setAuth(mockAddresses);
+      StorageService.setItem(STORAGE_KEYS.AUTH, mockAddresses);
+    } else {
+      // In production, completely clear auth data
+      setAuth({
+        isAuthenticated: false,
+        walletAddress: null,
+        btcAddress: null
+      });
+      StorageService.removeItem(STORAGE_KEYS.AUTH);
+    }
   };
   
   return (
