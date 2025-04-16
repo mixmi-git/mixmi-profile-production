@@ -1,13 +1,36 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useProfile } from '@/contexts/ProfileContext';
 import { useAuth } from '@/contexts/AuthContext';
 import MediaCard from '../cards/MediaCard';
+import MediaItemModal from '../modals/MediaItemModal';
+import { MediaItem } from '@/types';
 
 export default function MediaSection() {
-  const { mediaItems } = useProfile();
+  const { mediaItems, addMediaItem, updateMediaItem, removeMediaItem } = useProfile();
   const { isAuthenticated } = useAuth();
+  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingItem, setEditingItem] = useState<MediaItem | undefined>(undefined);
+  
+  const handleEdit = (item: MediaItem) => {
+    setEditingItem(item);
+    setIsModalOpen(true);
+  };
+  
+  const handleAdd = () => {
+    setEditingItem(undefined);
+    setIsModalOpen(true);
+  };
+  
+  const handleSave = (item: MediaItem) => {
+    if (editingItem) {
+      updateMediaItem(item.id, item);
+    } else {
+      addMediaItem(item);
+    }
+  };
   
   return (
     <section className="mb-16">
@@ -20,7 +43,10 @@ export default function MediaSection() {
         </div>
         
         {isAuthenticated && (
-          <button className="bg-slate-800 hover:bg-slate-700 text-cyan-400 px-3 py-1 rounded-md flex items-center space-x-2 transition-colors text-sm">
+          <button 
+            onClick={handleAdd}
+            className="bg-slate-800 hover:bg-slate-700 text-cyan-400 px-3 py-1 rounded-md flex items-center space-x-2 transition-colors text-sm"
+          >
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
               width="14" 
@@ -45,14 +71,15 @@ export default function MediaSection() {
           <MediaCard 
             key={item.id} 
             item={item} 
-            onEdit={isAuthenticated ? () => console.log('Edit media', item.id) : undefined}
+            onEdit={isAuthenticated ? () => handleEdit(item) : undefined}
+            onDelete={isAuthenticated ? () => removeMediaItem(item.id) : undefined}
           />
         ))}
         
         {isAuthenticated && (
           <div 
             className="rounded-md border-2 border-dashed border-slate-700 flex items-center justify-center cursor-pointer hover:border-slate-600 transition-colors p-8"
-            onClick={() => console.log('Add new media item')}
+            onClick={handleAdd}
           >
             <div className="text-center">
               <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center mx-auto mb-2">
@@ -83,6 +110,13 @@ export default function MediaSection() {
           </div>
         )}
       </div>
+      
+      <MediaItemModal 
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        item={editingItem}
+        onSave={handleSave}
+      />
     </section>
   );
 } 

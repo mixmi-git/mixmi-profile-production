@@ -54,6 +54,9 @@ interface ProfileContextType {
   addSpotlightItem: (item: SpotlightItem) => void;
   updateSpotlightItem: (id: string, item: SpotlightItem) => void;
   removeSpotlightItem: (id: string) => void;
+  addMediaItem: (item: MediaItem) => void;
+  updateMediaItem: (id: string, item: MediaItem) => void;
+  removeMediaItem: (id: string) => void;
   isSaving: boolean;
 }
 
@@ -148,6 +151,29 @@ export const ProfileProvider: React.FC<{children: React.ReactNode}> = ({ childre
     StorageService.setItem(STORAGE_KEYS.SPOTLIGHT, newItems);
   };
   
+  // Add a new media item
+  const addMediaItem = (item: MediaItem) => {
+    const newItems = [...mediaItems, item];
+    setMediaItems(newItems);
+    StorageService.setItem(STORAGE_KEYS.MEDIA, newItems);
+  };
+  
+  // Update an existing media item
+  const updateMediaItem = (id: string, updatedItem: MediaItem) => {
+    const newItems = mediaItems.map(item => 
+      item.id === id ? updatedItem : item
+    );
+    setMediaItems(newItems);
+    StorageService.setItem(STORAGE_KEYS.MEDIA, newItems);
+  };
+  
+  // Remove a media item
+  const removeMediaItem = (id: string) => {
+    const newItems = mediaItems.filter(item => item.id !== id);
+    setMediaItems(newItems);
+    StorageService.setItem(STORAGE_KEYS.MEDIA, newItems);
+  };
+  
   return (
     <ProfileContext.Provider value={{ 
       profile, 
@@ -158,6 +184,9 @@ export const ProfileProvider: React.FC<{children: React.ReactNode}> = ({ childre
       addSpotlightItem,
       updateSpotlightItem,
       removeSpotlightItem,
+      addMediaItem,
+      updateMediaItem,
+      removeMediaItem,
       isSaving 
     }}>
       {children}
