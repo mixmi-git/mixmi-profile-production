@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import ProfileImage from "./ProfileImage";
 import ProfileInfo from "./ProfileInfo";
 import EditProfileModal from "./EditProfileModalNew";
+import WalletSettingsModal from "../modals/WalletSettingsModal";
 import { useAuth } from "@/contexts/AuthContext";
 import { useProfile } from "@/contexts/ProfileContext";
 
@@ -11,6 +12,7 @@ export default function ProfileHeader() {
   const { isAuthenticated } = useAuth();
   const { profile } = useProfile();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
   
   return (
     <div className="mb-10 bg-slate-900 p-6 rounded-lg shadow-lg">
@@ -21,7 +23,28 @@ export default function ProfileHeader() {
       
       {isAuthenticated && (
         <>
-          <div className="mt-6 flex justify-end">
+          <div className="mt-6 flex justify-end space-x-3">
+            <button 
+              onClick={() => setIsWalletModalOpen(true)}
+              className="bg-slate-800 hover:bg-slate-700 text-cyan-400 px-4 py-2 rounded-md flex items-center space-x-2 transition-colors"
+            >
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="16" 
+                height="16" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+              >
+                <rect x="3" y="5" width="18" height="14" rx="2" ry="2"></rect>
+                <line x1="21" y1="12" x2="3" y2="12"></line>
+              </svg>
+              <span>Wallet Settings</span>
+            </button>
+            
             <button 
               onClick={() => setIsEditModalOpen(true)}
               className="bg-slate-800 hover:bg-slate-700 text-cyan-400 px-4 py-2 rounded-md flex items-center space-x-2 transition-colors"
@@ -47,6 +70,11 @@ export default function ProfileHeader() {
           <EditProfileModal 
             isOpen={isEditModalOpen} 
             onClose={() => setIsEditModalOpen(false)} 
+          />
+          
+          <WalletSettingsModal
+            isOpen={isWalletModalOpen}
+            onClose={() => setIsWalletModalOpen(false)}
           />
         </>
       )}

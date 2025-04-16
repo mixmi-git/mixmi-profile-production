@@ -4,13 +4,11 @@ import React, { useState } from "react";
 import { useProfile } from "@/contexts/ProfileContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/contexts/ToastContext";
-import WalletSettingsModal from "@/components/modals/WalletSettingsModal";
 
 export default function ProfileInfo() {
   const { profile } = useProfile();
   const { isAuthenticated, walletAddress, btcAddress } = useAuth();
   const { showToast } = useToast();
-  const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
   
   // Helper to get appropriate social icon
   const getSocialIcon = (platform: string) => {
@@ -225,14 +223,6 @@ export default function ProfileInfo() {
         <div className="space-y-2 mt-2">
           <div className="flex items-center justify-between mb-1">
             <h3 className="text-sm font-medium text-slate-300">Wallet Addresses</h3>
-            {isAuthenticated && (
-              <button
-                onClick={() => setIsWalletModalOpen(true)}
-                className="text-xs text-cyan-400 hover:text-cyan-300"
-              >
-                Edit Settings
-              </button>
-            )}
           </div>
 
           {profile.showWalletAddress && walletAddress && (
@@ -292,12 +282,6 @@ export default function ProfileInfo() {
           )}
         </div>
       )}
-
-      {/* Add the wallet settings modal */}
-      <WalletSettingsModal 
-        isOpen={isWalletModalOpen}
-        onClose={() => setIsWalletModalOpen(false)}
-      />
     </div>
   );
 } 
