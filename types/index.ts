@@ -15,6 +15,10 @@ export interface ProfileData {
   showWalletAddress: boolean;
   btcAddress?: string;
   showBtcAddress: boolean;
+  sticker: {
+    id: string;
+    visible: boolean;
+  };
 }
 
 export interface SpotlightItem {

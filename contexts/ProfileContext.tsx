@@ -21,7 +21,11 @@ const defaultProfile: ProfileData = {
     sticker: true
   },
   showWalletAddress: false,
-  showBtcAddress: false
+  showBtcAddress: false,
+  sticker: {
+    id: "", // Empty string means no sticker selected
+    visible: true
+  }
 };
 
 interface ProfileContextType {
