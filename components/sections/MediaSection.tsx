@@ -61,6 +61,8 @@ export default function MediaSection() {
   const handleUpdateItems = (items: MediaItem[]) => {
     // Use the new bulk update method
     updateAllMediaItems(items);
+    // Log to confirm the update is happening
+    console.log("Updating all media items:", items);
   };
   
   return (
