@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Media types we support
-export type MediaType = 'youtube' | 'spotify' | 'soundcloud' | 'other';
+export type MediaType = 'youtube' | 'spotify' | 'soundcloud' | 'apple-music' | 'other';
 
 interface MediaInfo {
   type: MediaType;
@@ -60,6 +60,22 @@ export function parseMediaUrl(url: string): MediaInfo | null {
       };
     }
     
+    // Apple Music
+    if (url.includes('music.apple.com')) {
+      // Extract the embed path from Apple Music URL
+      // Format: https://music.apple.com/us/album/album-name/id?i=song-id
+      try {
+        const cleanUrl = url.replace('https://music.apple.com/', '');
+        return {
+          type: 'apple-music',
+          embedUrl: `https://embed.music.apple.com/${cleanUrl}`,
+          title: 'Apple Music'
+        };
+      } catch (e) {
+        console.error('Error parsing Apple Music URL:', e);
+      }
+    }
+    
     // Default to original URL if no specific embedding is recognized
     return {
       type: 'other',
@@ -106,6 +122,18 @@ export function getMediaPreview(mediaType: MediaType, embedUrl: string): JSX.Ele
           frameBorder="no"
           src={embedUrl}
           title="SoundCloud Track"
+        />
+      );
+    case 'apple-music':
+      return (
+        <iframe
+          src={embedUrl}
+          width="100%"
+          height="175"
+          frameBorder="0"
+          allow="autoplay *; encrypted-media *;"
+          sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
+          title="Apple Music"
         />
       );
     default:
