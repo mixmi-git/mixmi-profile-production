@@ -10,10 +10,10 @@
   },
   "dependencies": {
     "@micro-stacks/react": "1.0.9",
-    "@stacks/auth": "7.0.5",
+    "@stacks/auth": "^7.0.5",
     "@stacks/common": "7.0.2",
-    "@stacks/connect": "8.1.7",
-    "@stacks/network": "7.0.2",
+    "@stacks/connect": "^8.1.7",
+    "@stacks/network": "^7.0.2",
     "@stacks/transactions": "7.0.5",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

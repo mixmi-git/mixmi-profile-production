@@ -1,9 +1,9 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { STORAGE_KEYS } from "@/types";
+import { AppConfig, UserSession, showConnect } from "@stacks/connect";
 import { StorageService } from "@/lib/storage";
-import { showConnect } from "@stacks/connect";
+import { STORAGE_KEYS } from "@/types";
 
 type AuthContextType = {
   isAuthenticated: boolean;
@@ -19,6 +19,11 @@ const defaultAuthState = {
   btcAddress: null
 };
 
+// Create a new AppConfig with the proper permissions
+const appConfig = new AppConfig(['store_write']);
+// Create a UserSession with the AppConfig
+const userSession = new UserSession({ appConfig });
+
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
@@ -28,10 +33,24 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }
     btcAddress: null as string | null
   });
   
-  // Load auth state from storage
+  // Load auth state from storage and check if user is already signed in
   useEffect(() => {
-    const storedAuth = StorageService.getItem(STORAGE_KEYS.AUTH, defaultAuthState);
-    setAuth(storedAuth);
+    if (typeof window !== 'undefined') {
+      // Check if user is already signed in
+      if (userSession.isUserSignedIn()) {
+        const userData = userSession.loadUserData();
+        
+        setAuth({
+          isAuthenticated: true,
+          walletAddress: userData.profile.stxAddress?.mainnet || null,
+          btcAddress: userData.profile.btcAddress?.p2wpkh?.mainnet || null
+        });
+      } else {
+        // Load from our own storage as fallback
+        const storedAuth = StorageService.getItem(STORAGE_KEYS.AUTH, defaultAuthState);
+        setAuth(storedAuth);
+      }
+    }
   }, []);
   
   // Save auth state to storage when it changes
@@ -44,20 +63,23 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }
   const connectWallet = () => {
     const appDetails = {
       name: "Mixmi Profile",
-      icon: window.location.origin + "/logo.png",
+      icon: window.location.origin + "/favicon.ico",
     };
     
     showConnect({
       appDetails,
-      onFinish: (data) => {
-        const { userSession } = data;
-        const userData = userSession.loadUserData();
-        
-        setAuth({
-          isAuthenticated: true,
-          walletAddress: userData.profile.stxAddress.mainnet, // or testnet based on your needs
-          btcAddress: userData.profile.btcAddress?.p2wpkh?.mainnet || null // Bitcoin address if available
-        });
+      redirectTo: '/',
+      userSession,
+      onFinish: () => {
+        if (userSession.isUserSignedIn()) {
+          const userData = userSession.loadUserData();
+          
+          setAuth({
+            isAuthenticated: true,
+            walletAddress: userData.profile.stxAddress?.mainnet || null,
+            btcAddress: userData.profile.btcAddress?.p2wpkh?.mainnet || null
+          });
+        }
       },
       onCancel: () => {
         console.log("Wallet connection canceled");
@@ -66,11 +88,16 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }
   };
   
   const disconnectWallet = () => {
+    if (userSession.isUserSignedIn()) {
+      userSession.signUserOut();
+    }
+    
     setAuth({
       isAuthenticated: false,
       walletAddress: null,
       btcAddress: null
     });
+    
     StorageService.removeItem(STORAGE_KEYS.AUTH);
   };
   
