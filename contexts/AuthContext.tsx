@@ -48,7 +48,17 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }
       } else {
         // Load from our own storage as fallback
         const storedAuth = StorageService.getItem(STORAGE_KEYS.AUTH, defaultAuthState);
-        setAuth(storedAuth);
+        
+        // FOR TESTING: Add mock wallet addresses if they don't exist
+        if (!storedAuth.walletAddress && process.env.NODE_ENV === 'development') {
+          setAuth({
+            ...storedAuth,
+            walletAddress: 'SP2J6ZY48GV1EZ5V2V5RB9MP66SW86PYKKNRV9EJ7',
+            btcAddress: '1AKHyiMrE5RRNjWCVhzqgCLYVV4AZMXsP'
+          });
+        } else {
+          setAuth(storedAuth);
+        }
       }
     }
   }, []);
@@ -61,30 +71,50 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }
   }, [auth]);
   
   const connectWallet = () => {
-    const appDetails = {
-      name: "Mixmi Profile",
-      icon: window.location.origin + "/favicon.ico",
-    };
-    
-    showConnect({
-      appDetails,
-      redirectTo: '/',
-      userSession,
-      onFinish: () => {
-        if (userSession.isUserSignedIn()) {
-          const userData = userSession.loadUserData();
-          
-          setAuth({
-            isAuthenticated: true,
-            walletAddress: userData.profile.stxAddress?.mainnet || null,
-            btcAddress: userData.profile.btcAddress?.p2wpkh?.mainnet || null
-          });
+    try {
+      const appDetails = {
+        name: "Mixmi Profile",
+        icon: window.location.origin + "/favicon.ico",
+      };
+      
+      console.log("Connecting to wallet...");
+      
+      showConnect({
+        appDetails,
+        redirectTo: '/',
+        userSession,
+        onFinish: () => {
+          console.log("Wallet connection finished");
+          if (userSession.isUserSignedIn()) {
+            const userData = userSession.loadUserData();
+            console.log("User is signed in, data:", userData);
+            
+            setAuth({
+              isAuthenticated: true,
+              walletAddress: userData.profile.stxAddress?.mainnet || null,
+              btcAddress: userData.profile.btcAddress?.p2wpkh?.mainnet || null
+            });
+          } else {
+            console.log("User session finished but not signed in");
+          }
+        },
+        onCancel: () => {
+          console.log("Wallet connection canceled");
         }
-      },
-      onCancel: () => {
-        console.log("Wallet connection canceled");
+      });
+    } catch (error) {
+      console.error("Error connecting to wallet:", error);
+      
+      // For testing/development: Use mock data if connection fails
+      if (process.env.NODE_ENV === 'development') {
+        console.log("Using mock wallet data for development");
+        setAuth({
+          isAuthenticated: true,
+          walletAddress: 'SP2J6ZY48GV1EZ5V2V5RB9MP66SW86PYKKNRV9EJ7',
+          btcAddress: '1AKHyiMrE5RRNjWCVhzqgCLYVV4AZMXsP'
+        });
       }
-    });
+    }
   };
   
   const disconnectWallet = () => {
