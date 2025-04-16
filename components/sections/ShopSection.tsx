@@ -21,9 +21,33 @@ export default function ShopSection() {
     setIsItemModalOpen(true);
   };
   
+  // Special handler for editing from the section editor modal
+  const handleEditFromEditor = (item: ShopItem) => {
+    // First close the section editor modal
+    setIsSectionModalOpen(false);
+    
+    // Then after a short delay, open the item modal for editing
+    setTimeout(() => {
+      setEditingItem(item);
+      setIsItemModalOpen(true);
+    }, 100);
+  };
+  
   const handleAdd = () => {
     setEditingItem(undefined);
     setIsItemModalOpen(true);
+  };
+  
+  // Special handler for adding from the section editor modal
+  const handleAddFromEditor = () => {
+    // First close the section editor modal
+    setIsSectionModalOpen(false);
+    
+    // Then after a short delay, open the item modal
+    setTimeout(() => {
+      setEditingItem(undefined);
+      setIsItemModalOpen(true);
+    }, 100);
   };
   
   const handleSave = (item: ShopItem) => {
@@ -133,8 +157,8 @@ export default function ShopSection() {
         title="Shop"
         items={shopItems}
         onUpdateItems={handleUpdateItems}
-        onAddItem={handleAdd}
-        onEditItem={handleEdit}
+        onAddItem={handleAddFromEditor}
+        onEditItem={handleEditFromEditor}
         onDeleteItem={removeShopItem}
         imageField="image"
       />
