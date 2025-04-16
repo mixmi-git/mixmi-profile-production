@@ -220,7 +220,7 @@ export default function ProfileInfo() {
       
       {/* Wallet addresses - Show based on profile settings */}
       <div className="space-y-2 mt-2">
-        {walletAddress && profile.showWalletAddress && (
+        {profile.showWalletAddress && walletAddress && (
           <div className="bg-slate-900 p-2 rounded-md flex items-center justify-between">
             <div>
               <span className="text-xs text-gray-500">STX:</span>
@@ -248,7 +248,7 @@ export default function ProfileInfo() {
           </div>
         )}
         
-        {btcAddress && profile.showBtcAddress && (
+        {profile.showBtcAddress && btcAddress && (
           <div className="bg-slate-900 p-2 rounded-md flex items-center justify-between">
             <div>
               <span className="text-xs text-gray-500">BTC:</span>
