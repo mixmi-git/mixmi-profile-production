@@ -14,7 +14,7 @@ module.exports = {
   			sm: 'calc(var(--radius) - 4px)'
   		},
       animation: {
-        'slow-spin': 'spin 10s linear infinite',
+        'slow-spin': 'spin 20s linear infinite',
       },
   		colors: {
   			background: 'hsl(var(--background))',

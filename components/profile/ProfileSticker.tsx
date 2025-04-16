@@ -22,14 +22,14 @@ export default function ProfileSticker({ editable = false }: ProfileStickerProps
   
   return (
     <>
-      <div className="fixed bottom-8 left-0 right-0 flex justify-center">
+      <section className="mb-16 py-8 flex justify-center">
         <div className="relative">
           {sticker && (
             <Image
               src={sticker.imageUrl}
               alt={sticker.alt}
-              width={100}
-              height={100}
+              width={130}
+              height={130}
               className="animate-slow-spin"
             />
           )}
@@ -43,7 +43,7 @@ export default function ProfileSticker({ editable = false }: ProfileStickerProps
             </button>
           )}
         </div>
-      </div>
+      </section>
       
       <StickerModal 
         isOpen={isModalOpen}
