@@ -160,7 +160,7 @@ export default function MediaSection() {
         onAddItem={handleAddFromEditor}
         onEditItem={handleEditFromEditor}
         onDeleteItem={removeMediaItem}
-        imageField="image"
+        imageField="type"
       />
     </section>
   );
