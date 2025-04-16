@@ -13,7 +13,24 @@ const defaultProfile: ProfileData = {
   title: "Add Your Title",
   bio: "Tell us about yourself...",
   image: "",
-  socialLinks: [],
+  socialLinks: [
+    {
+      platform: "twitter",
+      url: "https://twitter.com/example",
+    },
+    {
+      platform: "instagram",
+      url: "https://instagram.com/example",
+    },
+    {
+      platform: "youtube",
+      url: "https://youtube.com/example",
+    },
+    {
+      platform: "spotify",
+      url: "https://spotify.com/example",
+    }
+  ],
   sectionVisibility: {
     spotlight: true,
     media: true,
@@ -21,11 +38,11 @@ const defaultProfile: ProfileData = {
     sticker: true
   },
   sticker: {
-    id: "daisy-blue", // Set to the default sticker ID
+    id: "daisy-blue",
     visible: true
   },
-  showWalletAddress: false,
-  showBtcAddress: false
+  showWalletAddress: true,
+  showBtcAddress: true
 };
 
 interface ProfileContextType {
