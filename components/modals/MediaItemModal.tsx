@@ -89,12 +89,18 @@ export default function MediaItemModal({
     }
     
     // Always update the media type and embed URL based on the raw URL
-    setFormData((prev) => ({
-      ...prev,
-      type: mediaInfo.type,
-      embedUrl: mediaInfo.embedUrl,
-      title: prev.title || mediaInfo.title || ""
-    }));
+    // If the type has changed or title is empty, use the type as the title
+    setFormData((prev) => {
+      const typeChanged = prev.type !== mediaInfo.type;
+      const defaultTitle = mediaInfo.type.charAt(0).toUpperCase() + mediaInfo.type.slice(1);
+      
+      return {
+        ...prev,
+        type: mediaInfo.type,
+        embedUrl: mediaInfo.embedUrl,
+        title: typeChanged ? defaultTitle : (prev.title || defaultTitle)
+      };
+    });
     
     setPreview(getMediaPreview(mediaInfo.type, mediaInfo.embedUrl));
     setError(null);
