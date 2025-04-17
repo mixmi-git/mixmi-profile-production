@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "../ui/Modal";
 import { useProfile } from "@/contexts/ProfileContext";
 import { ProfileData, SocialLink } from "@/types";
+import { X } from "lucide-react";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary";
@@ -48,6 +49,13 @@ const PLATFORM_OPTIONS = [
   { value: "soundcloud", label: "SoundCloud" }
 ];
 
+// Character limits for fields
+const CHARACTER_LIMITS = {
+  name: 40,
+  title: 40,
+  bio: 350
+};
+
 const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen, onClose }) => {
   const { profile, updateProfile } = useProfile();
   const [formData, setFormData] = useState<ProfileData>({
@@ -71,7 +79,15 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen, onClose }) 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    // Apply character limits if needed
+    if (CHARACTER_LIMITS[name as keyof typeof CHARACTER_LIMITS]) {
+      const limit = CHARACTER_LIMITS[name as keyof typeof CHARACTER_LIMITS];
+      if (value.length <= limit) {
+        setFormData(prev => ({ ...prev, [name]: value }));
+      }
+    } else {
+      setFormData(prev => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -114,34 +130,46 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen, onClose }) 
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Edit Profile">
+    <Modal isOpen={isOpen} onClose={onClose} title="Edit Profile Details">
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-1">
-            Name
-          </label>
+          <div className="flex justify-between items-center mb-1">
+            <label htmlFor="name" className="block text-sm font-medium text-slate-300">
+              Name
+            </label>
+            <span className="text-sm text-slate-400">
+              {(formData.name?.length || 0)}/{CHARACTER_LIMITS.name}
+            </span>
+          </div>
           <input
             type="text"
             id="name"
             name="name"
-            value={formData.name}
+            value={formData.name || ''}
             onChange={handleChange}
             className="w-full p-2 bg-slate-800 border border-slate-700 rounded-md text-white"
+            maxLength={CHARACTER_LIMITS.name}
             required
           />
         </div>
 
         <div>
-          <label htmlFor="title" className="block text-sm font-medium text-slate-300 mb-1">
-            Title
-          </label>
+          <div className="flex justify-between items-center mb-1">
+            <label htmlFor="title" className="block text-sm font-medium text-slate-300">
+              Title
+            </label>
+            <span className="text-sm text-slate-400">
+              {(formData.title?.length || 0)}/{CHARACTER_LIMITS.title}
+            </span>
+          </div>
           <input
             type="text"
             id="title"
             name="title"
-            value={formData.title}
+            value={formData.title || ''}
             onChange={handleChange}
             className="w-full p-2 bg-slate-800 border border-slate-700 rounded-md text-white"
+            maxLength={CHARACTER_LIMITS.title}
           />
         </div>
 
@@ -153,23 +181,29 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen, onClose }) 
             type="text"
             id="image"
             name="image"
-            value={formData.image}
+            value={formData.image || ''}
             onChange={handleChange}
             className="w-full p-2 bg-slate-800 border border-slate-700 rounded-md text-white"
           />
         </div>
 
         <div>
-          <label htmlFor="bio" className="block text-sm font-medium text-slate-300 mb-1">
-            Bio
-          </label>
+          <div className="flex justify-between items-center mb-1">
+            <label htmlFor="bio" className="block text-sm font-medium text-slate-300">
+              Bio
+            </label>
+            <span className="text-sm text-slate-400">
+              {(formData.bio?.length || 0)}/{CHARACTER_LIMITS.bio}
+            </span>
+          </div>
           <textarea
             id="bio"
             name="bio"
-            value={formData.bio}
+            value={formData.bio || ''}
             onChange={handleChange}
             rows={3}
             className="w-full p-2 bg-slate-800 border border-slate-700 rounded-md text-white"
+            maxLength={CHARACTER_LIMITS.bio}
           />
         </div>
 
@@ -212,20 +246,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen, onClose }) 
                 onClick={() => removeSocialLink(index)}
                 className="text-gray-400 hover:text-gray-300 px-2 py-2"
               >
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  width="16" 
-                  height="16" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                >
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
+                <X size={16} />
               </button>
             </div>
           ))}
