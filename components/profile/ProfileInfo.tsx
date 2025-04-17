@@ -5,11 +5,13 @@ import { useProfile } from "@/contexts/ProfileContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/contexts/ToastContext";
 import { Instagram, Youtube, SquareX, Music, Github, Twitch, Plus, Clipboard } from "lucide-react";
+import SocialLinksModal from "../modals/SocialLinksModal";
 
 export default function ProfileInfo() {
   const { profile } = useProfile();
   const { isAuthenticated, walletAddress, btcAddress } = useAuth();
   const { showToast } = useToast();
+  const [isSocialLinksModalOpen, setIsSocialLinksModalOpen] = useState(false);
   
   // Map social links to their icons
   const getSocialIcon = (platform: string) => {
@@ -52,7 +54,7 @@ export default function ProfileInfo() {
   const bioText = (profile.bio || "Tell us about yourself...").slice(0, 350);
   
   return (
-    <div className="flex flex-col space-y-4 text-center max-w-[480px] mx-auto">
+    <div className="flex flex-col space-y-4 text-center max-w-[420px] mx-auto">
       <div className="mb-2">
         <h1 className="text-4xl font-bold text-accent" title={profile.name}>
           {nameText}
@@ -92,7 +94,7 @@ export default function ProfileInfo() {
         ) : isAuthenticated ? (
           <button 
             className="text-gray-500 hover:text-gray-400 transition-colors"
-            onClick={() => console.log('Add social links')}
+            onClick={() => setIsSocialLinksModalOpen(true)}
           >
             <Plus size={20} />
             <span className="sr-only">Add social links</span>
@@ -102,9 +104,9 @@ export default function ProfileInfo() {
       
       {/* Wallet addresses - completely simplified structure */}
       {((profile.showWalletAddress && walletAddress) || (profile.showBtcAddress && btcAddress)) && (
-        <div className="mt-5 flex flex-col items-center gap-3 max-w-xs mx-auto">
+        <div className="mt-5 flex flex-col items-center gap-1 max-w-xs mx-auto">
           {profile.showWalletAddress && walletAddress && (
-            <div className="bg-background py-2 px-3 rounded-md w-full border border-border flex items-center">
+            <div className="bg-background py-1.5 px-3 rounded-md w-full border border-border flex items-center">
               <span className="text-xs text-gray-500 shrink-0">STX:</span>
               <span className="text-xs text-gray-400 ml-2 mr-6">{`${walletAddress.slice(0, 8)}...${walletAddress.slice(-8)}`}</span>
               <button 
@@ -117,7 +119,7 @@ export default function ProfileInfo() {
           )}
           
           {profile.showBtcAddress && btcAddress && (
-            <div className="bg-background py-2 px-3 rounded-md w-full border border-border flex items-center">
+            <div className="bg-background py-1.5 px-3 rounded-md w-full border border-border flex items-center">
               <span className="text-xs text-gray-500 shrink-0">BTC:</span>
               <span className="text-xs text-gray-400 ml-2 mr-6">{`${btcAddress.slice(0, 8)}...${btcAddress.slice(-8)}`}</span>
               <button 
@@ -130,6 +132,11 @@ export default function ProfileInfo() {
           )}
         </div>
       )}
+      
+      <SocialLinksModal
+        isOpen={isSocialLinksModalOpen}
+        onClose={() => setIsSocialLinksModalOpen(false)}
+      />
     </div>
   );
 } 

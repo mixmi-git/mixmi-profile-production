@@ -4,6 +4,7 @@ import React from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import Link from "next/link";
 import Image from "next/image";
+import { Button } from "../ui/Button";
 
 export default function Header() {
   const { isAuthenticated, connectWallet, disconnectWallet } = useAuth();
@@ -21,21 +22,13 @@ export default function Header() {
       </Link>
       
       <div>
-        {isAuthenticated ? (
-          <button
-            onClick={disconnectWallet}
-            className="bg-background border border-accent text-accent px-4 py-2 rounded-md transition-colors hover:bg-opacity-80"
-          >
-            Disconnect Wallet
-          </button>
-        ) : (
-          <button
-            onClick={connectWallet}
-            className="bg-background border border-accent text-accent px-4 py-2 rounded-md transition-colors hover:bg-opacity-80"
-          >
-            Connect Wallet
-          </button>
-        )}
+        <Button
+          onClick={isAuthenticated ? disconnectWallet : connectWallet}
+          variant="secondary"
+          className="border border-white/30 text-white hover:bg-white/10 transition-colors"
+        >
+          {isAuthenticated ? 'Disconnect Wallet' : 'Connect Wallet'}
+        </Button>
       </div>
     </header>
   );
