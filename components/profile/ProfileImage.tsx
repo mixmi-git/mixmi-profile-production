@@ -21,9 +21,9 @@ export default function ProfileImage() {
   };
   
   return (
-    <div className="relative w-60 h-60 mx-auto md:mx-0">
+    <div className="relative w-64 h-64 mx-auto md:mx-0">
       <div 
-        className={`w-full h-full rounded-full overflow-hidden border-4 border-slate-700 ${
+        className={`w-full h-full rounded-lg overflow-hidden border-2 border-accent ${
           isAuthenticated ? "cursor-pointer hover:opacity-90" : ""
         }`}
         onClick={isAuthenticated ? handleImageClick : undefined}
@@ -36,7 +36,7 @@ export default function ProfileImage() {
             className="object-cover"
           />
         ) : (
-          <div className="w-full h-full bg-slate-800 flex items-center justify-center">
+          <div className="w-full h-full bg-background flex items-center justify-center">
             <span className="text-3xl text-slate-500">
               {isAuthenticated ? "+" : ""}
             </span>
@@ -45,7 +45,7 @@ export default function ProfileImage() {
       </div>
       
       {isAuthenticated && (
-        <div className="absolute bottom-2 right-2 bg-slate-800 rounded-full p-2 cursor-pointer hover:bg-slate-700">
+        <div className="absolute bottom-2 right-2 bg-background rounded-full p-2 cursor-pointer hover:bg-opacity-80 border border-accent">
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             width="24" 
@@ -56,7 +56,7 @@ export default function ProfileImage() {
             strokeWidth="2" 
             strokeLinecap="round" 
             strokeLinejoin="round" 
-            className="text-cyan-400"
+            className="text-accent"
           >
             <path d="M12 20h9"></path>
             <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>

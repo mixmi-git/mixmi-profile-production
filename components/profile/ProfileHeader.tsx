@@ -15,10 +15,14 @@ export default function ProfileHeader() {
   const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
   
   return (
-    <div className="mb-10 bg-slate-900 p-6 rounded-lg shadow-lg">
-      <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
-        <ProfileImage />
-        <ProfileInfo />
+    <div className="mb-10 border border-border rounded-lg shadow-lg p-6">
+      <div className="flex flex-col md:flex-row md:items-start gap-8">
+        <div className="md:w-1/3">
+          <ProfileImage />
+        </div>
+        <div className="md:w-2/3">
+          <ProfileInfo />
+        </div>
       </div>
       
       {isAuthenticated && (
@@ -26,7 +30,7 @@ export default function ProfileHeader() {
           <div className="mt-6 flex justify-end space-x-3">
             <button 
               onClick={() => setIsWalletModalOpen(true)}
-              className="bg-slate-800 hover:bg-slate-700 text-cyan-400 px-4 py-2 rounded-md flex items-center space-x-2 transition-colors"
+              className="bg-background border border-accent text-accent px-4 py-2 rounded-md flex items-center space-x-2 transition-colors hover:bg-opacity-80"
             >
               <svg 
                 xmlns="http://www.w3.org/2000/svg" 
@@ -47,7 +51,7 @@ export default function ProfileHeader() {
             
             <button 
               onClick={() => setIsEditModalOpen(true)}
-              className="bg-slate-800 hover:bg-slate-700 text-cyan-400 px-4 py-2 rounded-md flex items-center space-x-2 transition-colors"
+              className="bg-background border border-accent text-accent px-4 py-2 rounded-md flex items-center space-x-2 transition-colors hover:bg-opacity-80"
             >
               <svg 
                 xmlns="http://www.w3.org/2000/svg" 
