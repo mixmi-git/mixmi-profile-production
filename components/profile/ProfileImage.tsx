@@ -21,25 +21,28 @@ export default function ProfileImage() {
     <>
       <div className="relative w-80 h-80 mx-auto md:mx-0">
         <div 
-          className={`w-full h-full rounded-lg overflow-hidden border-2 border-accent ${
+          className={`w-full h-full rounded-lg border-2 border-accent overflow-hidden ${
             isAuthenticated ? "cursor-pointer hover:opacity-90" : ""
           }`}
           onClick={isAuthenticated ? handleEditClick : undefined}
         >
-          {profile.image ? (
-            <Image 
-              src={profile.image} 
-              alt={profile.name || "Profile"} 
-              fill
-              className="object-cover"
-            />
-          ) : (
-            <div className="w-full h-full bg-background flex items-center justify-center">
-              <span className="text-3xl text-slate-500">
-                {isAuthenticated ? "+" : ""}
-              </span>
-            </div>
-          )}
+          <div className="relative w-full h-full">
+            {profile.image ? (
+              <Image 
+                src={profile.image} 
+                alt={profile.name || "Profile"} 
+                fill
+                className="object-cover rounded-[6px]"
+                sizes="320px"
+              />
+            ) : (
+              <div className="w-full h-full bg-background flex items-center justify-center">
+                <span className="text-3xl text-slate-500">
+                  {isAuthenticated ? "+" : ""}
+                </span>
+              </div>
+            )}
+          </div>
         </div>
         
         {isAuthenticated && (
