@@ -107,7 +107,6 @@ export default function WalletSettingsModal({ isOpen, onClose }: WalletSettingsM
               checked={showBtc}
               onChange={(e) => setShowBtc(e.target.checked)}
               className="h-4 w-4 bg-slate-800 border-slate-700 rounded text-cyan-600 focus:ring-cyan-500"
-              disabled={!btcAddress}
             />
             <label htmlFor="showBtc" className="ml-2 text-sm text-slate-300">
               Show BTC wallet address on profile
