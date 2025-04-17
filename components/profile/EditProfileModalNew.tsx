@@ -119,11 +119,12 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen, onClose }) 
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Preserve existing wallet visibility settings
+    // Preserve existing wallet visibility settings and image
     const updatedProfile = {
       ...formData,
       showWalletAddress: profile.showWalletAddress,
-      showBtcAddress: profile.showBtcAddress
+      showBtcAddress: profile.showBtcAddress,
+      image: profile.image // Preserve the image since it's managed separately
     };
     updateProfile(updatedProfile);
     onClose();
@@ -170,20 +171,6 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen, onClose }) 
             onChange={handleChange}
             className="w-full p-2 bg-slate-800 border border-slate-700 rounded-md text-white"
             maxLength={CHARACTER_LIMITS.title}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="image" className="block text-sm font-medium text-slate-300 mb-1">
-            Profile Image URL
-          </label>
-          <input
-            type="text"
-            id="image"
-            name="image"
-            value={formData.image || ''}
-            onChange={handleChange}
-            className="w-full p-2 bg-slate-800 border border-slate-700 rounded-md text-white"
           />
         </div>
 
