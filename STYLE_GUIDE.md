@@ -43,7 +43,7 @@
 
 ### Profile Image
 - **Container:**
-  - Size: w-64 h-64
+  - Size: w-80 h-80 (320px square)
   - Border: 2px `#81E4F2` (accent)
   - Border Radius: rounded-lg
 
