@@ -15,8 +15,8 @@ export default function ProfileHeader() {
   const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
   
   return (
-    <div className="mb-10 border border-border rounded-lg shadow-lg p-6">
-      <div className="flex flex-col md:flex-row md:items-start gap-8">
+    <div className="mb-10 border border-border rounded-lg shadow-lg p-6 max-w-5xl mx-auto">
+      <div className="flex flex-col md:flex-row md:items-start gap-4">
         <div className="md:w-1/3">
           <ProfileImage />
         </div>
