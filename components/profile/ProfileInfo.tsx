@@ -6,6 +6,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/contexts/ToastContext";
 import { Instagram, Youtube, SquareX, Music, Github, Twitch, Plus, Clipboard } from "lucide-react";
 import SocialLinksModal from "../modals/SocialLinksModal";
+import EditButton from "../ui/EditButton";
 
 export default function ProfileInfo() {
   const { profile } = useProfile();
@@ -81,16 +82,13 @@ export default function ProfileInfo() {
         <div className="flex items-center mb-1">
           <h3 className="text-sm font-medium text-gray-400">Social Links</h3>
           {isAuthenticated && socialLinks.length > 0 && (
-            <button
-              className="ml-2 text-gray-500 hover:text-[#81E4F2] transition-colors"
-              onClick={() => setIsSocialLinksModalOpen(true)}
-              title="Edit social links"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-              </svg>
-            </button>
+            <div className="ml-2">
+              <EditButton 
+                size="sm" 
+                label="Edit Social Links" 
+                onClick={() => setIsSocialLinksModalOpen(true)} 
+              />
+            </div>
           )}
         </div>
         <div className="flex gap-6 justify-center">

@@ -1,0 +1,43 @@
+import { PenIcon } from 'lucide-react';
+import { ButtonHTMLAttributes } from 'react';
+
+interface EditButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  size?: 'sm' | 'md' | 'lg';
+  label?: string;
+}
+
+export default function EditButton({ 
+  size = 'md', 
+  label = 'Edit', 
+  className = '', 
+  ...props 
+}: EditButtonProps) {
+  // Size mappings
+  const sizeClasses = {
+    sm: 'w-7 h-7',
+    md: 'w-9 h-9',
+    lg: 'w-11 h-11'
+  };
+  
+  const iconSizes = {
+    sm: 14,
+    md: 16,
+    lg: 20
+  };
+  
+  return (
+    <button
+      type="button"
+      className={`
+        rounded-full border border-accent bg-background flex items-center justify-center
+        transition-all hover:bg-accent/10 focus:outline-none focus:ring-2 focus:ring-accent/50
+        ${sizeClasses[size]} ${className}
+      `}
+      aria-label={label}
+      title={label}
+      {...props}
+    >
+      <PenIcon size={iconSizes[size]} className="text-accent" />
+    </button>
+  );
+} 

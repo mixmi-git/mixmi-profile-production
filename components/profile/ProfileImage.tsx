@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import { useProfile } from "@/contexts/ProfileContext";
 import { useAuth } from "@/contexts/AuthContext";
 import Image from "next/image";
-import { Pencil } from "lucide-react";
 import ProfileImageModal from "./ProfileImageModal";
+import EditButton from "../ui/EditButton";
 
 export default function ProfileImage() {
   const { profile } = useProfile();
@@ -47,11 +47,13 @@ export default function ProfileImage() {
         </div>
         
         {isAuthenticated && (
-          <div 
-            className="absolute bottom-2 right-2 bg-[#101726] rounded-full p-2 cursor-pointer hover:bg-[#151C2A] border border-[#81E4F2] shadow-md transition-colors"
-            onClick={handleEditClick}
-          >
-            <Pencil size={20} className="text-[#81E4F2]" />
+          <div className="absolute bottom-2 right-2">
+            <EditButton 
+              size="md" 
+              label="Edit Profile Image" 
+              onClick={handleEditClick}
+              className="shadow-md" 
+            />
           </div>
         )}
       </div>
