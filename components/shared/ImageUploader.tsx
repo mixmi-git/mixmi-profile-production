@@ -58,12 +58,14 @@ export default function ImageUploader({
   }, [onImageChange]);
   
   // Configure dropzone
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+  const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
     onDrop,
     accept: {
       'image/*': ['.jpeg', '.jpg', '.png', '.gif', '.webp', '.svg']
     },
-    maxFiles: 1
+    maxFiles: 1,
+    noClick: false, // Ensure clicks are captured
+    noKeyboard: false // Allow keyboard navigation
   });
   
   // Handle URL input
@@ -89,11 +91,18 @@ export default function ImageUploader({
     setPreview(null);
     setImageUrl("");
     onImageChange("");
-  };
-  
-  // For directly clicking the upload area
-  const handleAreaClick = () => {
-    // This will be handled by the getRootProps
+    
+    // If we're not on the upload tab, switch to it
+    if (activeTab !== "upload") {
+      setActiveTab("upload");
+    }
+    
+    // Small delay to ensure the UI updates before attempting to open the file dialog
+    setTimeout(() => {
+      if (activeTab === "upload") {
+        open(); // This will open the file dialog directly
+      }
+    }, 100);
   };
   
   // Calculate aspect ratio class
@@ -162,7 +171,6 @@ export default function ImageUploader({
         <div
           {...getRootProps()}
           className="border-2 border-dashed border-gray-700 rounded-lg p-8 text-center cursor-pointer hover:border-cyan-400 transition-colors"
-          onClick={handleAreaClick}
         >
           <input {...getInputProps()} />
           <Upload size={24} className="mx-auto mb-2 text-gray-400" />
