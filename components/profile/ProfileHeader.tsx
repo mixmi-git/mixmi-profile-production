@@ -19,7 +19,7 @@ export default function ProfileHeader() {
   
   return (
     <div className="mb-10 border border-border rounded-lg shadow-lg p-6 max-w-5xl mx-auto">
-      <div className="flex flex-col md:flex-row md:items-start md:gap-12">
+      <div className="flex flex-col md:flex-row md:items-start md:gap-16">
         <div className="md:self-start">
           <ProfileImage />
         </div>
