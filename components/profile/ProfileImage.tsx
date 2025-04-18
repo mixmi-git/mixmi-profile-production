@@ -48,7 +48,7 @@ export default function ProfileImage() {
         
         {isAuthenticated && (
           <EditButton 
-            size="sm" 
+            size="md" 
             label="Edit Profile Image" 
             onClick={handleEditClick}
             className="absolute bottom-3 right-3" 

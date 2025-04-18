@@ -30,7 +30,7 @@ export default function ProfileHeader() {
             <div className="flex justify-center gap-6 mt-5">
               <div className="flex items-center">
                 <EditButton 
-                  size="sm" 
+                  size="md" 
                   label="Edit Profile" 
                   onClick={() => setIsEditModalOpen(true)}
                   className="mr-2"
@@ -40,7 +40,7 @@ export default function ProfileHeader() {
               
               <div className="flex items-center">
                 <EditButton 
-                  size="sm" 
+                  size="md" 
                   label="Edit Social Links" 
                   onClick={() => setIsSocialLinksModalOpen(true)}
                   className="mr-2"
@@ -50,7 +50,7 @@ export default function ProfileHeader() {
               
               <div className="flex items-center">
                 <EditButton 
-                  size="sm" 
+                  size="md" 
                   label="Wallet Settings" 
                   onClick={() => setIsWalletModalOpen(true)}
                   className="mr-2"
