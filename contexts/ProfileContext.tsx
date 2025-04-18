@@ -13,24 +13,7 @@ const defaultProfile: ProfileData = {
   title: "Add Your Title",
   bio: "Tell us about yourself...",
   image: "",
-  socialLinks: [
-    {
-      platform: "twitter",
-      url: "https://twitter.com/example",
-    },
-    {
-      platform: "instagram",
-      url: "https://instagram.com/example",
-    },
-    {
-      platform: "youtube",
-      url: "https://youtube.com/example",
-    },
-    {
-      platform: "spotify",
-      url: "https://spotify.com/example",
-    }
-  ],
+  socialLinks: [],
   sectionVisibility: {
     spotlight: true,
     media: true,

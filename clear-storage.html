@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Clear Mixmi Profile Storage</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #101726;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .container {
+      max-width: 600px;
+      padding: 20px;
+      background-color: #151C2A;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    button {
+      background-color: #81E4F2;
+      color: #101726;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #65d5e3;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+    .success {
+      background-color: rgba(0, 255, 0, 0.1);
+      border: 1px solid rgba(0, 255, 0, 0.3);
+    }
+    .error {
+      background-color: rgba(255, 0, 0, 0.1);
+      border: 1px solid rgba(255, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Clear Mixmi Profile Storage</h1>
+    <p>This tool will clear all stored profile data including social links from localStorage.</p>
+    <p>Use this to reset your profile data if you're experiencing issues with example social links.</p>
+    
+    <button id="clearBtn">Clear Storage</button>
+    <button id="resetProfileBtn">Reset Profile Only</button>
+    
+    <div id="result" class="result" style="display: none;"></div>
+  </div>
+
+  <script>
+    document.getElementById('clearBtn').addEventListener('click', function() {
+      try {
+        localStorage.clear();
+        
+        const resultEl = document.getElementById('result');
+        resultEl.textContent = 'All localStorage data cleared successfully! Please refresh your application.';
+        resultEl.className = 'result success';
+        resultEl.style.display = 'block';
+      } catch (err) {
+        const resultEl = document.getElementById('result');
+        resultEl.textContent = 'Error clearing storage: ' + err.message;
+        resultEl.className = 'result error';
+        resultEl.style.display = 'block';
+      }
+    });
+
+    document.getElementById('resetProfileBtn').addEventListener('click', function() {
+      try {
+        // Remove only profile-related data
+        localStorage.removeItem('profile');
+        
+        const resultEl = document.getElementById('result');
+        resultEl.textContent = 'Profile data cleared successfully! Please refresh your application.';
+        resultEl.className = 'result success';
+        resultEl.style.display = 'block';
+      } catch (err) {
+        const resultEl = document.getElementById('result');
+        resultEl.textContent = 'Error clearing profile data: ' + err.message;
+        resultEl.className = 'result error';
+        resultEl.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html> 

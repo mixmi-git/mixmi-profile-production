@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useProfile } from "@/contexts/ProfileContext";
 import { useAuth } from "@/contexts/AuthContext";
 import Image from "next/image";
+import { Pencil } from "lucide-react";
 import ProfileImageModal from "./ProfileImageModal";
 
 export default function ProfileImage() {
@@ -21,8 +22,8 @@ export default function ProfileImage() {
     <>
       <div className="relative w-80 h-80 mx-auto md:mx-0">
         <div 
-          className={`w-full h-full rounded-lg border-2 border-accent overflow-hidden ${
-            isAuthenticated ? "cursor-pointer hover:opacity-90" : ""
+          className={`w-full h-full rounded-lg border border-[#81E4F2] overflow-hidden ${
+            isAuthenticated ? "cursor-pointer hover:opacity-90 transition-opacity" : ""
           }`}
           onClick={isAuthenticated ? handleEditClick : undefined}
         >
@@ -36,8 +37,8 @@ export default function ProfileImage() {
                 sizes="320px"
               />
             ) : (
-              <div className="w-full h-full bg-background flex items-center justify-center">
-                <span className="text-3xl text-slate-500">
+              <div className="w-full h-full bg-[#151C2A] flex items-center justify-center">
+                <span className="text-3xl text-gray-500">
                   {isAuthenticated ? "+" : ""}
                 </span>
               </div>
@@ -47,24 +48,10 @@ export default function ProfileImage() {
         
         {isAuthenticated && (
           <div 
-            className="absolute bottom-2 right-2 bg-background rounded-full p-2 cursor-pointer hover:bg-opacity-80 border border-accent"
+            className="absolute bottom-2 right-2 bg-[#101726] rounded-full p-2 cursor-pointer hover:bg-[#151C2A] border border-[#81E4F2] shadow-md transition-colors"
             onClick={handleEditClick}
           >
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              width="24" 
-              height="24" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="2" 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-              className="text-accent"
-            >
-              <path d="M12 20h9"></path>
-              <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-            </svg>
+            <Pencil size={20} className="text-[#81E4F2]" />
           </div>
         )}
       </div>

@@ -1,16 +1,23 @@
 "use client";
 
 import React, { useRef, useEffect } from "react";
-import { IoClose } from "react-icons/io5";
+import { X } from "lucide-react";
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   title: string;
   children: React.ReactNode;
+  maxWidth?: "sm" | "md" | "lg" | "xl";
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
+const Modal: React.FC<ModalProps> = ({ 
+  isOpen, 
+  onClose, 
+  title, 
+  children,
+  maxWidth = "md" 
+}) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -39,19 +46,29 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
 
   if (!isOpen) return null;
 
+  const maxWidthClasses = {
+    sm: "max-w-sm",
+    md: "max-w-md",
+    lg: "max-w-lg",
+    xl: "max-w-xl"
+  };
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
-      <div ref={modalRef} className="bg-slate-900 rounded-lg shadow-xl w-full max-w-md mx-4 max-h-[90vh] overflow-y-auto">
-        <div className="flex justify-between items-center px-6 py-4 border-b border-slate-700">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm">
+      <div 
+        ref={modalRef} 
+        className={`bg-[#101726] rounded-lg shadow-xl w-full mx-4 max-h-[90vh] overflow-y-auto ${maxWidthClasses[maxWidth]} border border-[#151C2A]`}
+      >
+        <div className="flex justify-between items-center px-6 py-4 border-b border-[#151C2A]">
           <h3 className="text-xl font-medium text-white">{title}</h3>
           <button
             onClick={onClose}
-            className="text-slate-400 hover:text-white transition-colors"
+            className="text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#81E4F2] rounded-full p-1"
           >
-            <IoClose size={24} />
+            <X size={20} />
           </button>
         </div>
-        <div className="px-6 py-4">
+        <div className="px-6 py-5">
           {children}
         </div>
       </div>
