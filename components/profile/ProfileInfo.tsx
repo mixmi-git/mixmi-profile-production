@@ -6,7 +6,6 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/contexts/ToastContext";
 import { Instagram, Youtube, SquareX, Music, Github, Twitch, Plus, Clipboard } from "lucide-react";
 import SocialLinksModal from "../modals/SocialLinksModal";
-import EditButton from "../ui/EditButton";
 
 export default function ProfileInfo() {
   const { profile } = useProfile();
@@ -78,12 +77,12 @@ export default function ProfileInfo() {
       </div>
       
       {/* Social links */}
-      <div className="flex flex-col items-center my-4">
-        <h3 className="text-sm font-medium text-gray-400 mb-1">Social Links</h3>
-        <div className="flex gap-6 justify-center">
-          {socialLinks.length > 0 ? (
-            <>
-              {socialLinks.map((link, index) => (
+      {(socialLinks.length > 0 || isAuthenticated) && (
+        <div className="flex flex-col items-center my-4">
+          <span className="text-sm font-medium text-gray-400 mb-2">Social Links</span>
+          <div className="flex gap-6 justify-center">
+            {socialLinks.length > 0 ? (
+              socialLinks.map((link, index) => (
                 <a 
                   key={index}
                   href={link.url}
@@ -94,27 +93,13 @@ export default function ProfileInfo() {
                 >
                   {link.icon}
                 </a>
-              ))}
-              {isAuthenticated && (
-                <EditButton 
-                  size="sm" 
-                  label="Edit Social Links" 
-                  onClick={() => setIsSocialLinksModalOpen(true)}
-                  className="ml-1" 
-                />
-              )}
-            </>
-          ) : isAuthenticated ? (
-            <button 
-              className="text-gray-500 hover:text-[#81E4F2] transition-colors p-1.5 border border-dashed border-gray-700 rounded-full"
-              onClick={() => setIsSocialLinksModalOpen(true)}
-            >
-              <Plus size={18} />
-              <span className="sr-only">Add social links</span>
-            </button>
-          ) : null}
+              ))
+            ) : isAuthenticated ? (
+              <span className="text-gray-500 text-sm italic">No social links added</span>
+            ) : null}
+          </div>
         </div>
-      </div>
+      )}
       
       {/* Wallet addresses - compact style with reduced spacing */}
       {((profile.showWalletAddress && walletAddress) || (profile.showBtcAddress && btcAddress)) && (

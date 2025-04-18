@@ -5,6 +5,7 @@ import ProfileImage from "./ProfileImage";
 import ProfileInfo from "./ProfileInfo";
 import EditProfileModal from "./EditProfileModalNew";
 import WalletSettingsModal from "../modals/WalletSettingsModal";
+import SocialLinksModal from "../modals/SocialLinksModal";
 import { useAuth } from "@/contexts/AuthContext";
 import { useProfile } from "@/contexts/ProfileContext";
 import EditButton from "../ui/EditButton";
@@ -14,6 +15,7 @@ export default function ProfileHeader() {
   const { profile } = useProfile();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
+  const [isSocialLinksModalOpen, setIsSocialLinksModalOpen] = useState(false);
   
   return (
     <div className="mb-10 border border-border rounded-lg shadow-lg p-6 max-w-5xl mx-auto">
@@ -28,7 +30,17 @@ export default function ProfileHeader() {
       
       {isAuthenticated && (
         <>
-          <div className="mt-6 flex justify-end space-x-6">
+          <div className="mt-6 flex justify-end gap-4">
+            <div className="flex items-center">
+              <EditButton 
+                size="sm" 
+                label="Edit Social Links" 
+                onClick={() => setIsSocialLinksModalOpen(true)}
+                className="mr-2"
+              />
+              <span className="text-gray-400 text-sm">Social Links</span>
+            </div>
+            
             <div className="flex items-center">
               <EditButton 
                 size="sm" 
@@ -58,6 +70,11 @@ export default function ProfileHeader() {
           <WalletSettingsModal
             isOpen={isWalletModalOpen}
             onClose={() => setIsWalletModalOpen(false)}
+          />
+          
+          <SocialLinksModal
+            isOpen={isSocialLinksModalOpen}
+            onClose={() => setIsSocialLinksModalOpen(false)}
           />
         </>
       )}
