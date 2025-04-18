@@ -30,7 +30,17 @@ export default function ProfileHeader() {
       
       {isAuthenticated && (
         <>
-          <div className="mt-6 flex justify-end gap-4 max-w-[480px] ml-auto">
+          <div className="mt-4 mb-6 flex justify-end gap-4 max-w-[480px] w-full mx-auto">
+            <div className="flex items-center">
+              <EditButton 
+                size="sm" 
+                label="Edit Profile" 
+                onClick={() => setIsEditModalOpen(true)}
+                className="mr-2"
+              />
+              <span className="text-gray-400 text-sm">Profile</span>
+            </div>
+            
             <div className="flex items-center">
               <EditButton 
                 size="sm" 
@@ -38,7 +48,7 @@ export default function ProfileHeader() {
                 onClick={() => setIsSocialLinksModalOpen(true)}
                 className="mr-2"
               />
-              <span className="text-gray-400 text-sm">Social Links</span>
+              <span className="text-gray-400 text-sm">Social</span>
             </div>
             
             <div className="flex items-center">
@@ -48,17 +58,7 @@ export default function ProfileHeader() {
                 onClick={() => setIsWalletModalOpen(true)}
                 className="mr-2"
               />
-              <span className="text-gray-400 text-sm">Wallet Settings</span>
-            </div>
-            
-            <div className="flex items-center">
-              <EditButton 
-                size="sm" 
-                label="Edit Profile" 
-                onClick={() => setIsEditModalOpen(true)}
-                className="mr-2"
-              />
-              <span className="text-gray-400 text-sm">Edit Profile</span>
+              <span className="text-gray-400 text-sm">Wallet</span>
             </div>
           </div>
           
