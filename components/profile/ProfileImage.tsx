@@ -47,14 +47,12 @@ export default function ProfileImage() {
         </div>
         
         {isAuthenticated && (
-          <div className="absolute bottom-2 right-2">
-            <EditButton 
-              size="md" 
-              label="Edit Profile Image" 
-              onClick={handleEditClick}
-              className="shadow-md" 
-            />
-          </div>
+          <EditButton 
+            size="sm" 
+            label="Edit Profile Image" 
+            onClick={handleEditClick}
+            className="absolute bottom-4 right-4 shadow-md" 
+          />
         )}
       </div>
       

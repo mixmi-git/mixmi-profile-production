@@ -79,32 +79,31 @@ export default function ProfileInfo() {
       
       {/* Social links */}
       <div className="flex flex-col items-center my-4">
-        <div className="flex items-center mb-1">
-          <h3 className="text-sm font-medium text-gray-400">Social Links</h3>
-          {isAuthenticated && socialLinks.length > 0 && (
-            <div className="ml-2">
-              <EditButton 
-                size="sm" 
-                label="Edit Social Links" 
-                onClick={() => setIsSocialLinksModalOpen(true)} 
-              />
-            </div>
-          )}
-        </div>
+        <h3 className="text-sm font-medium text-gray-400 mb-1">Social Links</h3>
         <div className="flex gap-6 justify-center">
           {socialLinks.length > 0 ? (
-            socialLinks.map((link, index) => (
-              <a 
-                key={index}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-[#81E4F2] transition-colors"
-                title={link.platform}
-              >
-                {link.icon}
-              </a>
-            ))
+            <>
+              {socialLinks.map((link, index) => (
+                <a 
+                  key={index}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-[#81E4F2] transition-colors"
+                  title={link.platform}
+                >
+                  {link.icon}
+                </a>
+              ))}
+              {isAuthenticated && (
+                <EditButton 
+                  size="sm" 
+                  label="Edit Social Links" 
+                  onClick={() => setIsSocialLinksModalOpen(true)}
+                  className="ml-1" 
+                />
+              )}
+            </>
           ) : isAuthenticated ? (
             <button 
               className="text-gray-500 hover:text-[#81E4F2] transition-colors p-1.5 border border-dashed border-gray-700 rounded-full"
