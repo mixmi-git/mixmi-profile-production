@@ -20,7 +20,7 @@ export default function ProfileImage() {
   
   return (
     <>
-      <div className="relative w-[400px] h-[400px] mx-auto md:mx-0">
+      <div className="relative w-[400px] h-[400px] mx-auto">
         <div 
           className={`w-full h-full rounded-lg border border-accent overflow-hidden ${
             isAuthenticated ? "cursor-pointer hover:opacity-90 transition-opacity" : ""
