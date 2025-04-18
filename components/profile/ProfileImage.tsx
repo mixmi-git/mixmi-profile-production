@@ -51,7 +51,7 @@ export default function ProfileImage() {
             size="sm" 
             label="Edit Profile Image" 
             onClick={handleEditClick}
-            className="absolute bottom-4 right-4 shadow-md" 
+            className="absolute bottom-3 right-3" 
           />
         )}
       </div>
