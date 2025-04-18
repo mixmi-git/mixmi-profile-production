@@ -66,7 +66,7 @@ export default function ProfileInfo() {
       </p>
       
       <p 
-        className="text-gray-400 max-w-md mb-6 line-clamp-3 hover:line-clamp-none transition-all duration-200 cursor-default" 
+        className="text-gray-400 w-full mb-6 line-clamp-3 hover:line-clamp-none transition-all duration-200 cursor-default" 
         title={profile.bio && profile.bio.length > 350 ? profile.bio : undefined}
       >
         {bioText}
@@ -97,7 +97,7 @@ export default function ProfileInfo() {
       
       {/* Wallet addresses */}
       {((profile.showWalletAddress && walletAddress) || (profile.showBtcAddress && btcAddress)) && (
-        <div className="flex flex-col items-center gap-2 mb-8 max-w-xs w-full">
+        <div className="flex flex-col items-center gap-2 mb-8 w-full">
           {profile.showWalletAddress && walletAddress && (
             <div className="bg-[#151C2A] py-2 px-3 rounded-md w-full border border-[#1E293B] flex items-center">
               <span className="text-xs text-gray-500 shrink-0 font-medium">STX:</span>

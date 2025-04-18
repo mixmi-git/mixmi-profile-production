@@ -24,7 +24,7 @@ export default function ProfileHeader() {
           <ProfileImage />
         </div>
         <div className="flex flex-col md:self-center">
-          <div className="flex flex-col items-center text-center max-w-[480px]">
+          <div className="flex flex-col items-center text-center max-w-[400px]">
             <ProfileInfo />
             
             {isAuthenticated && (
