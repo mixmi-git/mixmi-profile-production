@@ -30,7 +30,7 @@ export default function ProfileHeader() {
       
       {isAuthenticated && (
         <>
-          <div className="mt-6 flex justify-end gap-4">
+          <div className="mt-6 flex justify-end gap-4 max-w-[480px] ml-auto">
             <div className="flex items-center">
               <EditButton 
                 size="sm" 

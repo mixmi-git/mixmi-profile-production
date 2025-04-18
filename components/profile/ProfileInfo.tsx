@@ -78,26 +78,23 @@ export default function ProfileInfo() {
       
       {/* Social links */}
       {(socialLinks.length > 0 || isAuthenticated) && (
-        <div className="flex flex-col items-center my-4">
-          <span className="text-sm font-medium text-gray-400 mb-2">Social Links</span>
-          <div className="flex gap-6 justify-center">
-            {socialLinks.length > 0 ? (
-              socialLinks.map((link, index) => (
-                <a 
-                  key={index}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-[#81E4F2] transition-colors"
-                  title={link.platform}
-                >
-                  {link.icon}
-                </a>
-              ))
-            ) : isAuthenticated ? (
-              <span className="text-gray-500 text-sm italic">No social links added</span>
-            ) : null}
-          </div>
+        <div className="flex justify-center gap-6 my-4">
+          {socialLinks.length > 0 ? (
+            socialLinks.map((link, index) => (
+              <a 
+                key={index}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-[#81E4F2] transition-colors"
+                title={link.platform}
+              >
+                {link.icon}
+              </a>
+            ))
+          ) : isAuthenticated ? (
+            <span className="text-gray-500 text-sm italic">No social links added</span>
+          ) : null}
         </div>
       )}
       
