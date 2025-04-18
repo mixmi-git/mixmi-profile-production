@@ -2,6 +2,7 @@
 
 import React, { useState, useCallback, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
+import { Trash2, Upload } from "lucide-react";
 
 interface ImageUploaderProps {
   initialImage?: string;
@@ -82,6 +83,18 @@ export default function ImageUploader({
       setError("Please enter a valid URL");
     }
   };
+
+  // Handle clearing the image
+  const handleClearImage = () => {
+    setPreview(null);
+    setImageUrl("");
+    onImageChange("");
+  };
+  
+  // For directly clicking the upload area
+  const handleAreaClick = () => {
+    // This will be handled by the getRootProps
+  };
   
   // Calculate aspect ratio class
   const getAspectRatioClass = () => {
@@ -132,31 +145,15 @@ export default function ImageUploader({
             alt="Preview"
             className="w-full h-full object-cover"
           />
-          <button
-            type="button"
-            onClick={() => {
-              setPreview(null);
-              setImageUrl("");
-              onImageChange("");
-            }}
-            className="absolute top-2 right-2 p-1 bg-black bg-opacity-60 rounded-full hover:bg-opacity-80"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-white"
+          <div className="absolute bottom-0 left-0 right-0 bg-black/70 py-2 px-3 flex justify-center">
+            <button 
+              onClick={handleClearImage}
+              className="text-white text-sm flex items-center hover:text-cyan-400 transition-colors"
             >
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </button>
+              <Trash2 size={16} className="mr-1" />
+              Replace Image
+            </button>
+          </div>
         </div>
       )}
       
@@ -164,43 +161,13 @@ export default function ImageUploader({
       {activeTab === "upload" && !preview && (
         <div
           {...getRootProps()}
-          className={`border-2 border-dashed rounded-md p-8 text-center cursor-pointer transition-colors ${
-            isDragActive
-              ? "border-cyan-400 bg-slate-800"
-              : "border-slate-700 hover:border-slate-600"
-          }`}
+          className="border-2 border-dashed border-gray-700 rounded-lg p-8 text-center cursor-pointer hover:border-cyan-400 transition-colors"
+          onClick={handleAreaClick}
         >
           <input {...getInputProps()} />
-          <div className="space-y-2">
-            <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center mx-auto">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="text-cyan-400"
-              >
-                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7"></path>
-                <line x1="16" y1="5" x2="22" y2="5"></line>
-                <line x1="19" y1="2" x2="19" y2="8"></line>
-                <circle cx="9" cy="9" r="2"></circle>
-                <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
-              </svg>
-            </div>
-            <p className="text-sm text-gray-400">
-              {isDragActive
-                ? "Drop the image here"
-                : "Drag and drop an image here, or click to select"}
-            </p>
-            <p className="text-xs text-gray-500">
-              Supports JPG, PNG, GIF up to 5MB
-            </p>
-          </div>
+          <Upload size={24} className="mx-auto mb-2 text-gray-400" />
+          <p className="text-gray-400">Click to upload or drag and drop</p>
+          <p className="text-gray-500 text-sm mt-1">PNG, JPG or GIF (max 5MB)</p>
         </div>
       )}
       
