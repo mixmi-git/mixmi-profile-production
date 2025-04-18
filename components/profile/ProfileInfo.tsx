@@ -54,31 +54,28 @@ export default function ProfileInfo() {
   const bioText = (profile.bio || "Tell us about yourself...").slice(0, 350);
   
   return (
-    <div className="flex flex-col space-y-4 text-center max-w-[420px] mx-auto">
-      <div className="mb-2">
-        <h1 className="text-[32px] font-medium text-[#81E4F2]" title={profile.name}>
-          {nameText}
-          {profile.name && profile.name.length > 40 ? "..." : ""}
-        </h1>
-        <h2 className="text-[20px] font-normal text-white/80 mt-1" title={profile.title}>
-          {titleText}
-          {profile.title && profile.title.length > 40 ? "..." : ""}
-        </h2>
-      </div>
+    <div className="flex flex-col items-center text-center">
+      <h1 className="text-3xl font-medium text-accent mb-2" title={profile.name}>
+        {nameText}
+        {profile.name && profile.name.length > 40 ? "..." : ""}
+      </h1>
       
-      <div className="text-gray-300 text-[14px] font-normal mt-1 mb-5">
-        <p 
-          className="line-clamp-3 hover:line-clamp-none transition-all duration-200 cursor-default" 
-          title={profile.bio && profile.bio.length > 350 ? profile.bio : undefined}
-        >
-          {bioText}
-          {profile.bio && profile.bio.length > 350 ? "..." : ""}
-        </p>
-      </div>
+      <p className="text-xl text-white/90 mb-3" title={profile.title}>
+        {titleText}
+        {profile.title && profile.title.length > 40 ? "..." : ""}
+      </p>
+      
+      <p 
+        className="text-gray-400 max-w-md mb-4 line-clamp-3 hover:line-clamp-none transition-all duration-200 cursor-default" 
+        title={profile.bio && profile.bio.length > 350 ? profile.bio : undefined}
+      >
+        {bioText}
+        {profile.bio && profile.bio.length > 350 ? "..." : ""}
+      </p>
       
       {/* Social links */}
       {(socialLinks.length > 0 || isAuthenticated) && (
-        <div className="flex justify-center gap-6 my-4">
+        <div className="flex justify-center gap-4 mb-4">
           {socialLinks.length > 0 ? (
             socialLinks.map((link, index) => (
               <a 
@@ -98,9 +95,9 @@ export default function ProfileInfo() {
         </div>
       )}
       
-      {/* Wallet addresses - compact style with reduced spacing */}
+      {/* Wallet addresses */}
       {((profile.showWalletAddress && walletAddress) || (profile.showBtcAddress && btcAddress)) && (
-        <div className="mt-3 flex flex-col items-center gap-1 max-w-xs mx-auto">
+        <div className="flex flex-col items-center gap-1 mb-5 max-w-xs w-full">
           {profile.showWalletAddress && walletAddress && (
             <div className="bg-[#151C2A] py-1.5 px-3 rounded-md w-full border border-[#1E293B] flex items-center">
               <span className="text-xs text-gray-500 shrink-0 font-medium">STX:</span>
