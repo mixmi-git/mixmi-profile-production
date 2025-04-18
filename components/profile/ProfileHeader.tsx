@@ -19,15 +19,15 @@ export default function ProfileHeader() {
   
   return (
     <div className="mb-10 border border-border rounded-lg shadow-lg p-6 max-w-5xl mx-auto">
-      <div className="flex flex-col md:flex-row md:items-start gap-4">
-        <div className="md:w-1/3">
+      <div className="flex flex-col md:flex-row md:items-start gap-8">
+        <div className="md:w-2/5">
           <ProfileImage />
         </div>
-        <div className="md:w-2/3">
+        <div className="md:w-3/5">
           <ProfileInfo />
           
           {isAuthenticated && (
-            <div className="flex justify-center gap-6 mt-5">
+            <div className="flex justify-center gap-6 mt-8">
               <div className="flex items-center">
                 <EditButton 
                   size="md" 

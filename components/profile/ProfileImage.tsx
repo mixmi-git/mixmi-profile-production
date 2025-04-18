@@ -20,9 +20,9 @@ export default function ProfileImage() {
   
   return (
     <>
-      <div className="relative w-80 h-80 mx-auto md:mx-0">
+      <div className="relative w-[400px] h-[400px] mx-auto md:mx-0">
         <div 
-          className={`w-full h-full rounded-lg border border-[#81E4F2] overflow-hidden ${
+          className={`w-full h-full rounded-lg border border-accent overflow-hidden ${
             isAuthenticated ? "cursor-pointer hover:opacity-90 transition-opacity" : ""
           }`}
           onClick={isAuthenticated ? handleEditClick : undefined}
@@ -34,7 +34,7 @@ export default function ProfileImage() {
                 alt={profile.name || "Profile"} 
                 fill
                 className="object-cover rounded-[6px]"
-                sizes="320px"
+                sizes="400px"
               />
             ) : (
               <div className="w-full h-full bg-[#151C2A] flex items-center justify-center">

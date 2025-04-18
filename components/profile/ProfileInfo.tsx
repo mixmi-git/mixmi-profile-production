@@ -55,18 +55,18 @@ export default function ProfileInfo() {
   
   return (
     <div className="flex flex-col items-center text-center">
-      <h1 className="text-3xl font-medium text-accent mb-2" title={profile.name}>
+      <h1 className="text-3xl font-medium text-accent mb-3" title={profile.name}>
         {nameText}
         {profile.name && profile.name.length > 40 ? "..." : ""}
       </h1>
       
-      <p className="text-xl text-white/90 mb-3" title={profile.title}>
+      <p className="text-xl text-white/90 mb-4" title={profile.title}>
         {titleText}
         {profile.title && profile.title.length > 40 ? "..." : ""}
       </p>
       
       <p 
-        className="text-gray-400 max-w-md mb-4 line-clamp-3 hover:line-clamp-none transition-all duration-200 cursor-default" 
+        className="text-gray-400 max-w-md mb-6 line-clamp-3 hover:line-clamp-none transition-all duration-200 cursor-default" 
         title={profile.bio && profile.bio.length > 350 ? profile.bio : undefined}
       >
         {bioText}
@@ -75,7 +75,7 @@ export default function ProfileInfo() {
       
       {/* Social links */}
       {(socialLinks.length > 0 || isAuthenticated) && (
-        <div className="flex justify-center gap-4 mb-4">
+        <div className="flex justify-center gap-4 mb-6">
           {socialLinks.length > 0 ? (
             socialLinks.map((link, index) => (
               <a 
@@ -97,9 +97,9 @@ export default function ProfileInfo() {
       
       {/* Wallet addresses */}
       {((profile.showWalletAddress && walletAddress) || (profile.showBtcAddress && btcAddress)) && (
-        <div className="flex flex-col items-center gap-1 mb-5 max-w-xs w-full">
+        <div className="flex flex-col items-center gap-2 mb-8 max-w-xs w-full">
           {profile.showWalletAddress && walletAddress && (
-            <div className="bg-[#151C2A] py-1.5 px-3 rounded-md w-full border border-[#1E293B] flex items-center">
+            <div className="bg-[#151C2A] py-2 px-3 rounded-md w-full border border-[#1E293B] flex items-center">
               <span className="text-xs text-gray-500 shrink-0 font-medium">STX:</span>
               <span className="text-xs text-gray-400 ml-2 truncate">{`${walletAddress.slice(0, 8)}...${walletAddress.slice(-8)}`}</span>
               <button 
@@ -112,7 +112,7 @@ export default function ProfileInfo() {
           )}
           
           {profile.showBtcAddress && btcAddress && (
-            <div className="bg-[#151C2A] py-1.5 px-3 rounded-md w-full border border-[#1E293B] flex items-center">
+            <div className="bg-[#151C2A] py-2 px-3 rounded-md w-full border border-[#1E293B] flex items-center">
               <span className="text-xs text-gray-500 shrink-0 font-medium">BTC:</span>
               <span className="text-xs text-gray-400 ml-2 truncate">{`${btcAddress.slice(0, 8)}...${btcAddress.slice(-8)}`}</span>
               <button 
