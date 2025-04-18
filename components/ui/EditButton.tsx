@@ -14,15 +14,15 @@ export default function EditButton({
 }: EditButtonProps) {
   // Size mappings
   const sizeClasses = {
-    sm: 'w-7 h-7',
-    md: 'w-9 h-9',
-    lg: 'w-11 h-11'
+    sm: 'w-8 h-8',
+    md: 'w-10 h-10',
+    lg: 'w-12 h-12'
   };
   
   const iconSizes = {
-    sm: 14,
-    md: 16,
-    lg: 20
+    sm: 16,
+    md: 18,
+    lg: 22
   };
   
   return (
