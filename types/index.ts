@@ -37,6 +37,7 @@ export interface MediaItem {
   title?: string;
   rawUrl: string;
   embedUrl?: string;
+  link?: string; // External link to the media source
 }
 
 export interface ShopItem {

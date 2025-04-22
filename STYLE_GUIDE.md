@@ -50,10 +50,28 @@
   - Shadow: shadow-lg
   - Padding: p-6
 
+### Media/Content Cards
+- **Base Card Styling:**
+  - Width: w-80 (320px)
+  - Border: 2px `#1E293B` (border-gray-700)
+  - Border on hover: 3px `#81E4F2` (accent)
+  - Border Radius: rounded-lg
+  - Transition: transition-all for smooth border changes
+  - Overflow: hidden
+  
+- **Media Card Specific:**
+  - YouTube/Default dimensions: aspect-video (16:9 ratio)
+  - Expandable media height: 400px when expanded
+  - Expand button: Small subtle circular button in bottom-right corner
+
+- **Spotlight/Shop Cards:**
+  - Dimensions: aspect-square (1:1 ratio)
+  - Title displayed in bottom gradient overlay with left accent border
+
 ### Profile Image
 - **Container:**
   - Size: w-[400px] h-[400px] (400px square)
-  - Border: 1px `#81E4F2` (accent)
+  - Border: 4px `#81E4F2` (accent) - thicker for emphasis
   - Border Radius: rounded-lg
 
 ### Wallet Address Display

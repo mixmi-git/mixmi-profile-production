@@ -22,9 +22,8 @@ export default function MediaItemModal({
   const [formData, setFormData] = useState<MediaItem>({
     id: "",
     type: "youtube",
-    title: "",
     rawUrl: "",
-    embedUrl: ""
+    embedUrl: "",
   });
   
   const [preview, setPreview] = useState<React.ReactNode | null>(null);
@@ -42,33 +41,24 @@ export default function MediaItemModal({
         setFormData({
           id: uuidv4(),
           type: "youtube",
-          title: "",
           rawUrl: "",
-          embedUrl: ""
+          embedUrl: "",
         });
         setPreview(null);
       }
       setError(null);
     }
   }, [isOpen, item]);
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
   
   const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const url = e.target.value;
-    setFormData((prev) => ({ ...prev, rawUrl: url }));
     
     // Clear previous embed data to ensure it gets regenerated
     setFormData((prev) => ({ 
       ...prev, 
       rawUrl: url,
       embedUrl: "", // Clear the embed URL to force regeneration
-      type: "youtube" // Reset type to default
+      type: "youtube", // Reset type to default
     }));
     
     setError(null);
@@ -89,16 +79,11 @@ export default function MediaItemModal({
     }
     
     // Always update the media type and embed URL based on the raw URL
-    // If the type has changed or title is empty, use the type as the title
     setFormData((prev) => {
-      const typeChanged = prev.type !== mediaInfo.type;
-      const defaultTitle = mediaInfo.type.charAt(0).toUpperCase() + mediaInfo.type.slice(1);
-      
       return {
         ...prev,
         type: mediaInfo.type,
         embedUrl: mediaInfo.embedUrl,
-        title: typeChanged ? defaultTitle : (prev.title || defaultTitle)
       };
     });
     
@@ -140,24 +125,6 @@ export default function MediaItemModal({
       title={item ? "Edit Media Item" : "Add Media Item"}
     >
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label
-            htmlFor="title"
-            className="block text-sm font-medium text-gray-300 mb-1"
-          >
-            Title (Optional)
-          </label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-            placeholder="Enter a title for this media"
-            className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
-          />
-        </div>
-
         <div>
           <label
             htmlFor="rawUrl"

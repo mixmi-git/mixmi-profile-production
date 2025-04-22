@@ -22,7 +22,7 @@ export default function ProfileImage() {
     <>
       <div className="relative w-[400px] h-[400px] mx-auto">
         <div 
-          className={`w-full h-full rounded-lg border border-accent overflow-hidden ${
+          className={`w-full h-full rounded-lg border-4 border-accent overflow-hidden ${
             isAuthenticated ? "cursor-pointer hover:opacity-90 transition-opacity" : ""
           }`}
           onClick={isAuthenticated ? handleEditClick : undefined}

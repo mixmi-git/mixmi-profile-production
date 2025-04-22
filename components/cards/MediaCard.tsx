@@ -1,7 +1,8 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { MediaItem } from '@/types';
+import { ExternalLink, ChevronUp, ChevronDown } from 'lucide-react';
 
 interface MediaCardProps {
   item: MediaItem;
@@ -9,14 +10,33 @@ interface MediaCardProps {
   onDelete?: () => void;
 }
 
-// Helper to get embed component based on media type
-const getMediaEmbed = (item: MediaItem) => {
-  if (!item.embedUrl) return null;
+export default function MediaCard({ item, onEdit, onDelete }: MediaCardProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
   
-  switch(item.type.toLowerCase()) {
-    case 'youtube':
-      return (
-        <div className="aspect-video w-full">
+  // Multiple media types can now be expanded
+  const canExpand = ['soundcloud', 'apple-music', 'spotify'].includes(item.type?.toLowerCase() || '');
+  
+  // Base container class for all media types - matches YouTube dimensions
+  const getContainerClass = () => {
+    // Base styles with fixed width and YouTube aspect ratio
+    const baseStyle = 'w-80 border-2 border-gray-700 hover:border-accent hover:border-[3px] transition-all rounded-lg overflow-hidden';
+    
+    // For expandable media that's expanded, use taller height
+    if (canExpand && isExpanded) {
+      return `${baseStyle} h-[400px]`;
+    }
+    
+    // Default to YouTube dimensions for all cards
+    return `${baseStyle} aspect-video`;
+  };
+  
+  // Helper to get embed component based on media type
+  const renderMedia = () => {
+    if (!item.embedUrl) return null;
+    
+    switch(item.type?.toLowerCase()) {
+      case 'youtube':
+        return (
           <iframe
             width="100%"
             height="100%"
@@ -27,85 +47,95 @@ const getMediaEmbed = (item: MediaItem) => {
             allowFullScreen
             className="w-full h-full"
           ></iframe>
-        </div>
-      );
-    case 'spotify':
-      return (
-        <div className="w-full">
+        );
+      case 'spotify':
+        return (
           <iframe
             src={item.embedUrl}
             width="100%"
-            height="80"
+            height="100%"
             frameBorder="0"
             allow="encrypted-media"
             title={item.title || "Spotify Track"}
-            className="w-full"
+            className="w-full h-full"
           ></iframe>
-        </div>
-      );
-    case 'soundcloud':
-      return (
-        <div className="w-full">
+        );
+      case 'soundcloud':
+        return (
           <iframe
             width="100%"
-            height="166"
+            height="100%"
             scrolling="no"
             frameBorder="no"
             src={item.embedUrl}
             title={item.title || "SoundCloud Track"}
-            className="w-full"
+            className="w-full h-full"
           ></iframe>
-        </div>
-      );
-    case 'mixcloud':
-      return (
-        <div className="w-full">
+        );
+      case 'mixcloud':
+        return (
           <iframe
             width="100%"
-            height="180"
+            height="100%"
             src={item.embedUrl}
             frameBorder="0"
             allow="autoplay"
             title={item.title || "Mixcloud Track"}
-            className="w-full"
+            className="w-full h-full"
           ></iframe>
-        </div>
-      );
-    case 'apple-music':
-      return (
-        <div className="w-full">
+        );
+      case 'apple-music':
+        return (
           <iframe
             src={item.embedUrl}
             width="100%"
-            height="175"
+            height="100%"
             frameBorder="0"
             allow="autoplay *; encrypted-media *;"
             sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
             title={item.title || "Apple Music Track"}
-            className="w-full"
+            className="w-full h-full"
           ></iframe>
-        </div>
-      );
-    default:
-      return (
-        <div className="bg-slate-800 p-4 flex items-center justify-center h-40 w-full">
-          <p>Unsupported media type</p>
-        </div>
-      );
-  }
-};
-
-export default function MediaCard({ item, onEdit, onDelete }: MediaCardProps) {
+        );
+      default:
+        return (
+          <div className="bg-slate-800 p-4 flex items-center justify-center h-full w-full">
+            <p>Unsupported media type</p>
+          </div>
+        );
+    }
+  };
+  
   return (
-    <div className="relative w-80 rounded-lg overflow-hidden border border-gray-700 hover:border-accent transition-colors group">
-      <div className="media-content w-full">
-        {getMediaEmbed(item)}
-      </div>
+    <div className={`relative ${getContainerClass()} group`}>
+      {renderMedia()}
       
-      {item.title && (
-        <div className="p-2 bg-gradient-to-t from-slate-900/90 to-slate-900/0">
-          <h3 className="text-white font-medium">{item.title}</h3>
-        </div>
+      {/* External link button */}
+      {item.link && (
+        <a 
+          href={item.link} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="absolute bottom-3 right-3 bg-background/60 hover:bg-background/80 p-1.5 rounded-full transition-colors"
+          title="View original"
+          onClick={(e) => e.stopPropagation()} // Prevent card click from triggering
+        >
+          <ExternalLink size={14} className="text-gray-300" />
+        </a>
+      )}
+      
+      {/* Expand button for expandable media types */}
+      {canExpand && !item.link && (
+        <button 
+          onClick={(e) => { e.stopPropagation(); setIsExpanded(!isExpanded); }}
+          className="absolute bottom-3 right-3 bg-background/60 hover:bg-background/80 p-1.5 rounded-full transition-colors"
+          title={isExpanded ? "Show less" : "Show more tracks"}
+        >
+          {isExpanded ? 
+            <ChevronUp size={14} className="text-gray-300" /> : 
+            <ChevronDown size={14} className="text-gray-300" />
+          }
+        </button>
       )}
       
       {(onEdit || onDelete) && (

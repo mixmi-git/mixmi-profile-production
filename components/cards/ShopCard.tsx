@@ -15,7 +15,7 @@ export default function ShopCard({ item, onEdit, onDelete }: ShopCardProps) {
   
   return (
     <div 
-      className="relative w-80 aspect-square rounded-lg overflow-hidden border border-gray-700 hover:border-accent transition-colors group"
+      className="relative w-80 aspect-square rounded-lg overflow-hidden border-2 border-gray-700 hover:border-accent hover:border-[3px] transition-all group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
