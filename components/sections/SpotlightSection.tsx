@@ -68,7 +68,9 @@ export default function SpotlightSection() {
       <div className="flex justify-between items-center mb-8">
         <div>
           <h2 className="text-2xl font-bold uppercase tracking-wider">Spotlight</h2>
-          <p className="text-gray-400 text-sm mt-1 mb-6">Share your work and favorite projects</p>
+          {isAuthenticated && (
+            <p className="text-gray-400 text-sm mt-1 mb-6">Share your work and favorite projects</p>
+          )}
         </div>
         
         {isAuthenticated && (

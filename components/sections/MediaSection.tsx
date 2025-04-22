@@ -70,7 +70,9 @@ export default function MediaSection() {
       <div className="flex justify-between items-center mb-8">
         <div>
           <h2 className="text-2xl font-bold uppercase tracking-wider">Media</h2>
-          <p className="text-gray-400 text-sm mt-1 mb-6">Share your videos, music, and podcasts</p>
+          {isAuthenticated && (
+            <p className="text-gray-400 text-sm mt-1 mb-6">Share your videos, music, and podcasts</p>
+          )}
         </div>
         
         {isAuthenticated && (

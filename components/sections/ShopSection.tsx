@@ -68,7 +68,9 @@ export default function ShopSection() {
       <div className="flex justify-between items-center mb-8">
         <div>
           <h2 className="text-2xl font-bold uppercase tracking-wider">Shop</h2>
-          <p className="text-gray-400 text-sm mt-1 mb-6">Share products and services you offer</p>
+          {isAuthenticated && (
+            <p className="text-gray-400 text-sm mt-1 mb-6">Share products and services you offer</p>
+          )}
         </div>
         
         {isAuthenticated && (
