@@ -43,6 +43,24 @@
   - Icon color: Remains `#81E4F2` (accent) on hover
   - Standard size for profile: md
 
+### Section Management
+- **Container:**
+  - Max width: max-w-md
+  - Background: Inherits page bg-background
+  - Border: border border-gray-800
+  - Border Radius: rounded-lg
+  - Padding: p-4
+  - Margin: mb-16 (margin-bottom)
+  - Centered: flex justify-center mx-auto
+  
+- **Toggle Buttons:**
+  - Shape: rounded-md
+  - Padding: px-3 py-1.5
+  - Font Size: text-sm
+  - Active state: bg-accent/10 text-accent border border-accent/30
+  - Inactive state: bg-gray-800 text-gray-400 border border-gray-700
+  - Layout: flex flex-wrap gap-3 justify-center
+
 ### Containers
 - **Card/Section Container:**
   - Background: transparent (inherits bg-background)
@@ -99,6 +117,18 @@
 - Container with auto margins
 - Padding top to account for fixed header (pt-24)
 
+### Vertical Spacing
+- **Major Sections:**
+  - Profile component: mb-16
+  - Section Manager: mb-16
+  - Content sections (Spotlight, Media, Shop): mb-20
+  
+- **Section Internal Spacing:**
+  - Section header container: mb-8
+  - Section heading and description: mb-6 (visible when authenticated)
+  - Card grid container: mb-4
+  - Card grid gap: gap-6
+
 ### Profile Layout
 - Mobile: Stacked (column)
 - Desktop: 
@@ -118,6 +148,12 @@
 - Horizontally centered
 - Consistent spacing between controls (gap-6)
 - Each control has icon + text label
+
+### Content Visibility
+- **Section descriptions** (guidance text under section titles):
+  - Only visible when authenticated
+  - Hidden for public/non-authenticated users
+  - Provides context only for users editing their own profile
 
 ## Responsive Breakpoints
 
