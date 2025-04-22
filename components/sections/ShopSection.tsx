@@ -64,13 +64,11 @@ export default function ShopSection() {
   };
   
   return (
-    <section className="max-w-6xl mx-auto mb-12">
-      <div className="flex justify-between items-center mb-6">
+    <section className="max-w-6xl mx-auto mb-20">
+      <div className="flex justify-between items-center mb-8">
         <div>
           <h2 className="text-2xl font-bold uppercase tracking-wider">Shop</h2>
-          {isAuthenticated && (
-            <p className="text-gray-400 text-sm mt-1">Share products and services you offer</p>
-          )}
+          <p className="text-gray-400 text-sm mt-1 mb-6">Share products and services you offer</p>
         </div>
         
         {isAuthenticated && (
@@ -97,7 +95,7 @@ export default function ShopSection() {
         )}
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center mb-4">
         {shopItems.map((item) => (
           <ShopCard 
             key={item.id} 

@@ -23,19 +23,19 @@ export default function SectionManager() {
   ] as const;
   
   return (
-    <div className="mb-10 flex justify-center">
-      <div className="bg-slate-900 p-4 rounded-md border border-slate-800 inline-block">
+    <div className="mb-16 flex justify-center">
+      <div className="max-w-md bg-background border border-gray-800 rounded-lg p-4 inline-block">
         <h3 className="text-sm font-medium text-gray-400 mb-3 text-center">Manage Sections</h3>
         
-        <div className="flex flex-wrap gap-2 justify-center">
+        <div className="flex flex-wrap gap-3 justify-center">
           {sections.map((section) => (
             <button
               key={section.key}
               onClick={() => toggleSection(section.key)}
-              className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+              className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
                 profile.sectionVisibility[section.key]
-                  ? 'bg-accent/10 text-accent border border-accent/50'
-                  : 'bg-slate-800 text-slate-400 border border-slate-700'
+                  ? 'bg-accent/10 text-accent border border-accent/30'
+                  : 'bg-gray-800 text-gray-400 border border-gray-700'
               }`}
             >
               {section.label}
