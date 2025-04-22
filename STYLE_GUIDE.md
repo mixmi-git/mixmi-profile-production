@@ -39,7 +39,8 @@
   - Icon sizes: sm (16px), md (18px), lg (22px)
   - Border: 1px `#81E4F2` (accent)
   - Background: transparent
-  - Hover: Light accent color background (10% opacity)
+  - Hover: Dark blue-gray background (rgba(20,30,50,0.85))
+  - Icon color: Remains `#81E4F2` (accent) on hover
   - Standard size for profile: md
 
 ### Containers
@@ -66,7 +67,10 @@
 
 - **Spotlight/Shop Cards:**
   - Dimensions: aspect-square (1:1 ratio)
-  - Title displayed in bottom gradient overlay with left accent border
+  - Title overlay: Dark gradient (from-slate-900/95 to-slate-900/0)
+  - Text enhancement: drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)] for readability
+  - Left border accent: 2px teal line
+  - Padding: p-3 for adequate spacing
 
 ### Profile Image
 - **Container:**
