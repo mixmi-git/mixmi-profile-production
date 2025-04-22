@@ -47,7 +47,7 @@ export default function ProfileImage() {
         </div>
         
         {isAuthenticated && (
-          <div className="absolute bottom-4 right-4 z-10">
+          <div className="absolute bottom-4 right-4">
             <EditButton 
               size="md" 
               label="Edit Profile Image" 
