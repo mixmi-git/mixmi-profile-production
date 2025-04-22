@@ -97,7 +97,7 @@ const getMediaEmbed = (item: MediaItem) => {
 
 export default function MediaCard({ item, onEdit, onDelete }: MediaCardProps) {
   return (
-    <div className="w-80 rounded-lg overflow-hidden border border-gray-700 hover:border-accent transition-colors group">
+    <div className="relative w-80 rounded-lg overflow-hidden border border-gray-700 hover:border-accent transition-colors group">
       <div className="media-content w-full">
         {getMediaEmbed(item)}
       </div>
