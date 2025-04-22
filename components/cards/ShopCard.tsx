@@ -32,12 +32,12 @@ export default function ShopCard({ item, onEdit, onDelete }: ShopCardProps) {
         </div>
       )}
       
-      <div className={`absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-slate-900/90 to-slate-900/0 transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-100'}`}>
+      <div className={`absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-slate-900/95 to-slate-900/0 transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-100'}`}>
         <div className="flex items-start">
           <div className="border-l-2 border-accent pl-2">
-            <h3 className="text-white font-medium text-sm">{item.title}</h3>
+            <h3 className="text-white font-medium text-sm drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">{item.title}</h3>
             {isHovered && item.description && (
-              <p className="text-gray-300 text-xs mt-1">{item.description}</p>
+              <p className="text-gray-200 text-xs mt-1 drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">{item.description}</p>
             )}
           </div>
         </div>

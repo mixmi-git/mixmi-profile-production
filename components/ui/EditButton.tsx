@@ -30,7 +30,7 @@ export default function EditButton({
       type="button"
       className={`
         rounded-full border border-accent bg-background flex items-center justify-center
-        transition-all hover:bg-accent/10 focus:outline-none focus:ring-2 focus:ring-accent/50
+        transition-all hover:bg-[rgba(20,30,50,0.85)] focus:outline-none focus:ring-2 focus:ring-accent/50
         ${sizeClasses[size]} ${className}
       `}
       aria-label={label}

@@ -23,7 +23,7 @@ export default function ProfileImage() {
       <div className="relative w-[400px] h-[400px] mx-auto">
         <div 
           className={`w-full h-full rounded-lg border-4 border-accent overflow-hidden ${
-            isAuthenticated ? "cursor-pointer hover:opacity-90 transition-opacity" : ""
+            isAuthenticated ? "cursor-pointer" : ""
           }`}
           onClick={isAuthenticated ? handleEditClick : undefined}
         >
@@ -47,12 +47,13 @@ export default function ProfileImage() {
         </div>
         
         {isAuthenticated && (
-          <EditButton 
-            size="md" 
-            label="Edit Profile Image" 
-            onClick={handleEditClick}
-            className="absolute bottom-4 right-4" 
-          />
+          <div className="absolute bottom-4 right-4 z-10">
+            <EditButton 
+              size="md" 
+              label="Edit Profile Image" 
+              onClick={handleEditClick}
+            />
+          </div>
         )}
       </div>
       
