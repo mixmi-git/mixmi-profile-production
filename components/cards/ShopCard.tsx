@@ -15,7 +15,7 @@ export default function ShopCard({ item, onEdit, onDelete }: ShopCardProps) {
   
   return (
     <div 
-      className="relative aspect-square rounded-md overflow-hidden bg-slate-800 border border-slate-700"
+      className="w-80 aspect-square rounded-lg overflow-hidden border border-gray-700 hover:border-accent transition-colors group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -34,7 +34,7 @@ export default function ShopCard({ item, onEdit, onDelete }: ShopCardProps) {
       
       <div className={`absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-slate-900/90 to-slate-900/0 transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-100'}`}>
         <div className="flex items-start">
-          <div className="border-l-2 border-cyan-400 pl-2">
+          <div className="border-l-2 border-accent pl-2">
             <h3 className="text-white font-medium text-sm">{item.title}</h3>
             {isHovered && item.description && (
               <p className="text-gray-300 text-xs mt-1">{item.description}</p>
@@ -51,7 +51,7 @@ export default function ShopCard({ item, onEdit, onDelete }: ShopCardProps) {
                 e.stopPropagation();
                 onEdit();
               }}
-              className="bg-slate-800/70 p-1 rounded-full opacity-0 hover:opacity-100 focus:opacity-100 transition-opacity"
+              className="bg-slate-800/70 p-1 rounded-full opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity"
               aria-label="Edit"
             >
               <svg 
@@ -64,7 +64,7 @@ export default function ShopCard({ item, onEdit, onDelete }: ShopCardProps) {
                 strokeWidth="2" 
                 strokeLinecap="round" 
                 strokeLinejoin="round"
-                className="text-cyan-400"
+                className="text-accent"
               >
                 <path d="M12 20h9"></path>
                 <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
@@ -80,7 +80,7 @@ export default function ShopCard({ item, onEdit, onDelete }: ShopCardProps) {
                   onDelete();
                 }
               }}
-              className="bg-slate-800/70 p-1 rounded-full opacity-0 hover:opacity-100 focus:opacity-100 transition-opacity"
+              className="bg-slate-800/70 p-1 rounded-full opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity"
               aria-label="Delete"
             >
               <svg 

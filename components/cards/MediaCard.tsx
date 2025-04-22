@@ -97,7 +97,7 @@ const getMediaEmbed = (item: MediaItem) => {
 
 export default function MediaCard({ item, onEdit, onDelete }: MediaCardProps) {
   return (
-    <div className="relative w-full rounded-md overflow-hidden bg-slate-800 border border-slate-700 group h-full">
+    <div className="w-80 rounded-lg overflow-hidden border border-gray-700 hover:border-accent transition-colors group">
       <div className="media-content w-full">
         {getMediaEmbed(item)}
       </div>
@@ -116,7 +116,7 @@ export default function MediaCard({ item, onEdit, onDelete }: MediaCardProps) {
                 e.stopPropagation();
                 onEdit();
               }}
-              className="bg-slate-800/70 p-1 rounded-full hover:bg-slate-700/90"
+              className="bg-slate-800/70 p-1 rounded-full"
               aria-label="Edit"
             >
               <svg 
@@ -129,7 +129,7 @@ export default function MediaCard({ item, onEdit, onDelete }: MediaCardProps) {
                 strokeWidth="2" 
                 strokeLinecap="round" 
                 strokeLinejoin="round"
-                className="text-cyan-400"
+                className="text-accent"
               >
                 <path d="M12 20h9"></path>
                 <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
@@ -145,7 +145,7 @@ export default function MediaCard({ item, onEdit, onDelete }: MediaCardProps) {
                   onDelete();
                 }
               }}
-              className="bg-slate-800/70 p-1 rounded-full hover:bg-slate-700/90"
+              className="bg-slate-800/70 p-1 rounded-full"
               aria-label="Delete"
             >
               <svg 

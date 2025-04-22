@@ -64,10 +64,10 @@ export default function ShopSection() {
   };
   
   return (
-    <section className="mb-16">
+    <section className="max-w-6xl mx-auto mb-12">
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h2 className="text-3xl font-bold uppercase tracking-wider text-white">Shop</h2>
+          <h2 className="text-2xl font-bold uppercase tracking-wider">Shop</h2>
           {isAuthenticated && (
             <p className="text-gray-400 text-sm mt-1">Share products and services you offer</p>
           )}
@@ -76,7 +76,7 @@ export default function ShopSection() {
         {isAuthenticated && (
           <button 
             onClick={() => setIsSectionModalOpen(true)}
-            className="bg-slate-800 hover:bg-slate-700 text-cyan-400 px-3 py-1 rounded-md flex items-center space-x-2 transition-colors text-sm"
+            className="bg-slate-800 hover:bg-slate-700 text-accent px-3 py-1 rounded-md flex items-center space-x-2 transition-colors text-sm"
           >
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
@@ -97,7 +97,7 @@ export default function ShopSection() {
         )}
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {shopItems.map((item) => (
           <ShopCard 
             key={item.id} 
@@ -109,7 +109,7 @@ export default function ShopSection() {
         
         {isAuthenticated && shopItems.length < 3 && (
           <div 
-            className="aspect-square rounded-md border-2 border-dashed border-slate-700 flex items-center justify-center cursor-pointer hover:border-slate-600 transition-colors"
+            className="w-80 aspect-square rounded-lg border-2 border-dashed border-gray-700 flex items-center justify-center cursor-pointer hover:border-accent transition-colors"
             onClick={handleAdd}
           >
             <div className="text-center">
@@ -124,7 +124,7 @@ export default function ShopSection() {
                   strokeWidth="2" 
                   strokeLinecap="round" 
                   strokeLinejoin="round"
-                  className="text-cyan-400"
+                  className="text-accent"
                 >
                   <line x1="12" y1="5" x2="12" y2="19"></line>
                   <line x1="5" y1="12" x2="19" y2="12"></line>
