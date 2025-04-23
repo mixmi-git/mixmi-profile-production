@@ -69,7 +69,7 @@ export default function ShopSection() {
         <div>
           <h2 className="text-2xl font-bold uppercase tracking-wider">Shop</h2>
           {isAuthenticated && (
-            <p className="text-gray-400 text-sm mt-1 mb-6">Share products and services you offer</p>
+            <p className="text-gray-400 text-sm mt-1 mb-6">Share products, services, and token-gated content</p>
           )}
         </div>
         
