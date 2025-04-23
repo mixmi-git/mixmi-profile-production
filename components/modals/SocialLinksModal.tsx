@@ -28,12 +28,12 @@ const platformOptions = [
   { value: "instagram", label: "Instagram", icon: <Instagram size={20} /> },
   { value: "youtube", label: "YouTube", icon: <Youtube size={20} /> },
   { value: "twitter", label: "X", icon: <FaXTwitter size={20} /> },
+  { value: "soundcloud", label: "SoundCloud", icon: <FaSoundcloud size={20} /> },
+  { value: "mixcloud", label: "Mixcloud", icon: <FaMixcloud size={20} /> },
+  { value: "tiktok", label: "TikTok", icon: <FaTiktok size={20} /> },
   { value: "spotify", label: "Spotify", icon: <Music size={20} /> },
   { value: "github", label: "GitHub", icon: <Github size={20} /> },
   { value: "twitch", label: "Twitch", icon: <Twitch size={20} /> },
-  { value: "soundcloud", label: "SoundCloud", icon: <FaSoundcloud size={20} /> },
-  { value: "tiktok", label: "TikTok", icon: <FaTiktok size={20} /> },
-  { value: "mixcloud", label: "Mixcloud", icon: <FaMixcloud size={20} /> },
 ];
 
 export default function SocialLinksModal({ isOpen, onClose }: SocialLinksModalProps) {
