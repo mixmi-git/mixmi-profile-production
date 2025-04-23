@@ -113,7 +113,6 @@ export default function MediaSection() {
         {isAuthenticated && mediaItems.length < 3 && (
           <EmptyItemCard 
             onClick={handleAdd}
-            label="Add Media"
             aspectRatio="video"
             minHeight="min-h-[200px]"
           />

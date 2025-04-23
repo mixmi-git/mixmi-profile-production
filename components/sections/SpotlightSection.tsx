@@ -111,7 +111,6 @@ export default function SpotlightSection() {
         {isAuthenticated && spotlightItems.length < 3 && (
           <EmptyItemCard 
             onClick={handleAdd}
-            label="Add Item"
             aspectRatio="square"
           />
         )}

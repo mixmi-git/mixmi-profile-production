@@ -2,6 +2,7 @@ import React from 'react';
 
 interface EmptyItemCardProps {
   onClick: () => void;
+  showLabel?: boolean;
   label?: string;
   aspectRatio?: 'square' | 'video' | 'free';
   width?: string;
@@ -10,6 +11,7 @@ interface EmptyItemCardProps {
 
 export default function EmptyItemCard({
   onClick,
+  showLabel = false,
   label = "Add Item",
   aspectRatio = 'square',
   width = "w-80",
@@ -26,7 +28,7 @@ export default function EmptyItemCard({
       onClick={onClick}
     >
       <div className="text-center">
-        <div className="w-16 h-16 mx-auto mb-3 flex items-center justify-center">
+        <div className="w-16 h-16 mx-auto flex items-center justify-center">
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             viewBox="0 0 24 24" 
@@ -41,7 +43,9 @@ export default function EmptyItemCard({
             <line x1="5" y1="12" x2="19" y2="12"></line>
           </svg>
         </div>
-        <p className="text-gray-500 text-sm">{label}</p>
+        {showLabel && (
+          <p className="text-gray-500 text-sm mt-2">{label}</p>
+        )}
       </div>
     </div>
   );

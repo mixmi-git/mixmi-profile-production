@@ -111,7 +111,6 @@ export default function ShopSection() {
         {isAuthenticated && shopItems.length < 3 && (
           <EmptyItemCard 
             onClick={handleAdd}
-            label="Add Item"
             aspectRatio="square"
           />
         )}
