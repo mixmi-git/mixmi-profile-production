@@ -54,10 +54,23 @@ export default function ImageUploader({
     // Convert file to base64 string for localStorage
     const reader = new FileReader();
     reader.onloadend = () => {
-      const base64String = reader.result as string;
-      setPreview(base64String);
-      onImageChange(base64String);
-      console.log("File successfully processed:", file.name);
+      try {
+        const base64String = reader.result as string;
+        
+        // Safety check to ensure we're not passing corrupted data
+        if (!base64String || typeof base64String !== 'string' || !base64String.startsWith('data:')) {
+          setError("Invalid image format");
+          return;
+        }
+        
+        console.log(`File processed: ${file.name}, size: ${(base64String.length / 1024).toFixed(2)}KB`);
+        
+        setPreview(base64String);
+        onImageChange(base64String);
+      } catch (error) {
+        console.error("Error processing image:", error);
+        setError("Error processing image");
+      }
     };
     reader.onerror = (error) => {
       console.error("Error reading file:", error);
@@ -93,10 +106,15 @@ export default function ImageUploader({
   
   // Handle URL input
   const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const url = e.target.value;
-    setImageUrl(url);
-    setPreview(url.length > 0 ? url : null);
-    onImageChange(url);
+    try {
+      const url = e.target.value;
+      setImageUrl(url);
+      setPreview(url.length > 0 ? url : null);
+      onImageChange(url);
+    } catch (error) {
+      console.error("Error in URL change handler:", error);
+      setError("Error processing URL");
+    }
   };
   
   // Handle URL validation

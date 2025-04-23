@@ -20,7 +20,7 @@ export default function SpotlightItemModal({
   onSave,
 }: SpotlightItemModalProps) {
   const [formData, setFormData] = useState<SpotlightItem>({
-    id: "",
+    id: uuidv4(),
     title: "",
     description: "",
     image: "",
@@ -30,31 +30,74 @@ export default function SpotlightItemModal({
   // Reset form data when modal opens or item changes
   useEffect(() => {
     if (isOpen) {
-      if (item) {
-        // Editing existing item
-        setFormData({ ...item });
-      } else {
-        // Adding new item
-        setFormData({
-          id: uuidv4(),
-          title: "",
-          description: "",
-          image: "",
-          link: "",
-        });
+      try {
+        if (item) {
+          // Editing existing item
+          console.log("Editing existing item:", item);
+          setFormData({ ...item });
+        } else {
+          // Adding new item with a fresh ID
+          console.log("Creating new item");
+          const newItem = {
+            id: uuidv4(),
+            title: "",
+            description: "",
+            image: "",
+            link: "",
+          };
+          setFormData(newItem);
+        }
+      } catch (error) {
+        console.error("Error resetting form data:", error);
       }
     }
   }, [isOpen, item]);
 
+  // Function to handle modal close with clean state
+  const handleModalClose = () => {
+    // Clean up by explicitly clearing form data 
+    // to avoid stale state on next open
+    setFormData({
+      id: uuidv4(),
+      title: "",
+      description: "",
+      image: "",
+      link: "",
+    });
+    onClose();
+  };
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    try {
+      const { name, value } = e.target;
+      console.log(`Updating ${name} field with value:`, value);
+      console.log("Current formData:", formData);
+      
+      // Safely update state
+      setFormData((prev) => {
+        const newState = { ...prev, [name]: value };
+        console.log("New formData will be:", newState);
+        return newState;
+      });
+    } catch (error) {
+      console.error("Error in handleChange:", error);
+    }
   };
 
   const handleImageChange = (imageData: string) => {
-    setFormData((prev) => ({ ...prev, image: imageData }));
+    try {
+      console.log("Updating image data, length:", imageData?.length || 0);
+      
+      // Safely update state
+      setFormData((prev) => {
+        const newState = { ...prev, image: imageData };
+        return newState;
+      });
+    } catch (error) {
+      console.error("Error in handleImageChange:", error);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -78,7 +121,7 @@ export default function SpotlightItemModal({
   return (
     <Modal
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={handleModalClose}
       title={item ? "Edit Spotlight Item" : "Add Spotlight Item"}
     >
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -151,7 +194,7 @@ export default function SpotlightItemModal({
         <div className="flex justify-end gap-2 pt-4">
           <button
             type="button"
-            onClick={onClose}
+            onClick={handleModalClose}
             className="px-4 py-2 border border-slate-700 rounded-md text-gray-300 hover:bg-slate-800"
           >
             Cancel
