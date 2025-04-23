@@ -25,7 +25,7 @@ export default function SectionManager() {
   return (
     <div className="mb-16 flex justify-center">
       <div className="max-w-md bg-background border border-gray-800 rounded-lg p-4 inline-block">
-        <h3 className="text-sm font-medium text-gray-400 mb-3 text-center">Manage Sections</h3>
+        <h3 className="text-sm font-medium text-gray-400 mb-3 text-center">Show/Hide Sections</h3>
         
         <div className="flex flex-wrap gap-3 justify-center">
           {sections.map((section) => (
