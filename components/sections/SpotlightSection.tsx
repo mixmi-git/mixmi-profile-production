@@ -7,6 +7,7 @@ import SpotlightCard from '../cards/SpotlightCard';
 import SpotlightItemModal from '../modals/SpotlightItemModal';
 import SectionEditorModal from '../modals/SectionEditorModal';
 import { SpotlightItem } from '@/types';
+import EmptyItemCard from '../shared/EmptyItemCard';
 
 export default function SpotlightSection() {
   const { spotlightItems, addSpotlightItem, updateSpotlightItem, removeSpotlightItem, updateAllSpotlightItems } = useProfile();
@@ -108,31 +109,11 @@ export default function SpotlightSection() {
         ))}
         
         {isAuthenticated && spotlightItems.length < 3 && (
-          <div 
-            className="w-80 aspect-square rounded-lg border-2 border-dashed border-gray-700 flex items-center justify-center cursor-pointer hover:border-accent transition-colors"
+          <EmptyItemCard 
             onClick={handleAdd}
-          >
-            <div className="text-center">
-              <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center mx-auto mb-2">
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  width="24" 
-                  height="24" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                  className="text-accent"
-                >
-                  <line x1="12" y1="5" x2="12" y2="19"></line>
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
-              </div>
-              <p className="text-gray-400">Add Item</p>
-            </div>
-          </div>
+            label="Add Item"
+            aspectRatio="square"
+          />
         )}
         
         {spotlightItems.length === 0 && !isAuthenticated && (
