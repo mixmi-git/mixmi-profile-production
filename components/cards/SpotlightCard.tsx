@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { SpotlightItem } from '@/types';
+import { ExternalLink } from 'lucide-react';
 
 interface SpotlightCardProps {
   item: SpotlightItem;
@@ -13,11 +14,18 @@ interface SpotlightCardProps {
 export default function SpotlightCard({ item, onEdit, onDelete }: SpotlightCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   
+  const handleCardClick = () => {
+    if (item.link) {
+      window.open(item.link, '_blank', 'noopener,noreferrer');
+    }
+  };
+  
   return (
     <div 
-      className="relative w-80 aspect-square rounded-lg overflow-hidden border-2 border-gray-700 hover:border-accent hover:border-[3px] transition-all group"
+      className={`relative w-80 aspect-square rounded-lg overflow-hidden border-2 border-gray-700 hover:border-accent hover:border-[3px] transition-all group ${item.link ? 'cursor-pointer' : ''}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={item.link ? handleCardClick : undefined}
     >
       {item.image ? (
         <Image 
@@ -33,13 +41,19 @@ export default function SpotlightCard({ item, onEdit, onDelete }: SpotlightCardP
       )}
       
       <div className={`absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-slate-900/95 to-slate-900/0 transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-100'}`}>
-        <div className="flex items-start">
+        <div className="flex items-start justify-between">
           <div className="border-l-2 border-accent pl-2">
             <h3 className="text-white font-medium text-sm drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">{item.title}</h3>
             {isHovered && item.description && (
               <p className="text-gray-200 text-xs mt-1 drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">{item.description}</p>
             )}
           </div>
+          
+          {item.link && (
+            <div className="text-accent pr-2">
+              <ExternalLink size={14} />
+            </div>
+          )}
         </div>
       </div>
       
