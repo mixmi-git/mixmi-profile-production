@@ -71,7 +71,7 @@ export default function MediaSection() {
         <div>
           <h2 className="text-2xl font-bold uppercase tracking-wider">Media</h2>
           {isAuthenticated && (
-            <p className="text-gray-400 text-sm mt-1 mb-6">Share your videos, music, and podcasts</p>
+            <p className="text-gray-400 text-sm mt-1 mb-6">Share your videos, music, and mixes</p>
           )}
         </div>
         
