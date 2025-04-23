@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import { useDropzone } from "react-dropzone";
 import { Trash2, Upload } from "lucide-react";
 
@@ -19,6 +19,7 @@ export default function ImageUploader({
   const [imageUrl, setImageUrl] = useState(initialImage || "");
   const [preview, setPreview] = useState<string | null>(initialImage || null);
   const [error, setError] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   
   // Reset preview when initialImage changes
   useEffect(() => {
@@ -31,6 +32,8 @@ export default function ImageUploader({
   // Handle file drop
   const onDrop = useCallback((acceptedFiles: File[]) => {
     setError(null);
+    
+    console.log("File drop detected:", acceptedFiles.length ? acceptedFiles[0].name : "No files");
     
     if (acceptedFiles.length === 0) {
       return;
@@ -50,8 +53,10 @@ export default function ImageUploader({
       const base64String = reader.result as string;
       setPreview(base64String);
       onImageChange(base64String);
+      console.log("File successfully processed:", file.name);
     };
-    reader.onerror = () => {
+    reader.onerror = (error) => {
+      console.error("Error reading file:", error);
       setError("Error reading file");
     };
     reader.readAsDataURL(file);
@@ -64,9 +69,23 @@ export default function ImageUploader({
       'image/*': ['.jpeg', '.jpg', '.png', '.gif', '.webp', '.svg']
     },
     maxFiles: 1,
-    noClick: false, // Ensure clicks are captured
-    noKeyboard: false // Allow keyboard navigation
+    noClick: false,
+    noKeyboard: false
   });
+  
+  // Handle manual click to open file dialog
+  const handleClickToUpload = (e: React.MouseEvent) => {
+    // Don't open file dialog if clicked on the Browse Files button
+    const target = e.target as HTMLElement;
+    if (target.tagName === 'BUTTON' || target.closest('button')) {
+      e.stopPropagation(); // Stop event here to prevent dropzone handlers from interfering
+      return; // Let the button's own click handler handle it
+    }
+    
+    // For other elements in the upload area, open the file dialog
+    open();
+    console.log("Opened file dialog via click");
+  };
   
   // Handle URL input
   const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,7 +119,11 @@ export default function ImageUploader({
     // Small delay to ensure the UI updates before attempting to open the file dialog
     setTimeout(() => {
       if (activeTab === "upload") {
-        open(); // This will open the file dialog directly
+        if (fileInputRef.current) {
+          fileInputRef.current.click();
+        } else {
+          open(); // Fallback to useDropzone's open method
+        }
       }
     }, 100);
   };
@@ -170,12 +193,27 @@ export default function ImageUploader({
       {activeTab === "upload" && !preview && (
         <div
           {...getRootProps()}
-          className="border-2 border-dashed border-gray-700 rounded-lg p-8 text-center cursor-pointer hover:border-[#81E4F2] transition-colors"
+          className="upload-area border-2 border-dashed border-gray-700 rounded-lg p-8 text-center cursor-pointer hover:border-[#81E4F2] transition-colors"
+          onClick={handleClickToUpload}
         >
-          <input {...getInputProps()} />
+          <input {...getInputProps()} ref={fileInputRef} />
           <Upload size={24} className="mx-auto mb-2 text-gray-400" />
           <p className="text-gray-400">Click to upload or drag and drop</p>
           <p className="text-gray-500 text-sm mt-1">PNG, JPG or GIF (max 5MB)</p>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              if (fileInputRef.current) {
+                fileInputRef.current.click();
+              } else {
+                open(); // Fallback to useDropzone's open method
+              }
+            }}
+            className="mt-4 px-4 py-2 bg-slate-800 text-gray-300 rounded-md hover:bg-slate-700 transition-colors"
+          >
+            Browse Files
+          </button>
         </div>
       )}
       

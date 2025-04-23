@@ -125,6 +125,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen, onClose }) 
               onChange={handleChange}
               className="w-full p-2 bg-slate-800 border border-slate-700 rounded-md text-white"
               maxLength={CHARACTER_LIMITS.name}
+              placeholder="Choose any display name - change it any time"
               required
             />
           </div>
@@ -132,7 +133,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen, onClose }) 
           <div>
             <div className="flex justify-between items-center mb-1">
               <label htmlFor="title" className="block text-sm font-medium text-slate-300">
-                Title
+                What You Do
               </label>
               <span className="text-sm text-slate-400">
                 {(formData.title?.length || 0)}/{CHARACTER_LIMITS.title}
@@ -146,6 +147,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen, onClose }) 
               onChange={handleChange}
               className="w-full p-2 bg-slate-800 border border-slate-700 rounded-md text-white"
               maxLength={CHARACTER_LIMITS.title}
+              placeholder="A short description of who you are or what you do"
             />
           </div>
 
@@ -166,6 +168,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen, onClose }) 
               rows={3}
               className="w-full p-2 bg-slate-800 border border-slate-700 rounded-md text-white"
               maxLength={CHARACTER_LIMITS.bio}
+              placeholder="Share a bit about yourself, your work, interests, or anything you'd like others to know"
             />
           </div>
 
