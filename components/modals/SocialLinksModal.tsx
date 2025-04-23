@@ -146,17 +146,17 @@ export default function SocialLinksModal({ isOpen, onClose }: SocialLinksModalPr
             </label>
             {savedLinks.map((link, index) => (
               <div key={index} className="flex items-center space-x-2">
-                <div className="flex items-center px-3 py-2 bg-[#0f172a] border border-[#1e293b] rounded-md text-gray-300 w-full">
-                  <div className="flex items-center justify-center w-8">
+                <div className="flex items-center px-3 py-2 bg-[#0f172a] border border-[#1e293b] rounded-md text-gray-300 flex-1 min-w-0">
+                  <div className="flex items-center justify-center w-8 flex-shrink-0">
                     {getPlatformIcon(link.platform)}
                   </div>
                   <span className="mx-2 text-gray-500">|</span>
-                  <span className="text-gray-300 truncate flex-1">{link.url}</span>
+                  <span className="text-gray-300 truncate flex-1 overflow-hidden">{link.url}</span>
                 </div>
                 <button
                   type="button"
                   onClick={() => handleRemoveLink(index)}
-                  className="p-2 bg-[#0f172a] text-gray-400 hover:text-red-400 border border-[#1e293b] rounded-md shrink-0"
+                  className="p-2 bg-[#0f172a] text-gray-400 hover:text-red-400 border border-[#1e293b] rounded-md flex-shrink-0"
                   title="Remove link"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
