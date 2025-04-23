@@ -97,6 +97,12 @@
   - Margin: mb-16 (margin-bottom)
   - Centered: flex justify-center mx-auto
   
+- **Section Editor Modal:**
+  - Content area: max-h-[60vh] with overflow-y-auto
+  - Vertical spacing: space-y-8 for major sections
+  - Button spacing: pt-6 above action buttons
+  - Button alignment: justify-end with gap-4
+  
 - **Toggle Buttons:**
   - Shape: rounded-md
   - Padding: px-3 py-1.5

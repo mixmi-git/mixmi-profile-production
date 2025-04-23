@@ -297,7 +297,7 @@ export default function SectionEditorModal<T extends Item>({
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} title={`Manage ${title}`}>
-      <div className="space-y-4">
+      <div className="space-y-8">
         <div className="max-h-[60vh] overflow-y-auto pr-2 -mr-2">
           {localItems.length > 0 ? (
             <div className="space-y-2">
@@ -320,7 +320,7 @@ export default function SectionEditorModal<T extends Item>({
           )}
         </div>
 
-        <div className="flex items-center justify-center pt-2">
+        <div className="flex items-center justify-center">
           <button
             type="button"
             onClick={onAddItem}
@@ -343,7 +343,7 @@ export default function SectionEditorModal<T extends Item>({
           </button>
         </div>
 
-        <div className="flex justify-end gap-2 pt-4 border-t border-slate-700">
+        <div className="flex justify-end gap-4 pt-6">
           <button
             type="button"
             onClick={onClose}
