@@ -4,7 +4,13 @@ import React, { useState } from "react";
 import { useProfile } from "@/contexts/ProfileContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/contexts/ToastContext";
-import { Instagram, Youtube, SquareX, Music, Github, Twitch, Plus, Clipboard } from "lucide-react";
+import { Instagram, Youtube, Music, Github, Twitch, Plus, Clipboard } from "lucide-react";
+import { 
+  FaSoundcloud, 
+  FaMixcloud,
+  FaTiktok,
+  FaXTwitter
+} from "react-icons/fa6";
 import SocialLinksModal from "../modals/SocialLinksModal";
 
 export default function ProfileInfo() {
@@ -21,13 +27,19 @@ export default function ProfileInfo() {
       case 'youtube':
         return <Youtube size={20} />;
       case 'twitter':
-        return <SquareX size={20} />;
+        return <FaXTwitter size={20} />;
       case 'spotify':
         return <Music size={20} />;
       case 'github':
         return <Github size={20} />;
       case 'twitch':
         return <Twitch size={20} />;
+      case 'soundcloud':
+        return <FaSoundcloud size={20} />;
+      case 'mixcloud':
+        return <FaMixcloud size={20} />;
+      case 'tiktok':
+        return <FaTiktok size={20} />;
       default:
         return <Music size={20} />;
     }

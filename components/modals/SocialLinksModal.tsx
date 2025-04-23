@@ -4,8 +4,20 @@ import React, { useState, useEffect } from "react";
 import { useProfile } from "@/contexts/ProfileContext";
 import { useToast } from "@/contexts/ToastContext";
 import Modal from "../ui/Modal";
-import { Button } from "../ui/Button";
-import { Instagram, Youtube, SquareX, Music, Github, Twitch, ChevronDown } from "lucide-react";
+import { 
+  Instagram, 
+  Youtube, 
+  Music, 
+  Github, 
+  Twitch, 
+  ChevronDown
+} from "lucide-react";
+import { 
+  FaSoundcloud, 
+  FaMixcloud,
+  FaTiktok,
+  FaXTwitter
+} from "react-icons/fa6";
 
 interface SocialLinksModalProps {
   isOpen: boolean;
@@ -15,13 +27,16 @@ interface SocialLinksModalProps {
 const platformOptions = [
   { value: "instagram", label: "Instagram", icon: <Instagram size={20} /> },
   { value: "youtube", label: "YouTube", icon: <Youtube size={20} /> },
-  { value: "twitter", label: "Twitter", icon: <SquareX size={20} /> },
+  { value: "twitter", label: "X", icon: <FaXTwitter size={20} /> },
   { value: "spotify", label: "Spotify", icon: <Music size={20} /> },
   { value: "github", label: "GitHub", icon: <Github size={20} /> },
   { value: "twitch", label: "Twitch", icon: <Twitch size={20} /> },
+  { value: "soundcloud", label: "SoundCloud", icon: <FaSoundcloud size={20} /> },
+  { value: "tiktok", label: "TikTok", icon: <FaTiktok size={20} /> },
+  { value: "mixcloud", label: "Mixcloud", icon: <FaMixcloud size={20} /> },
 ];
 
-const SocialLinksModal: React.FC<SocialLinksModalProps> = ({ isOpen, onClose }) => {
+export default function SocialLinksModal({ isOpen, onClose }: SocialLinksModalProps) {
   const { profile, updateProfile } = useProfile();
   const { showToast } = useToast();
   
@@ -90,7 +105,9 @@ const SocialLinksModal: React.FC<SocialLinksModalProps> = ({ isOpen, onClose }) 
     setSavedLinks(updatedLinks);
   };
 
-  const handleSave = () => {
+  const handleSave = (e: React.FormEvent) => {
+    e.preventDefault();
+    
     // Check if there's an unsaved link in the input fields
     const allLinks = [...savedLinks];
     if (platform && url) {
@@ -119,114 +136,131 @@ const SocialLinksModal: React.FC<SocialLinksModalProps> = ({ isOpen, onClose }) 
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Social Links">
-      <div className="space-y-6">
+    <Modal isOpen={isOpen} onClose={onClose} title="Edit Social Links">
+      <form onSubmit={handleSave} className="space-y-4">
         {/* Display existing links */}
-        {savedLinks.map((link, index) => (
-          <div key={index} className="flex space-x-3">
-            {/* Platform display (already saved) */}
-            <div className="w-1/2">
-              <div className="flex items-center gap-2 px-3 py-2.5 text-base border rounded-md bg-[#151C2A] border-[#1E293B] text-gray-300">
-                {getPlatformIcon(link.platform)}
-                <span>{getPlatformLabel(link.platform)}</span>
+        {savedLinks.length > 0 && (
+          <div className="space-y-3">
+            <label className="block text-sm font-medium text-gray-300 mb-1">
+              Your Links
+            </label>
+            {savedLinks.map((link, index) => (
+              <div key={index} className="flex items-center space-x-2">
+                <div className="flex items-center px-3 py-2 bg-[#0f172a] border border-[#1e293b] rounded-md text-gray-300 w-full">
+                  <div className="flex items-center justify-center w-8">
+                    {getPlatformIcon(link.platform)}
+                  </div>
+                  <span className="mx-2 text-gray-500">|</span>
+                  <span className="text-[#60a5fa] truncate flex-1">{link.url}</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => handleRemoveLink(index)}
+                  className="p-2 bg-[#0f172a] text-gray-400 hover:text-red-400 border border-[#1e293b] rounded-md shrink-0"
+                  title="Remove link"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M3 6h18"></path>
+                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                  </svg>
+                </button>
               </div>
-            </div>
-            
-            {/* URL display with delete button */}
-            <div className="w-1/2 relative flex">
-              <input
-                type="text"
-                value={link.url}
-                readOnly
-                className="w-full px-3 py-2.5 text-base bg-[#151C2A] border border-[#1E293B] rounded-l-md text-[#81E4F2]"
-              />
-              <button
-                onClick={() => handleRemoveLink(index)}
-                className="bg-[#151C2A] text-gray-400 hover:text-red-400 px-3 py-2.5 border border-l-0 border-[#1E293B] rounded-r-md"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M3 6h18"></path>
-                  <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
-                </svg>
-              </button>
-            </div>
+            ))}
           </div>
-        ))}
+        )}
         
         {/* Input for new link */}
-        <div className="flex space-x-3">
-          {/* Platform dropdown */}
-          <div className="w-1/2 relative">
+        <div className="space-y-3">
+          <label className="block text-sm font-medium text-gray-300 mb-1">
+            Add New Link
+          </label>
+          <div className="flex space-x-2">
+            {/* Platform dropdown */}
+            <div className="relative w-[100px] shrink-0">
+              <button
+                type="button"
+                className="flex items-center justify-between w-full px-3 py-2 bg-[#0f172a] border border-[#1e293b] rounded-md text-gray-300 focus:outline-none focus:border-[#38bdf8]"
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                title={platform ? getPlatformLabel(platform) : "Select Platform"}
+              >
+                <div className="flex items-center justify-center">
+                  {platform ? getPlatformIcon(platform) : "Platform"}
+                </div>
+                <ChevronDown size={16} className="text-gray-500 ml-1 shrink-0" />
+              </button>
+              
+              {dropdownOpen && (
+                <div className="absolute z-10 w-[200px] mt-1 bg-[#0f172a] border border-[#1e293b] rounded-md shadow-lg">
+                  <ul className="py-1 max-h-48 overflow-auto">
+                    {platformOptions.map((option) => (
+                      <li key={option.value}>
+                        <button
+                          type="button"
+                          className={`flex items-center w-full px-3 py-2 text-sm hover:bg-[#1e293b] ${
+                            platform === option.value ? "bg-[#1e293b] text-[#60a5fa]" : "text-gray-300"
+                          }`}
+                          onClick={() => handlePlatformSelect(option.value)}
+                        >
+                          <div className="flex items-center gap-2">
+                            {option.icon}
+                            <span>{option.label}</span>
+                          </div>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+            
+            {/* URL input */}
+            <div className="flex-1">
+              <input
+                type="text"
+                placeholder="https://"
+                value={url}
+                onChange={handleUrlChange}
+                className="w-full px-3 py-2 bg-[#0f172a] border border-[#1e293b] rounded-md text-gray-300 placeholder-gray-500 focus:outline-none focus:border-[#38bdf8]"
+              />
+            </div>
+            
+            {/* Add button */}
             <button
               type="button"
-              className="flex items-center justify-between w-full px-3 py-2.5 text-base border rounded-md bg-[#151C2A] border-[#1E293B] text-gray-300"
-              onClick={() => setDropdownOpen(!dropdownOpen)}
+              onClick={handleAddLink}
+              className="px-3 py-2 bg-[#1e293b] text-white rounded-md hover:bg-[#334155] shrink-0"
             >
-              <div className="flex items-center gap-2">
-                {platform ? getPlatformIcon(platform) : null}
-                <span>{platform ? getPlatformLabel(platform) : "Select Platform"}</span>
-              </div>
-              <ChevronDown size={16} className="text-gray-500" />
+              Add
             </button>
-            
-            {dropdownOpen && (
-              <div className="absolute z-10 w-full mt-1 bg-[#151C2A] border border-[#1E293B] rounded-md shadow-lg">
-                <ul className="py-1 max-h-48 overflow-auto">
-                  {platformOptions.map((option) => (
-                    <li key={option.value}>
-                      <button
-                        type="button"
-                        className={`flex items-center w-full px-3 py-2 text-sm hover:bg-[#1a2436] ${
-                          platform === option.value ? "bg-[#1a2436] text-[#81E4F2]" : "text-gray-300"
-                        }`}
-                        onClick={() => handlePlatformSelect(option.value)}
-                      >
-                        <div className="flex items-center gap-2">
-                          {option.icon}
-                          <span>{option.label}</span>
-                        </div>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-          
-          {/* URL input with Add button */}
-          <div className="w-1/2 flex">
-            <input
-              type="text"
-              placeholder="https://"
-              value={url}
-              onChange={handleUrlChange}
-              className="w-full px-3 py-2.5 text-base bg-[#151C2A] border border-[#1E293B] rounded-md text-gray-300 placeholder-gray-500"
-            />
           </div>
         </div>
         
         {/* Action buttons */}
-        <div className="pt-4 border-t border-[#1E293B] flex justify-end gap-3">
-          <Button 
-            onClick={() => {
-              // Explicitly set to just one empty field
-              setSavedLinks([]);
-            }}
-            size="lg"
-            variant="secondary"
+        <div className="flex justify-end gap-2 pt-4">
+          {savedLinks.length > 0 && (
+            <button
+              type="button"
+              onClick={() => setSavedLinks([])}
+              className="px-4 py-2 border border-[#1e293b] rounded-md text-gray-300 hover:bg-[#1e293b]"
+            >
+              Clear All
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={onClose}
+            className="px-4 py-2 border border-[#1e293b] rounded-md text-gray-300 hover:bg-[#1e293b]"
           >
-            Clear All Links
-          </Button>
-          <Button size="lg" variant="secondary" onClick={onClose}>
             Cancel
-          </Button>
-          <Button size="lg" onClick={handleSave}>
+          </button>
+          <button
+            type="submit"
+            className="px-4 py-2 bg-[#0ea5e9] text-white rounded-md hover:bg-[#0284c7]"
+          >
             Save Changes
-          </Button>
+          </button>
         </div>
-      </div>
+      </form>
     </Modal>
   );
-};
-
-export default SocialLinksModal; 
+} 
