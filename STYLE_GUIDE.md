@@ -64,6 +64,17 @@
   - Appears on hover with `group-hover:opacity-100`
   - Transition: `transition-opacity`
 
+### Delete/Remove Buttons
+- **Standard Delete Button:**
+  - Shape: Circular (rounded-full)
+  - Size: p-1 (padding)
+  - Background: `bg-slate-700`
+  - Hover: `hover:bg-slate-600`
+  - Icon color: `text-red-400`
+  - Icon size: 16px (width, height)
+  - Standard SVG includes trash lid and vertical lines
+  - Used consistently across modals and content managers
+
 ### Social Links
 - **Icons:**
   - Use `react-icons/fa6` library for brand icons
