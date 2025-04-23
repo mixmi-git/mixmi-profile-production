@@ -26,6 +26,10 @@ export default function ImageUploader({
     if (initialImage) {
       setPreview(initialImage);
       setImageUrl(initialImage);
+    } else {
+      // Reset when initialImage is empty or null (for new items)
+      setPreview(null);
+      setImageUrl("");
     }
   }, [initialImage]);
   
