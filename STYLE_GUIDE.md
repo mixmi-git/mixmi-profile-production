@@ -29,18 +29,24 @@
 
 ### Buttons
 - **Primary Button:** 
-  - Background: transparent
-  - Border: 1px `#81E4F2` (accent)
-  - Text: `#81E4F2` (accent)
-  - Hover: Reduced opacity (80%)
+  - Background: `#81E4F2` (accent teal)
+  - Hover: `#65d5e3` (darker teal)
+  - Text: `#101726` (dark background color)
   - Padding: px-4 py-2
   - Border Radius: rounded-md
 - **Save Button:**
-  - Background: `#0ea5e9` (cyan-600)
-  - Hover: `#0284c7` (cyan-700)
+  - Background: `#0ea5e9` (blue)
+  - Hover: `#0284c7` (darker blue)
   - Text: white
   - Padding: px-4 py-2
   - Border Radius: rounded-md
+  - Used consistently across all modals for Save/Confirm actions
+- **Secondary Button:**
+  - Background: `#151C2A`
+  - Hover: `#1a2436`
+  - Border: 1px `#1E293B`
+  - Text: gray-200
+  - Used for Cancel actions
 
 ### Edit Buttons
 - **Circular Edit Button:**
