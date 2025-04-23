@@ -4,8 +4,11 @@
 
 ### Primary Colors
 - **Background:** `#101726` - Dark blue background for the entire application
-- **Border:** `#151C2A` - Slightly lighter blue for borders and container edges
+- **Container Background:** `#0f172a` - Slightly darker blue for form fields and containers
+- **Border:** `#1e293b` - Border color for input fields, containers, and cards
 - **Accent:** `#81E4F2` - Cyan/teal color for highlights, buttons, and interactive elements
+- **URL/Link Color:** `#60a5fa` - Blue color for URLs and hyperlinks
+- **Accent Focus:** `#38bdf8` - Used for input focus states and interactive elements
 
 ### Text Colors
 - **Primary Text:** `#FFFFFF` - White for main text content
@@ -32,6 +35,12 @@
   - Hover: Reduced opacity (80%)
   - Padding: px-4 py-2
   - Border Radius: rounded-md
+- **Save Button:**
+  - Background: `#0ea5e9` (cyan-600)
+  - Hover: `#0284c7` (cyan-700)
+  - Text: white
+  - Padding: px-4 py-2
+  - Border Radius: rounded-md
 
 ### Edit Buttons
 - **Circular Edit Button:**
@@ -42,6 +51,35 @@
   - Hover: Dark blue-gray background (rgba(20,30,50,0.85))
   - Icon color: Remains `#81E4F2` (accent) on hover
   - Standard size for profile: md
+- **Card Edit Button:**
+  - Background: `rgba(15, 23, 42, 0.7)` (bg-slate-800/70)
+  - Hover: `rgba(51, 65, 85, 0.8)` (bg-slate-700/80)
+  - Initially hidden with `opacity-0`
+  - Appears on hover with `group-hover:opacity-100`
+  - Transition: `transition-opacity`
+
+### Social Links
+- **Icons:**
+  - Use `react-icons/fa6` library for brand icons
+  - Size: 20px consistent across all platforms
+  - Standard platforms: Instagram, YouTube, X (Twitter), Spotify, GitHub, Twitch
+  - Music platforms: SoundCloud, Mixcloud
+  - Other platforms: TikTok
+- **Display:**
+  - Icon-only display for better visual consistency
+  - Hover tooltip with platform name for better usability
+  - URLs truncated with ellipsis when too long
+  - Link text color: `#60a5fa` (text-blue-400)
+
+### Form Inputs
+- **Text Inputs and Textareas:**
+  - Background: `#0f172a` (bg-slate-800)
+  - Border: 1px `#1e293b` (border-slate-700)
+  - Border Radius: rounded-md
+  - Padding: px-3 py-2
+  - Text Color: `#ffffff` (text-white)
+  - Placeholder Color: `#71717A` (text-gray-500)
+  - Focus: `focus:outline-none focus:border-[#38bdf8]`
 
 ### Section Management
 - **Container:**
@@ -89,6 +127,10 @@
   - Text enhancement: drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)] for readability
   - Left border accent: 2px teal line
   - Padding: p-3 for adequate spacing
+  - Edit buttons: 
+    - Hidden by default (`opacity-0`)
+    - Visible on hover (`group-hover:opacity-100`)
+    - Positioned in top-right corner
 
 ### Profile Image
 - **Container:**
@@ -98,12 +140,30 @@
 
 ### Wallet Address Display
 - **Container:**
-  - Background: `#151C2A`
-  - Border: 1px `#1E293B`
+  - Background: `#0f172a`
+  - Border: 1px `#1e293b`
   - Border Radius: rounded-md
   - Padding: py-2 px-3
-  - Width: Full width (responsive to parent container)
+  - Max Width: max-w-[350px] to limit the width
   - Gap between addresses: gap-2
+- **Address Text:**
+  - Color: `#60a5fa` (text-blue-400) for better readability
+  - Size: text-xs
+  - Use truncate for long addresses
+- **Copy Button:**
+  - Size: 14px icon
+  - Padding: p-1
+  - Hover Color: `#38bdf8`
+  - Position: Right aligned
+  - Tooltip: "Copy address" on hover
+
+## Content Types
+
+### Token-Gated Content
+- **Supported in:** Shop section
+- **Display:** Same as standard shop items
+- **Link handling:** Direct users to token-gated platforms (NFT marketplaces, token gates, etc.)
+- **Description:** Mention that token-gating is available in the helper text
 
 ## Layout
 
@@ -154,6 +214,10 @@
   - Only visible when authenticated
   - Hidden for public/non-authenticated users
   - Provides context only for users editing their own profile
+  - Standard text formats:
+    - Spotlight: "Showcase your projects or amplify friends you collab with"
+    - Media: "Share your videos, music, and mixes"
+    - Shop: "Share your products, services, and token-gated content"
 
 ## Responsive Breakpoints
 
