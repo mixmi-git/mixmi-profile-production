@@ -109,14 +109,15 @@ export default function ProfileInfo() {
       
       {/* Wallet addresses */}
       {((profile.showWalletAddress && walletAddress) || (profile.showBtcAddress && btcAddress)) && (
-        <div className="flex flex-col items-center gap-2 mb-8 w-full">
+        <div className="flex flex-col items-center gap-2 mb-8 max-w-[350px]">
           {profile.showWalletAddress && walletAddress && (
-            <div className="bg-[#151C2A] py-2 px-3 rounded-md w-full border border-[#1E293B] flex items-center">
+            <div className="bg-[#0f172a] py-2 px-3 rounded-md w-full border border-[#1e293b] flex items-center">
               <span className="text-xs text-gray-500 shrink-0 font-medium">STX:</span>
-              <span className="text-xs text-gray-400 ml-2 truncate">{`${walletAddress.slice(0, 8)}...${walletAddress.slice(-8)}`}</span>
+              <span className="text-xs text-[#60a5fa] ml-2 truncate flex-1">{`${walletAddress.slice(0, 8)}...${walletAddress.slice(-8)}`}</span>
               <button 
-                className="text-gray-400 hover:text-[#81E4F2] ml-auto p-0.5"
+                className="text-gray-400 hover:text-[#38bdf8] ml-1 p-1 shrink-0"
                 onClick={() => copyToClipboard(walletAddress)}
+                title="Copy address"
               >
                 <Clipboard size={14} />
               </button>
@@ -124,12 +125,13 @@ export default function ProfileInfo() {
           )}
           
           {profile.showBtcAddress && btcAddress && (
-            <div className="bg-[#151C2A] py-2 px-3 rounded-md w-full border border-[#1E293B] flex items-center">
+            <div className="bg-[#0f172a] py-2 px-3 rounded-md w-full border border-[#1e293b] flex items-center">
               <span className="text-xs text-gray-500 shrink-0 font-medium">BTC:</span>
-              <span className="text-xs text-gray-400 ml-2 truncate">{`${btcAddress.slice(0, 8)}...${btcAddress.slice(-8)}`}</span>
+              <span className="text-xs text-[#60a5fa] ml-2 truncate flex-1">{`${btcAddress.slice(0, 8)}...${btcAddress.slice(-8)}`}</span>
               <button 
-                className="text-gray-400 hover:text-[#81E4F2] ml-auto p-0.5"
+                className="text-gray-400 hover:text-[#38bdf8] ml-1 p-1 shrink-0"
                 onClick={() => copyToClipboard(btcAddress)}
+                title="Copy address"
               >
                 <Clipboard size={14} />
               </button>
