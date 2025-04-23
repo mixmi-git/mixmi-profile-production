@@ -223,14 +223,29 @@ export default function SocialLinksModal({ isOpen, onClose }: SocialLinksModalPr
                 className="w-full px-3 py-2 bg-[#0f172a] border border-[#1e293b] rounded-md text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#81E4F2]"
               />
             </div>
-            
-            {/* Add button */}
+          </div>
+          
+          {/* Add button as large plus icon */}
+          <div className="flex items-center justify-center pt-2">
             <button
               type="button"
               onClick={handleAddLink}
-              className="px-3 py-2 bg-[#1e293b] text-white rounded-md hover:bg-[#334155] shrink-0"
+              className="flex items-center justify-center p-3 text-gray-500 hover:text-gray-400 transition-colors"
+              aria-label="Add new link"
             >
-              Add
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                className="w-8 h-8"
+              >
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
             </button>
           </div>
         </div>
