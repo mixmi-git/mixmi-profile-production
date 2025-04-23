@@ -22,7 +22,7 @@ export default function ProfileImage() {
     <>
       <div className="relative w-[400px] h-[400px] mx-auto">
         <div 
-          className={`w-full h-full rounded-lg border-4 border-accent overflow-hidden ${
+          className={`w-full h-full rounded-lg border-4 border-accent overflow-hidden group ${
             isAuthenticated ? "cursor-pointer" : ""
           }`}
           onClick={isAuthenticated ? handleEditClick : undefined}
@@ -47,7 +47,7 @@ export default function ProfileImage() {
                     strokeWidth="2" 
                     strokeLinecap="round" 
                     strokeLinejoin="round" 
-                    className="w-12 h-12 text-gray-500"
+                    className="w-12 h-12 text-gray-500 group-hover:text-gray-400 transition-colors"
                   >
                     <line x1="12" y1="5" x2="12" y2="19"></line>
                     <line x1="5" y1="12" x2="19" y2="12"></line>

@@ -24,7 +24,7 @@ export default function EmptyItemCard({
   
   return (
     <div 
-      className={`${width} ${aspectRatioClass} ${minHeight || ''} rounded-lg border-2 border-dashed border-gray-700 flex items-center justify-center cursor-pointer hover:border-gray-500 transition-colors`}
+      className={`${width} ${aspectRatioClass} ${minHeight || ''} rounded-lg border-2 border-dashed border-gray-700 flex items-center justify-center cursor-pointer hover:border-gray-500 transition-colors group`}
       onClick={onClick}
     >
       <div className="text-center">
@@ -37,7 +37,7 @@ export default function EmptyItemCard({
             strokeWidth="2" 
             strokeLinecap="round" 
             strokeLinejoin="round" 
-            className="w-12 h-12 text-gray-500"
+            className="w-12 h-12 text-gray-500 group-hover:text-gray-400 transition-colors"
           >
             <line x1="12" y1="5" x2="12" y2="19"></line>
             <line x1="5" y1="12" x2="19" y2="12"></line>
