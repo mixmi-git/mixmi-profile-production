@@ -51,14 +51,14 @@ export default function ShopCard({ item, onEdit, onDelete }: ShopCardProps) {
       </div>
       
       {(onEdit || onDelete) && (
-        <div className="absolute top-2 right-2 flex space-x-1">
+        <div className="absolute top-2 right-2 flex space-x-1 opacity-0 group-hover:opacity-100 transition-opacity">
           {onEdit && (
             <button 
               onClick={(e) => {
                 e.stopPropagation();
                 onEdit();
               }}
-              className="bg-slate-800/70 p-1 rounded-full opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity"
+              className="bg-slate-800/70 p-1 rounded-full hover:bg-slate-700/80"
               aria-label="Edit"
             >
               <svg 
@@ -87,7 +87,7 @@ export default function ShopCard({ item, onEdit, onDelete }: ShopCardProps) {
                   onDelete();
                 }
               }}
-              className="bg-slate-800/70 p-1 rounded-full opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity"
+              className="bg-slate-800/70 p-1 rounded-full hover:bg-slate-700/80"
               aria-label="Delete"
             >
               <svg 
