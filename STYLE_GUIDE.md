@@ -149,17 +149,18 @@
   - Background: `#0f172a`
   - Border: 1px `#1e293b`
   - Border Radius: rounded-md
-  - Padding: py-2 px-3
+  - Padding: py-2 px-4
   - Max Width: max-w-[350px] to limit the width
   - Gap between addresses: gap-2
 - **Address Text:**
-  - Color: `#60a5fa` (text-blue-400) for better readability
+  - Color: text-gray-400 (light gray) for better readability
   - Size: text-xs
   - Use truncate for long addresses
 - **Copy Button:**
   - Size: 14px icon
   - Padding: p-1
-  - Hover Color: `#38bdf8`
+  - Default: text-gray-400
+  - Hover: text-[#81E4F2] (teal accent color) with transition
   - Position: Right aligned
   - Tooltip: "Copy address" on hover
 
