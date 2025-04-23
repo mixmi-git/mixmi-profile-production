@@ -96,7 +96,7 @@ export default function SpotlightItemModal({
             value={formData.title}
             onChange={handleChange}
             placeholder="Enter title"
-            className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-[#81E4F2]"
             required
           />
         </div>
@@ -115,7 +115,7 @@ export default function SpotlightItemModal({
             onChange={handleChange}
             placeholder="Enter description"
             rows={3}
-            className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 resize-none"
+            className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-[#81E4F2] resize-none"
           />
         </div>
 
@@ -144,7 +144,7 @@ export default function SpotlightItemModal({
             value={formData.link}
             onChange={handleChange}
             placeholder="https://example.com"
-            className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-[#81E4F2]"
           />
         </div>
 
@@ -158,7 +158,7 @@ export default function SpotlightItemModal({
           </button>
           <button
             type="submit"
-            className="px-4 py-2 bg-cyan-600 text-white rounded-md hover:bg-cyan-500"
+            className="px-4 py-2 bg-[#0ea5e9] text-white rounded-md hover:bg-[#0284c7]"
           >
             {item ? "Save Changes" : "Add Item"}
           </button>

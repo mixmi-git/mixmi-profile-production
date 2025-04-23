@@ -92,7 +92,7 @@ export default function WalletSettingsModal({ isOpen, onClose }: WalletSettingsM
               id="showStx"
               checked={showStx}
               onChange={(e) => setShowStx(e.target.checked)}
-              className="h-4 w-4 bg-slate-800 border-slate-700 rounded text-cyan-600 focus:ring-cyan-500"
+              className="h-4 w-4 bg-slate-800 border-slate-700 rounded text-[#81E4F2] focus:ring-[#81E4F2]"
               disabled={!walletAddress}
             />
             <label htmlFor="showStx" className="ml-2 text-sm text-slate-300">
@@ -106,7 +106,7 @@ export default function WalletSettingsModal({ isOpen, onClose }: WalletSettingsM
               id="showBtc"
               checked={showBtc}
               onChange={(e) => setShowBtc(e.target.checked)}
-              className="h-4 w-4 bg-slate-800 border-slate-700 rounded text-cyan-600 focus:ring-cyan-500"
+              className="h-4 w-4 bg-slate-800 border-slate-700 rounded text-[#81E4F2] focus:ring-[#81E4F2]"
             />
             <label htmlFor="showBtc" className="ml-2 text-sm text-slate-300">
               Show BTC wallet address on profile
@@ -125,7 +125,7 @@ export default function WalletSettingsModal({ isOpen, onClose }: WalletSettingsM
           <button 
             type="button" 
             onClick={handleSave}
-            className="px-4 py-2 bg-cyan-600 text-white rounded-md hover:bg-cyan-500"
+            className="px-4 py-2 bg-[#0ea5e9] text-white rounded-md hover:bg-[#0284c7]"
           >
             Save Changes
           </button>

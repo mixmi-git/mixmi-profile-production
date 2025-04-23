@@ -151,7 +151,7 @@ export default function SocialLinksModal({ isOpen, onClose }: SocialLinksModalPr
                     {getPlatformIcon(link.platform)}
                   </div>
                   <span className="mx-2 text-gray-500">|</span>
-                  <span className="text-[#60a5fa] truncate flex-1">{link.url}</span>
+                  <span className="text-gray-300 truncate flex-1">{link.url}</span>
                 </div>
                 <button
                   type="button"
@@ -179,7 +179,7 @@ export default function SocialLinksModal({ isOpen, onClose }: SocialLinksModalPr
             <div className="relative w-[100px] shrink-0">
               <button
                 type="button"
-                className="flex items-center justify-between w-full px-3 py-2 bg-[#0f172a] border border-[#1e293b] rounded-md text-gray-300 focus:outline-none focus:border-[#38bdf8]"
+                className="flex items-center justify-between w-full px-3 py-2 bg-[#0f172a] border border-[#1e293b] rounded-md text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#81E4F2]"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
                 title={platform ? getPlatformLabel(platform) : "Select Platform"}
               >
@@ -197,7 +197,7 @@ export default function SocialLinksModal({ isOpen, onClose }: SocialLinksModalPr
                         <button
                           type="button"
                           className={`flex items-center w-full px-3 py-2 text-sm hover:bg-[#1e293b] ${
-                            platform === option.value ? "bg-[#1e293b] text-[#60a5fa]" : "text-gray-300"
+                            platform === option.value ? "bg-[#1e293b] text-[#81E4F2]" : "text-gray-300"
                           }`}
                           onClick={() => handlePlatformSelect(option.value)}
                         >
@@ -220,7 +220,7 @@ export default function SocialLinksModal({ isOpen, onClose }: SocialLinksModalPr
                 placeholder="https://"
                 value={url}
                 onChange={handleUrlChange}
-                className="w-full px-3 py-2 bg-[#0f172a] border border-[#1e293b] rounded-md text-gray-300 placeholder-gray-500 focus:outline-none focus:border-[#38bdf8]"
+                className="w-full px-3 py-2 bg-[#0f172a] border border-[#1e293b] rounded-md text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#81E4F2]"
               />
             </div>
             

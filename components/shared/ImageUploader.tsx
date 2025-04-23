@@ -126,7 +126,7 @@ export default function ImageUploader({
           type="button"
           className={`px-4 py-2 text-sm font-medium ${
             activeTab === "upload"
-              ? "border-b-2 border-cyan-400 text-cyan-400"
+              ? "border-b-2 border-[#81E4F2] text-[#81E4F2]"
               : "text-gray-400 hover:text-gray-300"
           }`}
           onClick={() => setActiveTab("upload")}
@@ -137,7 +137,7 @@ export default function ImageUploader({
           type="button"
           className={`px-4 py-2 text-sm font-medium ${
             activeTab === "url"
-              ? "border-b-2 border-cyan-400 text-cyan-400"
+              ? "border-b-2 border-[#81E4F2] text-[#81E4F2]"
               : "text-gray-400 hover:text-gray-300"
           }`}
           onClick={() => setActiveTab("url")}
@@ -157,7 +157,7 @@ export default function ImageUploader({
           <div className="absolute bottom-0 left-0 right-0 bg-black/70 py-2 px-3 flex justify-center">
             <button 
               onClick={handleClearImage}
-              className="text-white text-sm flex items-center hover:text-cyan-400 transition-colors"
+              className="text-white text-sm flex items-center hover:text-[#81E4F2] transition-colors"
             >
               <Trash2 size={16} className="mr-1" />
               Replace Image
@@ -170,7 +170,7 @@ export default function ImageUploader({
       {activeTab === "upload" && !preview && (
         <div
           {...getRootProps()}
-          className="border-2 border-dashed border-gray-700 rounded-lg p-8 text-center cursor-pointer hover:border-cyan-400 transition-colors"
+          className="border-2 border-dashed border-gray-700 rounded-lg p-8 text-center cursor-pointer hover:border-[#81E4F2] transition-colors"
         >
           <input {...getInputProps()} />
           <Upload size={24} className="mx-auto mb-2 text-gray-400" />
@@ -188,7 +188,7 @@ export default function ImageUploader({
             onChange={handleUrlChange}
             onBlur={validateUrl}
             placeholder="https://example.com/image.jpg"
-            className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-[#81E4F2]"
           />
           <p className="text-xs text-gray-500">
             Enter the URL of an image from the web

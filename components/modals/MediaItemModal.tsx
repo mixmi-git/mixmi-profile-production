@@ -140,7 +140,7 @@ export default function MediaItemModal({
               value={formData.rawUrl}
               onChange={handleUrlChange}
               placeholder="https://youtube.com/watch?v=..."
-              className="flex-1 px-3 py-2 bg-slate-800 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
+              className="flex-1 px-3 py-2 bg-slate-800 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-[#81E4F2]"
               required
             />
             <button
@@ -183,7 +183,7 @@ export default function MediaItemModal({
           </button>
           <button
             type="submit"
-            className="px-4 py-2 bg-cyan-600 text-white rounded-md hover:bg-cyan-500"
+            className="px-4 py-2 bg-[#0ea5e9] text-white rounded-md hover:bg-[#0284c7]"
           >
             {item ? "Save Changes" : "Add Item"}
           </button>

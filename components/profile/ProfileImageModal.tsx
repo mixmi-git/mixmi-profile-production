@@ -35,8 +35,12 @@ export default function ProfileImageModal({ isOpen, onClose, currentImage }: Pro
         />
         
         <div className="flex justify-end space-x-3 pt-4">
-          <Button variant="primary" onClick={onClose}>
-            Apply Image
+          <Button 
+            variant="primary" 
+            onClick={onClose}
+            className="bg-[#0ea5e9] hover:bg-[#0284c7] text-white"
+          >
+            Save Changes
           </Button>
         </div>
       </div>

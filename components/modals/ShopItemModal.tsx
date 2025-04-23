@@ -96,7 +96,7 @@ export default function ShopItemModal({
             value={formData.title}
             onChange={handleChange}
             placeholder="Enter item name"
-            className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-[#81E4F2]"
             required
           />
         </div>
@@ -115,7 +115,7 @@ export default function ShopItemModal({
             onChange={handleChange}
             placeholder="Brief description of what you're offering"
             rows={3}
-            className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 resize-none"
+            className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-[#81E4F2] resize-none"
           />
         </div>
 
@@ -144,7 +144,7 @@ export default function ShopItemModal({
             value={formData.link}
             onChange={handleChange}
             placeholder="URL where this item can be purchased"
-            className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-[#81E4F2]"
           />
           <p className="text-xs text-gray-500 mt-1">
             Enter the URL where customers can purchase this item
@@ -161,7 +161,7 @@ export default function ShopItemModal({
           </button>
           <button
             type="submit"
-            className="px-4 py-2 bg-cyan-600 text-white rounded-md hover:bg-cyan-500"
+            className="px-4 py-2 bg-[#0ea5e9] text-white rounded-md hover:bg-[#0284c7]"
           >
             {item ? "Save Changes" : "Add Item"}
           </button>
