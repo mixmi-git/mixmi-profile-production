@@ -364,7 +364,7 @@ export default function SectionEditorModal<T extends Item>({
             onClick={handleSave}
             className="px-4 py-2 bg-[#0ea5e9] text-white rounded-md hover:bg-[#0284c7]"
           >
-            Save Order
+            Save Changes
           </button>
         </div>
       </div>
