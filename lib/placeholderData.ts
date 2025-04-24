@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { ProfileData, SpotlightItem, MediaItem, ShopItem } from "@/types";
+import { ProfileData, SpotlightItem, MediaItem, ShopItem, GalleryItem } from "@/types";
 
 /**
  * This file contains placeholder data that can be used in development mode
@@ -22,6 +22,7 @@ export const placeholderProfile: ProfileData = {
     spotlight: true,
     media: true,
     shop: true,
+    gallery: true,
     sticker: true
   },
   sticker: {
@@ -104,12 +105,32 @@ export const placeholderShopItems: ShopItem[] = [
   }
 ];
 
+// Placeholder gallery items
+export const placeholderGalleryItems: GalleryItem[] = [
+  {
+    id: uuidv4(),
+    image: "/placeholder-images/gallery-1.jpg", // To be added
+    createdAt: new Date(2023, 5, 15).toISOString()
+  },
+  {
+    id: uuidv4(),
+    image: "/placeholder-images/gallery-2.jpg", // To be added
+    createdAt: new Date(2023, 6, 20).toISOString()
+  },
+  {
+    id: uuidv4(),
+    image: "/placeholder-images/gallery-3.jpg", // To be added
+    createdAt: new Date(2023, 7, 10).toISOString()
+  }
+];
+
 // Function to get all placeholder data in one object
 export function getPlaceholderData() {
   return {
     profile: placeholderProfile,
     spotlightItems: placeholderSpotlightItems,
     mediaItems: placeholderMediaItems,
-    shopItems: placeholderShopItems
+    shopItems: placeholderShopItems,
+    galleryItems: placeholderGalleryItems
   };
 } 

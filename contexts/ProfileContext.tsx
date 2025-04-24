@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { ProfileData, SpotlightItem, MediaItem, ShopItem, STORAGE_KEYS } from "@/types";
+import { ProfileData, SpotlightItem, MediaItem, ShopItem, GalleryItem, STORAGE_KEYS } from "@/types";
 import { StorageService } from "@/lib/storage";
 import { useDebounce } from "@/hooks/useDebounce";
 import { v4 as uuidv4 } from "uuid";
@@ -18,6 +18,7 @@ const defaultProfile: ProfileData = {
     spotlight: true,
     media: true,
     shop: true,
+    gallery: true,
     sticker: true
   },
   sticker: {
@@ -33,6 +34,7 @@ export interface ProfileContextType {
   spotlightItems: SpotlightItem[];
   mediaItems: MediaItem[];
   shopItems: ShopItem[];
+  galleryItems: GalleryItem[];
   updateProfile: (updates: Partial<ProfileData>) => void;
   addSpotlightItem: (item: SpotlightItem) => void;
   updateSpotlightItem: (id: string, item: SpotlightItem) => void;
@@ -46,6 +48,10 @@ export interface ProfileContextType {
   updateShopItem: (id: string, item: ShopItem) => void;
   removeShopItem: (id: string) => void;
   updateAllShopItems: (items: ShopItem[]) => void;
+  addGalleryItem: (item: GalleryItem) => void;
+  updateGalleryItem: (id: string, item: GalleryItem) => void;
+  removeGalleryItem: (id: string) => void;
+  updateAllGalleryItems: (items: GalleryItem[]) => void;
   isSaving: boolean;
 }
 
@@ -56,6 +62,7 @@ export const ProfileProvider: React.FC<{children: React.ReactNode}> = ({ childre
   const [spotlightItems, setSpotlightItems] = useState<SpotlightItem[]>([]);
   const [mediaItems, setMediaItems] = useState<MediaItem[]>([]);
   const [shopItems, setShopItems] = useState<ShopItem[]>([]);
+  const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([]);
   const [isSaving, setIsSaving] = useState(false);
   
   // Use the debounce hook to prevent too many saves
@@ -89,6 +96,9 @@ export const ProfileProvider: React.FC<{children: React.ReactNode}> = ({ childre
     
     const storedShopItems = StorageService.getItem<ShopItem[]>(STORAGE_KEYS.SHOP, []);
     setShopItems(storedShopItems);
+    
+    const storedGalleryItems = StorageService.getItem<GalleryItem[]>(STORAGE_KEYS.GALLERY, []);
+    setGalleryItems(storedGalleryItems);
   }, []);
   
   // Save profile when it changes (debounced)
@@ -204,12 +214,42 @@ export const ProfileProvider: React.FC<{children: React.ReactNode}> = ({ childre
     StorageService.setItem(STORAGE_KEYS.SHOP, items);
   };
   
+  // Add a new gallery item
+  const addGalleryItem = (item: GalleryItem) => {
+    const newItems = [...galleryItems, item];
+    setGalleryItems(newItems);
+    StorageService.setItem(STORAGE_KEYS.GALLERY, newItems);
+  };
+  
+  // Update an existing gallery item
+  const updateGalleryItem = (id: string, updatedItem: GalleryItem) => {
+    const newItems = galleryItems.map(item => 
+      item.id === id ? updatedItem : item
+    );
+    setGalleryItems(newItems);
+    StorageService.setItem(STORAGE_KEYS.GALLERY, newItems);
+  };
+  
+  // Remove a gallery item
+  const removeGalleryItem = (id: string) => {
+    const newItems = galleryItems.filter(item => item.id !== id);
+    setGalleryItems(newItems);
+    StorageService.setItem(STORAGE_KEYS.GALLERY, newItems);
+  };
+  
+  // Update all gallery items at once (for reordering)
+  const updateAllGalleryItems = (items: GalleryItem[]) => {
+    setGalleryItems(items);
+    StorageService.setItem(STORAGE_KEYS.GALLERY, items);
+  };
+  
   return (
     <ProfileContext.Provider value={{ 
       profile, 
       spotlightItems, 
       mediaItems, 
       shopItems,
+      galleryItems,
       updateProfile,
       addSpotlightItem,
       updateSpotlightItem,
@@ -223,6 +263,10 @@ export const ProfileProvider: React.FC<{children: React.ReactNode}> = ({ childre
       updateShopItem,
       removeShopItem,
       updateAllShopItems,
+      addGalleryItem,
+      updateGalleryItem,
+      removeGalleryItem,
+      updateAllGalleryItems,
       isSaving 
     }}>
       {children}

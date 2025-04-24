@@ -9,6 +9,7 @@ export interface ProfileData {
     spotlight: boolean;
     media: boolean;
     shop: boolean;
+    gallery: boolean;
     sticker: boolean;
   };
   walletAddress?: string;
@@ -48,6 +49,12 @@ export interface ShopItem {
   link?: string;
 }
 
+export interface GalleryItem {
+  id: string;
+  image: string;
+  createdAt?: string;
+}
+
 export interface SocialLink {
   platform: string;
   url: string;
@@ -60,6 +67,7 @@ export const STORAGE_KEYS = {
   SPOTLIGHT: "spotlight",
   MEDIA: "media",
   SHOP: "shop",
+  GALLERY: "gallery",
   STICKER: "sticker",
   AUTH: "auth"
 };
@@ -97,6 +105,7 @@ export interface Profile {
     spotlight: boolean;
     media: boolean;
     shop: boolean;
+    gallery: boolean;
     sticker: boolean;
   };
   walletAddress?: string;

@@ -19,6 +19,7 @@ export default function SectionManager() {
     { key: 'spotlight', label: 'Spotlight' },
     { key: 'media', label: 'Media' },
     { key: 'shop', label: 'Shop' },
+    { key: 'gallery', label: 'Gallery' },
     { key: 'sticker', label: 'Sticker' }
   ] as const;
   
