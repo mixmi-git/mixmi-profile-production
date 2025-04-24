@@ -3,9 +3,7 @@
 import React, { useState } from "react";
 import ProfileImage from "./ProfileImage";
 import ProfileInfo from "./ProfileInfo";
-import EditProfileModal from "./EditProfileModalNew";
-import WalletSettingsModal from "../modals/WalletSettingsModal";
-import SocialLinksModal from "../modals/SocialLinksModal";
+import UnifiedProfileModal from "./UnifiedProfileModal";
 import { useAuth } from "@/contexts/AuthContext";
 import { useProfile } from "@/contexts/ProfileContext";
 import EditButton from "../ui/EditButton";
@@ -13,9 +11,7 @@ import EditButton from "../ui/EditButton";
 export default function ProfileHeader() {
   const { isAuthenticated } = useAuth();
   const { profile } = useProfile();
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
-  const [isSocialLinksModalOpen, setIsSocialLinksModalOpen] = useState(false);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   
   return (
     <div className="mb-16 border border-border rounded-lg shadow-lg p-6 max-w-5xl mx-auto">
@@ -28,36 +24,14 @@ export default function ProfileHeader() {
             <ProfileInfo />
             
             {isAuthenticated && (
-              <div className="flex justify-center gap-6 mt-8">
-                <div className="flex items-center">
-                  <EditButton 
-                    size="md" 
-                    label="Edit Profile" 
-                    onClick={() => setIsEditModalOpen(true)}
-                    className="mr-2"
-                  />
-                  <span className="text-gray-400 text-sm">Profile</span>
-                </div>
-                
-                <div className="flex items-center">
-                  <EditButton 
-                    size="md" 
-                    label="Edit Social Links" 
-                    onClick={() => setIsSocialLinksModalOpen(true)}
-                    className="mr-2"
-                  />
-                  <span className="text-gray-400 text-sm">Social</span>
-                </div>
-                
-                <div className="flex items-center">
-                  <EditButton 
-                    size="md" 
-                    label="Wallet Settings" 
-                    onClick={() => setIsWalletModalOpen(true)}
-                    className="mr-2"
-                  />
-                  <span className="text-gray-400 text-sm">Wallet</span>
-                </div>
+              <div className="flex justify-center mt-8">
+                <EditButton 
+                  size="md" 
+                  label="Edit Profile" 
+                  onClick={() => setIsProfileModalOpen(true)}
+                  className="mr-2"
+                />
+                <span className="text-gray-400 text-sm ml-2 self-center">Edit your profile</span>
               </div>
             )}
           </div>
@@ -65,22 +39,10 @@ export default function ProfileHeader() {
       </div>
       
       {isAuthenticated && (
-        <>
-          <EditProfileModal 
-            isOpen={isEditModalOpen} 
-            onClose={() => setIsEditModalOpen(false)} 
-          />
-          
-          <WalletSettingsModal
-            isOpen={isWalletModalOpen}
-            onClose={() => setIsWalletModalOpen(false)}
-          />
-          
-          <SocialLinksModal
-            isOpen={isSocialLinksModalOpen}
-            onClose={() => setIsSocialLinksModalOpen(false)}
-          />
-        </>
+        <UnifiedProfileModal 
+          isOpen={isProfileModalOpen} 
+          onClose={() => setIsProfileModalOpen(false)} 
+        />
       )}
     </div>
   );
