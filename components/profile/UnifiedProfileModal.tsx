@@ -89,8 +89,8 @@ export default function UnifiedProfileModal({ isOpen, onClose }: UnifiedProfileM
       if (profile.socialLinks && Array.isArray(profile.socialLinks)) {
         setSocialLinks(
           profile.socialLinks
-            .filter(link => link && link.platform && link.url)
-            .map(link => ({ platform: link.platform, url: link.url }))
+            .filter((link: SocialLink) => link && link.platform && link.url)
+            .map((link: SocialLink) => ({ platform: link.platform, url: link.url }))
         );
       } else {
         setSocialLinks([]);
@@ -114,10 +114,10 @@ export default function UnifiedProfileModal({ isOpen, onClose }: UnifiedProfileM
     if (CHARACTER_LIMITS[name as keyof typeof CHARACTER_LIMITS]) {
       const limit = CHARACTER_LIMITS[name as keyof typeof CHARACTER_LIMITS];
       if (value.length <= limit) {
-        setProfileData(prev => ({ ...prev, [name]: value }));
+        setProfileData((prev: ProfileData) => ({ ...prev, [name]: value }));
       }
     } else {
-      setProfileData(prev => ({ ...prev, [name]: value }));
+      setProfileData((prev: ProfileData) => ({ ...prev, [name]: value }));
     }
   };
   

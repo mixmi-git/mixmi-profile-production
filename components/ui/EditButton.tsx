@@ -4,6 +4,7 @@ import { ButtonHTMLAttributes } from 'react';
 interface EditButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'sm' | 'md' | 'lg';
   label?: string;
+  onClick?: () => void;
 }
 
 export default function EditButton({ 
