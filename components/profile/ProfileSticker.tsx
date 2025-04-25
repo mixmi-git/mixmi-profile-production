@@ -37,9 +37,23 @@ export default function ProfileSticker({ editable = false }: ProfileStickerProps
           {editable && (
             <button 
               onClick={() => setIsModalOpen(true)}
-              className="absolute -top-2 -right-2 px-2 py-1 text-xs bg-slate-800 text-cyan-400 rounded-md border border-slate-700 hover:bg-slate-700"
+              className="absolute -top-2 -right-2 bg-slate-800 hover:bg-slate-700 text-accent px-3 py-1 rounded-md flex items-center space-x-2 transition-colors text-sm"
             >
-              Edit Sticker
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="14" 
+                height="14" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+              >
+                <path d="M12 20h9"></path>
+                <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+              </svg>
+              <span>Edit Sticker</span>
             </button>
           )}
         </div>
