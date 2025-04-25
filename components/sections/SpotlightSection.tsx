@@ -65,7 +65,7 @@ export default function SpotlightSection() {
   };
   
   return (
-    <section className="max-w-6xl mx-auto mb-20">
+    <section className="max-w-6xl mx-auto mb-12">
       <div className="mb-8">
         <h2 className="text-2xl font-bold uppercase tracking-wider">Spotlight</h2>
         {isAuthenticated && (

@@ -24,7 +24,7 @@ export default function SectionManager() {
   ] as const;
   
   return (
-    <div className="mb-16 flex justify-center">
+    <div className="mb-8 flex justify-center">
       <div className="bg-background border border-gray-800 rounded-lg p-5 inline-block">
         <h3 className="text-sm font-medium text-gray-400 mb-4">Section Visibility</h3>
         

@@ -65,7 +65,7 @@ export default function ShopSection() {
   };
   
   return (
-    <section className="max-w-6xl mx-auto mb-20">
+    <section className="max-w-6xl mx-auto mb-12">
       <div className="mb-8">
         <h2 className="text-2xl font-bold uppercase tracking-wider">Shop</h2>
         {isAuthenticated && (
