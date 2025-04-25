@@ -86,12 +86,12 @@ export default function SectionManager() {
         
         {/* Dropdown Content */}
         {isOpen && (
-          <div className="absolute top-full left-0 mt-2 z-10 bg-[#0a0f16] border border-[#1e293b] rounded-lg p-4 w-52 shadow-xl">
+          <div className="absolute top-full left-0 mt-2 z-10 bg-[#0a0f16] border border-[#1e293b] rounded-lg px-3 py-3 w-48 shadow-xl">
             <div className="flex flex-col space-y-2">
               {sections.map((section) => (
                 <label
                   key={section.key}
-                  className="flex items-center justify-between gap-3 cursor-pointer rounded-md p-2 hover:bg-[#1a2436] transition-colors"
+                  className="flex items-center justify-between gap-1 cursor-pointer rounded-md p-2 hover:bg-[#1a2436] transition-colors"
                 >
                   <span className={`text-sm font-medium ${
                     profile.sectionVisibility[section.key]
