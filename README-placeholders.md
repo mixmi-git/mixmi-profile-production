@@ -10,6 +10,9 @@ This repository contains placeholder content for the Mixmi profile application, 
     /spotlight    - Images for spotlight section
     /gallery      - Images and GIFs for gallery section
     /shop         - Images for shop products
+  /js
+    load-placeholder.js - Script to load placeholder data
+  load-placeholders.html - Web page to load placeholder data
 ```
 
 ## Placeholder Data
@@ -30,9 +33,34 @@ All placeholder content is organized in the `placeholder-data.json` file with th
 - Gallery images: `gallery-item-[n].gif`
 - Shop product images: `product-[n].[extension]` (jpg, jpeg, png)
 
-## Usage
+## Loading Placeholder Data
 
-This placeholder content is intended for development and testing purposes only. Replace with actual content before production deployment.
+There are two ways to load the placeholder data into your profile:
+
+### 1. Using the Web Interface
+
+1. Run your development server
+2. Navigate to `http://localhost:3000/load-placeholders.html` (or whatever your port is)
+3. Click the "Load Placeholder Content" button
+4. Refresh the main profile page to see the changes
+
+### 2. Using the Browser Console
+
+1. Open your browser console on the profile page
+2. Run:
+```javascript
+// First, make sure the script is loaded
+const script = document.createElement('script');
+script.src = '/js/load-placeholder.js';
+document.head.appendChild(script);
+
+// Wait a moment for the script to load, then:
+setTimeout(() => {
+  loadPlaceholderData();
+  // Refresh the page to see changes
+  window.location.reload();
+}, 500);
+```
 
 ## Profile Summary
 
