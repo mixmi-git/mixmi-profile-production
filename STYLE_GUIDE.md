@@ -88,6 +88,22 @@
   - URLs truncated with ellipsis when too long
   - Link text color: `#60a5fa` (text-blue-400)
 
+### Media Type Icons
+- **Implementation:**
+  - Use consistent brand icons from `react-icons/fa6` and `lucide-react` libraries
+  - Size: 20px consistent across all platforms
+  - Standard colors matching official brand colors
+  - YouTube: `<Youtube />` from lucide-react (red)
+  - Spotify: `<Music />` from lucide-react (green)
+  - SoundCloud: `<FaSoundcloud />` from react-icons/fa6 (orange)
+  - Mixcloud: `<FaMixcloud />` from react-icons/fa6 (purple)
+  - Apple Music: `<FaApple />` from react-icons/fa6 (red)
+- **Display:**
+  - Used in media thumbnails when no image is available
+  - Used in section editor item cards for visual identification
+  - Background: bg-slate-900 for contrast
+  - Container: Square with border (border-slate-700)
+
 ### Form Inputs
 - **Text Inputs and Textareas:**
   - Background: `#0f172a` (bg-slate-800)
@@ -113,6 +129,9 @@
   - Vertical spacing: space-y-8 for major sections
   - Button spacing: pt-6 above action buttons
   - Button alignment: justify-end with gap-4
+  - Section title input field: w-full p-2 bg-slate-800 border border-slate-700 rounded-md
+  - Section title label: text-sm font-medium text-slate-300
+  - Item counts display: text-gray-400 text-sm in top-right corner
   
 - **Toggle Buttons:**
   - Shape: rounded-md
@@ -121,6 +140,21 @@
   - Active state: bg-accent/10 text-accent border border-accent/30
   - Inactive state: bg-gray-800 text-gray-400 border border-gray-700
   - Layout: flex flex-wrap gap-3 justify-center
+
+- **Section Item Limits:**
+  - Media section: Maximum 6 items
+  - Spotlight section: Maximum 3 items
+  - Shop section: Maximum 3 items
+  - Gallery section: Maximum 3 items
+  - Item count display: "{current}/{max} items"
+  - Add button only visible when below the limit
+
+- **Section Title Customization:**
+  - All sections support customizable titles
+  - Default titles specified in ProfileData type
+  - Input field in section editor modal
+  - Label: "Section Title"
+  - Display: Title shown in h2 element with className="text-2xl font-bold uppercase tracking-wider"
 
 ### Containers
 - **Card/Section Container:**
