@@ -43,8 +43,8 @@
         "image": "/placeholders/spotlight/spotlight-item-2.jpeg"
       },
       {
-        "title": "The Selecta",
-        "description": "Fluffy riddims",
+        "title": "The Art Show",
+        "description": "Abstract Pineapples",
         "url": "https://docs.google.com/document/d/1jle4_X3L4bARJwH-ycnQxGG4MZjgcqnbKnFRuuR1TOI/edit?usp=sharing",
         "image": "/placeholders/spotlight/spotlight-item-3.jpeg"
       }
