@@ -86,7 +86,7 @@ export default function SectionManager() {
         
         {/* Dropdown Content */}
         {isOpen && (
-          <div className="absolute top-full left-0 mt-2 z-10 bg-[#0a0f16] border border-[#1e293b] rounded-lg p-4 w-60 shadow-xl">
+          <div className="absolute top-full left-0 mt-2 z-10 bg-[#0a0f16] border border-[#1e293b] rounded-lg p-4 w-52 shadow-xl">
             <div className="flex flex-col space-y-2">
               {sections.map((section) => (
                 <label
@@ -101,7 +101,7 @@ export default function SectionManager() {
                     {section.label}
                   </span>
                   <div 
-                    className={`w-12 h-6 rounded-full relative transition-colors ${
+                    className={`w-10 h-6 rounded-full relative transition-colors ${
                       profile.sectionVisibility[section.key] 
                         ? 'bg-accent' 
                         : 'bg-gray-700'
@@ -111,7 +111,7 @@ export default function SectionManager() {
                     <div 
                       className={`absolute top-1 w-4 h-4 rounded-full transition-all ${
                         profile.sectionVisibility[section.key] 
-                          ? 'bg-white left-7' 
+                          ? 'bg-white left-5' 
                           : 'bg-gray-400 left-1'
                       }`}
                     />
