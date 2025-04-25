@@ -14,7 +14,7 @@ const profileData = {
   name: placeholderData.profile.name,
   title: placeholderData.profile.whatYouDo,
   bio: placeholderData.profile.bio,
-  image: "", // No profile image provided
+  image: placeholderData.profile.image, // Using the profile image
   socialLinks: placeholderData.socialLinks.map(link => ({
     platform: link.platform.toLowerCase().replace(/\s*\(.*\)/, ''), // Clean platform name (e.g., "X (twitter)" -> "x")
     url: link.url

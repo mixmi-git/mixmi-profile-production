@@ -15,7 +15,8 @@
     "profile": {
       "name": "FluFFy Toy CoLLecTive",
       "whatYouDo": "House Party Fluffy Crew",
-      "bio": "All this stuff is just placeholder content. This is now YOUR page to customize.  **** But for fun, here's the story: Fluffy Toy Collective is a collective of fluffy frens that make music and pineapple art. Let them ruin your reputation with your neighbors as they bring noise and exploding snacks to your house. Then call your lawyer :))) ****"
+      "bio": "All this stuff is just placeholder content. This is now YOUR page to customize.  **** But for fun, here's the story: Fluffy Toy Collective is a collective of fluffy frens that make music and pineapple art. Let them ruin your reputation with your neighbors as they bring noise and exploding snacks to your house. Then call your lawyer :))) ****",
+      "image": "/placeholders/profile/profile-image.jpeg"
     },
     "socialLinks": [
       {
@@ -95,7 +96,7 @@
     name: placeholderData.profile.name,
     title: placeholderData.profile.whatYouDo,
     bio: placeholderData.profile.bio,
-    image: "", // No profile image provided
+    image: placeholderData.profile.image, // Now using the profile image
     socialLinks: placeholderData.socialLinks.map(link => ({
       platform: link.platform.toLowerCase().replace(/\s*\(.*\)/, ''), // Clean platform name (e.g., "X (twitter)" -> "x")
       url: link.url

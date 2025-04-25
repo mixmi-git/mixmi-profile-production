@@ -7,9 +7,10 @@ This repository contains placeholder content for the Mixmi profile application, 
 ```
 /public
   /placeholders
-    /spotlight    - Images for spotlight section
-    /gallery      - Images and GIFs for gallery section
-    /shop         - Images for shop products
+    /profile     - Profile avatar image
+    /spotlight   - Images for spotlight section
+    /gallery     - Images and GIFs for gallery section
+    /shop        - Images for shop products
   /js
     load-placeholder.js - Script to load placeholder data
   load-placeholders.html - Web page to load placeholder data
@@ -19,7 +20,7 @@ This repository contains placeholder content for the Mixmi profile application, 
 
 All placeholder content is organized in the `placeholder-data.json` file with the following structure:
 
-- **Profile**: Basic profile information including name, what you do, and bio
+- **Profile**: Basic profile information including name, what you do, bio, and profile image
 - **Social Links**: Links to social media platforms
 - **Wallet Visibility Defaults**: Settings for wallet visibility
 - **Spotlight Items**: Featured content items with images
@@ -29,6 +30,7 @@ All placeholder content is organized in the `placeholder-data.json` file with th
 
 ## Image Naming Conventions
 
+- Profile image: `profile-image.jpeg`
 - Spotlight images: `spotlight-item-[n].jpeg` 
 - Gallery images: `gallery-item-[n].gif`
 - Shop product images: `product-[n].[extension]` (jpg, jpeg, png)
