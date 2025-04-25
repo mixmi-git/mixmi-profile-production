@@ -87,8 +87,6 @@ export default function SectionManager() {
         {/* Dropdown Content */}
         {isOpen && (
           <div className="absolute top-full left-0 mt-2 z-10 bg-background border border-gray-800 rounded-lg p-4 w-56 shadow-lg">
-            <h3 className="text-sm font-medium text-gray-400 mb-3">Section Visibility</h3>
-            
             <div className="flex flex-col space-y-2">
               {sections.map((section) => (
                 <label
