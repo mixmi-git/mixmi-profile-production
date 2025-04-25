@@ -78,7 +78,7 @@ export default function SectionManager() {
             strokeWidth="2" 
             strokeLinecap="round" 
             strokeLinejoin="round"
-            className={`transition-transform ml-1 ${isOpen ? 'rotate-180' : ''}`}
+            className={`transition-transform duration-300 ml-1 ${isOpen ? 'rotate-180' : ''}`}
           >
             <polyline points="6 9 12 15 18 9"></polyline>
           </svg>
@@ -86,15 +86,22 @@ export default function SectionManager() {
         
         {/* Dropdown Content */}
         {isOpen && (
-          <div className="absolute top-full left-0 mt-2 z-10 bg-background border border-gray-800 rounded-lg p-4 w-56 shadow-lg">
+          <div className="absolute top-full left-0 mt-2 z-10 bg-[#0a0f16] border border-[#1e293b] rounded-lg p-4 w-60 shadow-xl">
             <div className="flex flex-col space-y-2">
               {sections.map((section) => (
                 <label
                   key={section.key}
-                  className="flex items-center gap-3 cursor-pointer group"
+                  className="flex items-center justify-between gap-3 cursor-pointer rounded-md p-2 hover:bg-[#1a2436] transition-colors"
                 >
+                  <span className={`text-sm font-medium ${
+                    profile.sectionVisibility[section.key]
+                      ? 'text-white'
+                      : 'text-gray-400'
+                  }`}>
+                    {section.label}
+                  </span>
                   <div 
-                    className={`w-10 h-5 rounded-full relative transition-colors ${
+                    className={`w-12 h-6 rounded-full relative transition-colors ${
                       profile.sectionVisibility[section.key] 
                         ? 'bg-accent' 
                         : 'bg-gray-700'
@@ -102,20 +109,13 @@ export default function SectionManager() {
                     onClick={() => toggleSection(section.key)}
                   >
                     <div 
-                      className={`absolute top-0.5 w-4 h-4 rounded-full transition-all ${
+                      className={`absolute top-1 w-4 h-4 rounded-full transition-all ${
                         profile.sectionVisibility[section.key] 
-                          ? 'bg-white left-[1.35rem]' 
-                          : 'bg-gray-400 left-0.5'
+                          ? 'bg-white left-7' 
+                          : 'bg-gray-400 left-1'
                       }`}
                     />
                   </div>
-                  <span className={`text-sm ${
-                    profile.sectionVisibility[section.key]
-                      ? 'text-white'
-                      : 'text-gray-400'
-                  }`}>
-                    {section.label}
-                  </span>
                 </label>
               ))}
             </div>
