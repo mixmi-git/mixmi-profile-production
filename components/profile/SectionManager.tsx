@@ -40,7 +40,7 @@ export default function SectionManager() {
   ] as const;
   
   return (
-    <div className="mb-8 flex justify-center">
+    <div className="mb-16 flex justify-center">
       <div ref={dropdownRef} className="relative">
         {/* Dropdown Button - Styled like Edit Section buttons */}
         <button 

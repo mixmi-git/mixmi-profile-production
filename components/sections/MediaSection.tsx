@@ -67,7 +67,7 @@ export default function MediaSection() {
   };
   
   return (
-    <section className="max-w-6xl mx-auto mb-12">
+    <section className="max-w-6xl mx-auto mb-20">
       <div className="mb-8">
         <h2 className="text-2xl font-bold uppercase tracking-wider">Media</h2>
         {isAuthenticated && (
