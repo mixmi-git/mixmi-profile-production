@@ -10,7 +10,7 @@ import { MediaItem } from '@/types';
 import EmptyItemCard from '../shared/EmptyItemCard';
 
 export default function MediaSection() {
-  const { mediaItems, addMediaItem, updateMediaItem, removeMediaItem, updateAllMediaItems } = useProfile();
+  const { profile, updateProfile, mediaItems, addMediaItem, updateMediaItem, removeMediaItem, updateAllMediaItems } = useProfile();
   const { isAuthenticated } = useAuth();
   
   const [isItemModalOpen, setIsItemModalOpen] = useState(false);
@@ -62,17 +62,24 @@ export default function MediaSection() {
   const handleUpdateItems = (items: MediaItem[]) => {
     // Use the new bulk update method
     updateAllMediaItems(items);
-    // Log to confirm the update is happening
-    console.log("Updating all media items:", items);
   };
   
+  const handleUpdateSectionTitle = (newTitle: string) => {
+    updateProfile({
+      sectionTitles: {
+        ...profile.sectionTitles,
+        media: newTitle
+      }
+    });
+  };
+
   return (
     <section className="max-w-6xl mx-auto mb-20">
       <div className="mb-8">
-        <h2 className="text-2xl font-bold uppercase tracking-wider">Media</h2>
+        <h2 className="text-2xl font-bold uppercase tracking-wider">{profile.sectionTitles.media}</h2>
         {isAuthenticated && (
           <>
-            <p className="text-gray-400 text-sm mt-1 mb-2">Share your videos, music, and mixes</p>
+            <p className="text-gray-400 text-sm mt-1 mb-2">Share links to videos, music, articles, or any other media</p>
             <button 
               onClick={() => setIsSectionModalOpen(true)}
               className="bg-slate-800 hover:bg-slate-700 text-accent px-3 py-1 rounded-md flex items-center space-x-2 transition-colors text-sm mt-2"
@@ -107,11 +114,10 @@ export default function MediaSection() {
           />
         ))}
         
-        {isAuthenticated && mediaItems.length < 3 && (
+        {isAuthenticated && mediaItems.length < 6 && (
           <EmptyItemCard 
             onClick={handleAdd}
             aspectRatio="video"
-            minHeight="min-h-[200px]"
           />
         )}
         
@@ -134,13 +140,16 @@ export default function MediaSection() {
       <SectionEditorModal<MediaItem>
         isOpen={isSectionModalOpen}
         onClose={() => setIsSectionModalOpen(false)}
-        title="Media"
+        title={profile.sectionTitles.media}
         items={mediaItems}
         onUpdateItems={handleUpdateItems}
         onAddItem={handleAddFromEditor}
         onEditItem={handleEditFromEditor}
         onDeleteItem={removeMediaItem}
-        imageField="type"
+        imageField="thumbnailUrl"
+        sectionKey="media"
+        onUpdateSectionTitle={handleUpdateSectionTitle}
+        maxItems={6}
       />
     </section>
   );

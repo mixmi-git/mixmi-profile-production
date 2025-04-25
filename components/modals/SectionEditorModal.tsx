@@ -30,6 +30,7 @@ interface SectionEditorModalProps<T extends Item> {
   imageField?: string;
   sectionKey?: string;
   onUpdateSectionTitle?: (title: string) => void;
+  maxItems?: number; // Maximum number of items allowed
 }
 
 interface DraggableItemProps<T extends Item> {
@@ -267,7 +268,8 @@ export default function SectionEditorModal<T extends Item>({
   onDeleteItem,
   imageField = "image",
   sectionKey,
-  onUpdateSectionTitle
+  onUpdateSectionTitle,
+  maxItems = 3 // Default to 3 items
 }: SectionEditorModalProps<T>) {
   const [localItems, setLocalItems] = useState<T[]>([]);
   const [sectionTitle, setSectionTitle] = useState(title);
@@ -322,7 +324,7 @@ export default function SectionEditorModal<T extends Item>({
 
         <div className="flex justify-end items-center mb-4">
           <span className="text-gray-400 text-sm">
-            {localItems.length}/3 items
+            {localItems.length}/{maxItems} items
           </span>
         </div>
 
@@ -348,7 +350,7 @@ export default function SectionEditorModal<T extends Item>({
           )}
         </div>
 
-        {localItems.length < 3 && (
+        {localItems.length < maxItems && (
           <div className="flex items-center justify-center">
             <button
               type="button"
