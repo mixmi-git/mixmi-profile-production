@@ -7,6 +7,27 @@ export default function SectionManager() {
   const { profile, updateProfile } = useProfile();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  
+  // State to store the exact width of the button
+  const [buttonWidth, setButtonWidth] = useState(0);
+  
+  // Update button width when it changes
+  useEffect(() => {
+    if (buttonRef.current) {
+      const updateWidth = () => {
+        const width = buttonRef.current?.offsetWidth || 0;
+        setButtonWidth(width);
+      };
+      
+      // Initial measurement
+      updateWidth();
+      
+      // Update on window resize
+      window.addEventListener('resize', updateWidth);
+      return () => window.removeEventListener('resize', updateWidth);
+    }
+  }, []);
   
   // Handle clicks outside the dropdown to close it
   useEffect(() => {
@@ -44,6 +65,7 @@ export default function SectionManager() {
       <div ref={dropdownRef} className="relative">
         {/* Dropdown Button - Styled like Edit Section buttons */}
         <button 
+          ref={buttonRef}
           onClick={() => setIsOpen(!isOpen)}
           className="bg-slate-800 hover:bg-slate-700 text-accent px-3 py-1 rounded-md flex items-center space-x-2 transition-colors text-sm"
         >
@@ -86,12 +108,15 @@ export default function SectionManager() {
         
         {/* Dropdown Content */}
         {isOpen && (
-          <div className="absolute top-full left-0 mt-2 z-10 bg-[#0a0f16] border border-[#1e293b] rounded-lg px-3 py-3 w-48 shadow-xl">
-            <div className="flex flex-col space-y-2">
+          <div 
+            className="absolute top-full left-0 mt-2 z-10 bg-[#0a0f16] border border-[#1e293b] rounded-lg py-3 shadow-xl"
+            style={{ width: buttonWidth > 0 ? `${buttonWidth}px` : 'auto' }}
+          >
+            <div className="flex flex-col space-y-2 px-3">
               {sections.map((section) => (
                 <label
                   key={section.key}
-                  className="flex items-center justify-between gap-1 cursor-pointer rounded-md p-2 hover:bg-[#1a2436] transition-colors"
+                  className="flex items-center justify-between cursor-pointer rounded-md p-1 hover:bg-[#1a2436] transition-colors"
                 >
                   <span className={`text-sm font-medium ${
                     profile.sectionVisibility[section.key]
