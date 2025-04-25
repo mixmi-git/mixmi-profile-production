@@ -78,15 +78,34 @@ const galleryItems = placeholderData.galleryItems.map(item => ({
 
 // Export a function that loads the data into localStorage when run in the browser
 function loadPlaceholderData() {
-  // Store data in localStorage
-  localStorage.setItem('profile', JSON.stringify(profileData));
-  localStorage.setItem('spotlight', JSON.stringify(spotlightItems));
-  localStorage.setItem('media', JSON.stringify(mediaItems));
-  localStorage.setItem('shop', JSON.stringify(shopItems));
-  localStorage.setItem('gallery', JSON.stringify(galleryItems));
+  // Clear existing data
+  if (typeof localStorage !== 'undefined') {
+    localStorage.removeItem('profile');
+    localStorage.removeItem('spotlight');
+    localStorage.removeItem('media');
+    localStorage.removeItem('shop');
+    localStorage.removeItem('gallery');
+  }
   
-  console.log('Placeholder data loaded successfully!');
-  console.log('Refresh the page to see changes.');
+  // Store data in localStorage
+  if (typeof localStorage !== 'undefined') {
+    localStorage.setItem('profile', JSON.stringify(profileData));
+    localStorage.setItem('spotlight', JSON.stringify(spotlightItems));
+    localStorage.setItem('media', JSON.stringify(mediaItems));
+    localStorage.setItem('shop', JSON.stringify(shopItems));
+    localStorage.setItem('gallery', JSON.stringify(galleryItems));
+    
+    console.log('Placeholder data loaded successfully!');
+    console.log('Refresh the page to see changes.');
+  }
+  
+  return {
+    profile: profileData,
+    spotlight: spotlightItems,
+    media: mediaItems,
+    shop: shopItems,
+    gallery: galleryItems
+  };
 }
 
 // In a browser environment, make the function available globally

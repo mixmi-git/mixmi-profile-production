@@ -33,19 +33,19 @@
         "title": "The Band",
         "description": "Bringing the noise",
         "url": "https://docs.google.com/document/d/1y-ZK_ZhkNFanwqBJ5Aqk-Gog62pVRraZf-hvQUbrwwU/edit?usp=sharing",
-        "image": "/public/placeholders/spotlight/spotlight-item-1.jpeg"
+        "image": "/placeholders/spotlight/spotlight-item-1.jpeg"
       },
       {
         "title": "The Selecta",
         "description": "Fluffy riddims",
         "url": "https://docs.google.com/document/d/1Kf_3ZtxoeX_gzmxIcaLz70izOdo5kLLdZrnLQlWHZww/edit?usp=sharing",
-        "image": "/public/placeholders/spotlight/spotlight-item-2.jpeg"
+        "image": "/placeholders/spotlight/spotlight-item-2.jpeg"
       },
       {
         "title": "The Selecta",
         "description": "Fluffy riddims",
         "url": "https://docs.google.com/document/d/1jle4_X3L4bARJwH-ycnQxGG4MZjgcqnbKnFRuuR1TOI/edit?usp=sharing",
-        "image": "/public/placeholders/spotlight/spotlight-item-3.jpeg"
+        "image": "/placeholders/spotlight/spotlight-item-3.jpeg"
       }
     ],
     "media": [
@@ -60,31 +60,31 @@
       {
         "title": "Blue's Rare Vinyl",
         "description": "I got your tunes",
-        "image": "/public/placeholders/shop/product-1.jpeg",
+        "image": "/placeholders/shop/product-1.jpeg",
         "url": ""
       },
       {
         "title": "Collectible stickers",
         "description": "Make your laptop feel ugly",
-        "image": "/public/placeholders/shop/product-2.png",
+        "image": "/placeholders/shop/product-2.png",
         "url": "https://docs.google.com/document/d/1kJ1C5nZRYoeu2KJeAaC9sLclufG0-Egq3sGcTAy3SnE/edit?usp=sharing"
       },
       {
         "title": "The Remixes",
         "description": "Make your laptop feel ugly",
-        "image": "/public/placeholders/shop/product-3.jpg",
+        "image": "/placeholders/shop/product-3.jpg",
         "url": ""
       }
     ],
     "galleryItems": [
       {
-        "image": "/public/placeholders/gallery/gallery-item-1.gif"
+        "image": "/placeholders/gallery/gallery-item-1.gif"
       },
       {
-        "image": "/public/placeholders/gallery/gallery-item-2.gif"
+        "image": "/placeholders/gallery/gallery-item-2.gif"
       },
       {
-        "image": "/public/placeholders/gallery/gallery-item-3.gif"
+        "image": "/placeholders/gallery/gallery-item-3.gif"
       }
     ]
   };
