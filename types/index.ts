@@ -12,6 +12,13 @@ export interface ProfileData {
     gallery: boolean;
     sticker: boolean;
   };
+  sectionTitles: {
+    spotlight: string;
+    media: string;
+    shop: string;
+    gallery: string;
+    sticker: string;
+  };
   walletAddress?: string;
   showWalletAddress: boolean;
   btcAddress?: string;

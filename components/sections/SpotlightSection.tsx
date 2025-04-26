@@ -10,7 +10,7 @@ import { SpotlightItem } from '@/types';
 import EmptyItemCard from '../shared/EmptyItemCard';
 
 export default function SpotlightSection() {
-  const { spotlightItems, addSpotlightItem, updateSpotlightItem, removeSpotlightItem, updateAllSpotlightItems } = useProfile();
+  const { profile, updateProfile, spotlightItems, addSpotlightItem, updateSpotlightItem, removeSpotlightItem, updateAllSpotlightItems } = useProfile();
   const { isAuthenticated } = useAuth();
   
   const [isItemModalOpen, setIsItemModalOpen] = useState(false);
@@ -63,11 +63,20 @@ export default function SpotlightSection() {
     // Use the new bulk update method
     updateAllSpotlightItems(items);
   };
+
+  const handleUpdateSectionTitle = (newTitle: string) => {
+    updateProfile({
+      sectionTitles: {
+        ...profile.sectionTitles,
+        spotlight: newTitle
+      }
+    });
+  };
   
   return (
     <section className="max-w-6xl mx-auto mb-20">
       <div className="mb-8">
-        <h2 className="text-2xl font-bold uppercase tracking-wider">Spotlight</h2>
+        <h2 className="text-2xl font-bold uppercase tracking-wider">{profile.sectionTitles.spotlight}</h2>
         {isAuthenticated && (
           <>
             <p className="text-gray-400 text-sm mt-1 mb-2">Showcase your projects or amplify friends you collab with</p>
@@ -131,13 +140,15 @@ export default function SpotlightSection() {
       <SectionEditorModal<SpotlightItem>
         isOpen={isSectionModalOpen}
         onClose={() => setIsSectionModalOpen(false)}
-        title="Spotlight"
+        title={profile.sectionTitles.spotlight}
         items={spotlightItems}
         onUpdateItems={handleUpdateItems}
         onAddItem={handleAddFromEditor}
         onEditItem={handleEditFromEditor}
         onDeleteItem={removeSpotlightItem}
         imageField="image"
+        sectionKey="spotlight"
+        onUpdateSectionTitle={handleUpdateSectionTitle}
       />
     </section>
   );

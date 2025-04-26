@@ -10,7 +10,7 @@ import { ShopItem } from '@/types';
 import EmptyItemCard from '../shared/EmptyItemCard';
 
 export default function ShopSection() {
-  const { shopItems, addShopItem, updateShopItem, removeShopItem, updateAllShopItems } = useProfile();
+  const { profile, updateProfile, shopItems, addShopItem, updateShopItem, removeShopItem, updateAllShopItems } = useProfile();
   const { isAuthenticated } = useAuth();
   
   const [isItemModalOpen, setIsItemModalOpen] = useState(false);
@@ -64,10 +64,19 @@ export default function ShopSection() {
     updateAllShopItems(items);
   };
   
+  const handleUpdateSectionTitle = (newTitle: string) => {
+    updateProfile({
+      sectionTitles: {
+        ...profile.sectionTitles,
+        shop: newTitle
+      }
+    });
+  };
+  
   return (
     <section className="max-w-6xl mx-auto mb-20">
       <div className="mb-8">
-        <h2 className="text-2xl font-bold uppercase tracking-wider">Shop</h2>
+        <h2 className="text-2xl font-bold uppercase tracking-wider">{profile.sectionTitles.shop}</h2>
         {isAuthenticated && (
           <>
             <p className="text-gray-400 text-sm mt-1 mb-2">Share your products, services, and token-gated content</p>
@@ -131,13 +140,15 @@ export default function ShopSection() {
       <SectionEditorModal<ShopItem>
         isOpen={isSectionModalOpen}
         onClose={() => setIsSectionModalOpen(false)}
-        title="Shop"
+        title={profile.sectionTitles.shop}
         items={shopItems}
         onUpdateItems={handleUpdateItems}
         onAddItem={handleAddFromEditor}
         onEditItem={handleEditFromEditor}
         onDeleteItem={removeShopItem}
         imageField="image"
+        sectionKey="shop"
+        onUpdateSectionTitle={handleUpdateSectionTitle}
       />
     </section>
   );

@@ -21,6 +21,13 @@ const defaultProfile: ProfileData = {
     gallery: true,
     sticker: true
   },
+  sectionTitles: {
+    spotlight: "Spotlight",
+    media: "Media",
+    shop: "Shop",
+    gallery: "Gallery",
+    sticker: "Sticker"
+  },
   sticker: {
     id: "daisy-blue",
     visible: true

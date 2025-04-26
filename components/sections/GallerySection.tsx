@@ -10,7 +10,7 @@ import { GalleryItem } from '@/types';
 import EmptyItemCard from '../shared/EmptyItemCard';
 
 export default function GallerySection() {
-  const { galleryItems, addGalleryItem, updateGalleryItem, removeGalleryItem, updateAllGalleryItems } = useProfile();
+  const { profile, updateProfile, galleryItems, addGalleryItem, updateGalleryItem, removeGalleryItem, updateAllGalleryItems } = useProfile();
   const { isAuthenticated } = useAuth();
   
   const [isItemModalOpen, setIsItemModalOpen] = useState(false);
@@ -64,10 +64,19 @@ export default function GallerySection() {
     updateAllGalleryItems(items);
   };
   
+  const handleUpdateSectionTitle = (newTitle: string) => {
+    updateProfile({
+      sectionTitles: {
+        ...profile.sectionTitles,
+        gallery: newTitle
+      }
+    });
+  };
+  
   return (
     <section className="max-w-6xl mx-auto mb-20">
       <div className="mb-8">
-        <h2 className="text-2xl font-bold uppercase tracking-wider">Gallery</h2>
+        <h2 className="text-2xl font-bold uppercase tracking-wider">{profile.sectionTitles.gallery}</h2>
         {isAuthenticated && (
           <>
             <p className="text-gray-400 text-sm mt-1 mb-2">Share your visual experiments and artwork</p>
@@ -131,13 +140,15 @@ export default function GallerySection() {
       <SectionEditorModal<GalleryItem>
         isOpen={isSectionModalOpen}
         onClose={() => setIsSectionModalOpen(false)}
-        title="Gallery"
+        title={profile.sectionTitles.gallery}
         items={galleryItems}
         onUpdateItems={handleUpdateItems}
         onAddItem={handleAddFromEditor}
         onEditItem={handleEditFromEditor}
         onDeleteItem={removeGalleryItem}
         imageField="image"
+        sectionKey="gallery"
+        onUpdateSectionTitle={handleUpdateSectionTitle}
       />
     </section>
   );
