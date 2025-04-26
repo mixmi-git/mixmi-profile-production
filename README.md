@@ -34,8 +34,8 @@ Mixmi Profile is a customizable web-based profile platform built with Next.js. I
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/mixmi-git/mixmi-profile.git
-   cd mixmi-profile
+   git clone https://github.com/mixmi-git/mixmi-profile-production.git
+   cd mixmi-profile-production
    ```
 
 2. Install dependencies:
@@ -68,7 +68,7 @@ mixmi-profile/
 ├── lib/                   # Utility functions and services
 ├── public/                # Static assets
 │   ├── logos/             # Logo images
-│   ├── placeholder-images/# Placeholder images for sections
+│   ├── placeholders/      # Placeholder images for sections
 │   └── stickers/          # Sticker images
 └── types/                 # TypeScript type definitions
 ```
@@ -114,13 +114,23 @@ Edit your profile details including:
 - Social links
 - Wallet addresses (STX and BTC)
 
-## Development
+## Demo Content
 
-### Running Tests
+This repository includes demo content that can be loaded to showcase the platform's features:
 
-```bash
-npm run test
-```
+- Sample profile data
+- Placeholder images for all sections
+- Pre-configured media, shop items, spotlight features, and gallery items
+
+### Loading Demo Data
+
+To load the demo data:
+
+1. Open the browser console
+2. Run the command `loadPlaceholderData()`
+3. Refresh the page
+
+## Deployment
 
 ### Building for Production
 
@@ -128,31 +138,20 @@ npm run test
 npm run build
 ```
 
-### Linting
+The build output will be in the `.next` directory. This can be deployed to any hosting platform that supports Next.js applications.
 
-```bash
-npm run lint
-```
+### Recommended Hosting
 
-## Design System
+- [Vercel](https://vercel.com) - Zero configuration deployments
+- [Netlify](https://netlify.com) - Easy deployment with continuous integration
+- [AWS Amplify](https://aws.amazon.com/amplify/) - Full stack serverless solution
 
-The project follows a design system outlined in the [STYLE_GUIDE.md](./STYLE_GUIDE.md) file, which includes:
+## Support and Issue Reporting
 
-- Color scheme
-- Typography
-- Component styling
-- Layout guidelines
-- Responsive breakpoints
+If you encounter any issues or have questions, please:
 
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+1. Check the [GitHub Issues](https://github.com/mixmi-git/mixmi-profile-production/issues) for existing reports
+2. Create a new issue with detailed information if your problem hasn't been reported
 
 ## License
 
@@ -163,40 +162,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - [Next.js](https://nextjs.org/) - The React framework
 - [Tailwind CSS](https://tailwindcss.com/) - CSS framework
 - [React DnD](https://react-dnd.github.io/react-dnd/) - Drag and Drop for React
-- [Stacks Blockchain](https://www.stacks.co/) - Blockchain integration
-
-## Placeholder Content
-
-A working demo version with placeholder content is available on the `placeholder-content` branch. This branch includes:
-
-- Sample profile data for "FluFFy Toy CoLLecTive"
-- Placeholder images for all sections
-- Pre-configured media, shop items, spotlight features, and gallery items
-- Automatic data loading via browser localStorage
-
-### Loading Placeholder Data
-
-The placeholder data can be loaded by:
-
-1. Opening the browser console
-2. Running the command `loadPlaceholderData()`
-3. Refreshing the page
-
-### Recent Updates (as of July 2024)
-
-The following updates were made to the placeholder content:
-
-- Updated Spotlight URLs to point to Google Sites landing pages
-- Updated Shop item URLs and descriptions
-- Modified Media section text to include supported platforms (YouTube, Spotify, SoundCloud, Mixcloud)
-- Added all placeholder images to the repository for consistent display
-
-### Reverting to Placeholder Version
-
-If you need to revert to the stable placeholder version:
-
-```bash
-git checkout placeholder-content
-npm install
-npm run dev
-```
+- [Stacks Blockchain](https://www.stacks.co/) - Blockchain integration 
