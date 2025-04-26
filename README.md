@@ -164,3 +164,39 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - [Tailwind CSS](https://tailwindcss.com/) - CSS framework
 - [React DnD](https://react-dnd.github.io/react-dnd/) - Drag and Drop for React
 - [Stacks Blockchain](https://www.stacks.co/) - Blockchain integration
+
+## Placeholder Content
+
+A working demo version with placeholder content is available on the `placeholder-content` branch. This branch includes:
+
+- Sample profile data for "FluFFy Toy CoLLecTive"
+- Placeholder images for all sections
+- Pre-configured media, shop items, spotlight features, and gallery items
+- Automatic data loading via browser localStorage
+
+### Loading Placeholder Data
+
+The placeholder data can be loaded by:
+
+1. Opening the browser console
+2. Running the command `loadPlaceholderData()`
+3. Refreshing the page
+
+### Recent Updates (as of July 2024)
+
+The following updates were made to the placeholder content:
+
+- Updated Spotlight URLs to point to Google Sites landing pages
+- Updated Shop item URLs and descriptions
+- Modified Media section text to include supported platforms (YouTube, Spotify, SoundCloud, Mixcloud)
+- Added all placeholder images to the repository for consistent display
+
+### Reverting to Placeholder Version
+
+If you need to revert to the stable placeholder version:
+
+```bash
+git checkout placeholder-content
+npm install
+npm run dev
+```
