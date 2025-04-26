@@ -33,19 +33,19 @@
       {
         "title": "The Band",
         "description": "Bringing the noise",
-        "url": "https://docs.google.com/document/d/1y-ZK_ZhkNFanwqBJ5Aqk-Gog62pVRraZf-hvQUbrwwU/edit?usp=sharing",
+        "url": "https://sites.google.com/view/fluffytoybandbooking/home",
         "image": "/placeholders/spotlight/spotlight-item-1.jpeg"
       },
       {
         "title": "The Selecta",
         "description": "Fluffy riddims",
-        "url": "https://docs.google.com/document/d/1Kf_3ZtxoeX_gzmxIcaLz70izOdo5kLLdZrnLQlWHZww/edit?usp=sharing",
+        "url": "https://sites.google.com/view/selectapinkbunny/home",
         "image": "/placeholders/spotlight/spotlight-item-2.jpeg"
       },
       {
         "title": "The Art Show",
         "description": "Abstract Pineapples",
-        "url": "https://docs.google.com/document/d/1jle4_X3L4bARJwH-ycnQxGG4MZjgcqnbKnFRuuR1TOI/edit?usp=sharing",
+        "url": "https://sites.google.com/view/abstractpineapples/home",
         "image": "/placeholders/spotlight/spotlight-item-3.jpeg"
       }
     ],
@@ -68,11 +68,11 @@
         "title": "Collectible stickers",
         "description": "Make your laptop feel ugly",
         "image": "/placeholders/shop/product-2.png",
-        "url": "https://docs.google.com/document/d/1kJ1C5nZRYoeu2KJeAaC9sLclufG0-Egq3sGcTAy3SnE/edit?usp=sharing"
+        "url": "https://sites.google.com/view/fluffytoycollectivestickers/home"
       },
       {
         "title": "The Remixes",
-        "description": "Make your laptop feel ugly",
+        "description": "Your favorite club bangers ruined",
         "image": "/placeholders/shop/product-3.jpg",
         "url": ""
       }

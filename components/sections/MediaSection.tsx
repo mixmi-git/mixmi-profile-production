@@ -79,7 +79,7 @@ export default function MediaSection() {
         <h2 className="text-2xl font-bold uppercase tracking-wider">{profile.sectionTitles.media}</h2>
         {isAuthenticated && (
           <>
-            <p className="text-gray-400 text-sm mt-1 mb-2">Share links to videos, music, articles, or any other media</p>
+            <p className="text-gray-400 text-sm mt-1 mb-2">Share your music, videos, mixes — supports YouTube, Spotify, SoundCloud, Mixcloud, and more</p>
             <button 
               onClick={() => setIsSectionModalOpen(true)}
               className="bg-slate-800 hover:bg-slate-700 text-accent px-3 py-1 rounded-md flex items-center space-x-2 transition-colors text-sm mt-2"
