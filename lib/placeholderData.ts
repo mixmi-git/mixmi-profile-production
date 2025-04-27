@@ -7,7 +7,7 @@ import { ProfileData, SpotlightItem, MediaItem, ShopItem, GalleryItem } from "@/
  */
 
 // Placeholder profile data
-export const placeholderProfile: ProfileData = {
+export const placeholderProfile = {
   id: uuidv4(),
   name: "Jane Doe",
   title: "Web3 Creator & Digital Artist",
@@ -30,8 +30,8 @@ export const placeholderProfile: ProfileData = {
     visible: true
   },
   showWalletAddress: true,
-  showBtcAddress: true
-};
+  showBtcAddress: true} as ProfileData;
+
 
 // Placeholder spotlight items
 export const placeholderSpotlightItems: SpotlightItem[] = [
@@ -132,5 +132,5 @@ export function getPlaceholderData() {
     mediaItems: placeholderMediaItems,
     shopItems: placeholderShopItems,
     galleryItems: placeholderGalleryItems
-  };
+  
 } 
